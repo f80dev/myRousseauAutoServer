@@ -1,0 +1,30 @@
+[
+  {
+    "service":"vidange",
+    "tarifs":[
+      {
+        "modele":"renault/clio",
+        "prix":200
+      },
+      {
+        "modele":"renault/twingo",
+        "prix":250
+      }
+    ]
+  },
+
+  {
+    "service":"carosserie",
+    "tarifs":[
+      {
+        "modele":"renault/clio",
+        "prix":550
+      },
+      {
+        "modele":"renault/twingo",
+        "prix":300
+      }
+    ]
+  }
+
+]

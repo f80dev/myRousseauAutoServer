@@ -1,0 +1,25 @@
+[
+  {
+    "id":"vidange",
+    "label":"Vidange"
+  },
+  {
+    "id":"carosserie_light",
+    "label":"travaux express de carrosserie",
+    "description":"pare-brises, ailes, pare-chocs, phares, clignotants, portes, rétroviseurs."
+  },
+  {
+    "id":"revision",
+    "label":"revision"
+  },
+  {
+    "id":"location",
+    "label":"location courte durée",
+    "description":""
+  },
+  {
+    "id":"reparation",
+    "label":"Réparation mécanique",
+    "description":""
+  }
+]

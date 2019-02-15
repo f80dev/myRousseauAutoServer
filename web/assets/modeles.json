@@ -1,0 +1,75 @@
+[
+  {
+    "marque":"renault",
+    "modeles":[
+      {
+        "reference":"clio",
+        "photo":""
+      },
+      {
+        "reference":"kangoo",
+        "photo":"https://www.cdn.renault.com/content/dam/Renault/FR/personal-cars/kangoo/k61-kangoo/k61-phase2/limited-editions/renault-kangoo-limited-2018.jpg.ximg.l_full_m.smart.jpg"
+      },
+      {
+        "reference":"espace",
+        "photo":""
+      },
+      {
+        "reference":"scenic",
+        "photo":"https://www.cdn.renault.com/content/dam/Renault/master/vehicules/scenic-jfa-ph1/reveal/renault-scenic-jfa-ph1-preview-video-001.jpg.ximg.s_12_h.smart.jpg"
+      },
+      {
+        "reference":"captur",
+        "photo":"https://www.cdn.renault.com/content/dam/Renault/MY/personal-cars/captur/j87-captur/j87-phase1/packshot/Renault_Captur_facelifted_phase2_Pearl_white_Malaysia.jpg.ximg.l_full_m.smart.jpg"
+      }
+    ]
+  },
+
+  {
+    "marque":"BMW",
+    "modeles":[
+      {
+        "reference":"Serie 5",
+        "photo":""
+      },
+      {
+        "reference":"Serie 3",
+        "photo":""
+      },
+      {
+        "reference":"Serie 1",
+        "photo":""
+      }
+    ]
+  },
+
+  {
+    "marque":"Dacia",
+    "modeles":[
+      {
+        "reference":"Dokker",
+        "photo":"http://www.rousseau-auto.com/includes/miniature.php?pic=../eurotax/photos/P/p0524956.jpg&w_max=135&h_max=93"
+      },
+      {
+        "reference":"Lodgy",
+        "photo":"http://www.rousseau-auto.com/includes/miniature.php?pic=../eurotax/photos/P/p0524991.jpg&w_max=135&h_max=93"
+      },
+      {
+        "reference":"Logan MCV",
+        "photo":"http://www.rousseau-auto.com/includes/miniature.php?pic=../eurotax/photos/P/p0538182.jpg&w_max=135&h_max=93"
+      },
+      {
+        "reference":"Logan",
+        "photo":"http://www.rousseau-auto.com/includes/miniature.php?pic=../eurotax/photos/P/p0549920.jpg&w_max=135&h_max=93"
+      },
+      {
+        "reference":"Sandero",
+        "photo":"http://www.rousseau-auto.com/includes/miniature.php?pic=../eurotax/photos/P/p0552764.jpg&w_max=135&h_max=93"
+      }
+    ]
+  }
+
+
+
+
+]

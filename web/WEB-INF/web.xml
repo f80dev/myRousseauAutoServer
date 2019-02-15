@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+
+
+    <servlet>
+        <servlet-name>EndpointsServlet</servlet-name>
+        <servlet-class>com.google.api.server.spi.EndpointsServlet</servlet-class>
+        <init-param>
+            <param-name>services</param-name>
+            <param-value>server.Rest</param-value>
+        </init-param>
+
+        <init-param>
+            <param-name>restricted</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EndpointsServlet</servlet-name>
+        <url-pattern>/_ah/api/*</url-pattern>
+    </servlet-mapping>
+
+
+
+
+    <servlet>
+        <servlet-name>connectTo</servlet-name>
+        <servlet-class>server.connectTo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>connectTo</servlet-name>
+        <url-pattern>/_ah/api/rousseau/v1/connectTo</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
+        <servlet-name>oauth2Callback</servlet-name>
+        <servlet-class>server.OAuth2Callback</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>oauth2Callback</servlet-name>
+        <url-pattern>/oauth2callback/*</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+
+    <filter>
+        <filter-name>ObjectifyFilter</filter-name>
+        <filter-class>com.googlecode.objectify.ObjectifyFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ObjectifyFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Default page to serve -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>
