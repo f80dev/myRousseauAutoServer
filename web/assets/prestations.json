@@ -1,6 +1,8 @@
 [
   {
     "service":"vidange",
+    "label":"vidange de votre véhicule",
+    "photo":"https://conseils.oscaro.com/img/contenu/vidange/12345-conseils-vidange-11.jpg",
     "tarifs":[
       {
         "modele":"renault/clio",
@@ -9,12 +11,27 @@
       {
         "modele":"renault/twingo",
         "prix":250
+      },
+      {
+        "modele":"renault/*",
+        "prix":200
+      },
+      {
+        "modele":"dacia/*",
+        "prix":200
+      },
+      {
+        "modele":"BMW/*",
+        "prix":550
       }
     ]
   },
 
   {
     "service":"carosserie",
+    "label":"travaux express de carrosserie",
+    "description":"pare-brises, ailes, pare-chocs, phares, clignotants, portes, rétroviseurs.",
+    "photo":"http://www.garage-opel-thevenet.fr/sx-content/uploads/cms/carrosserie-1.jpg",
     "tarifs":[
       {
         "modele":"renault/clio",
@@ -23,8 +40,43 @@
       {
         "modele":"renault/twingo",
         "prix":300
+      },
+      {
+        "modele":"BMW/*",
+        "prix":600
+      },
+      {
+        "modele":"porsche/*",
+        "prix":800
+      },
+      {
+        "modele":"dacia/*",
+        "prix":150
+      },
+      {
+        "modele":"*/*",
+        "prix":400
       }
     ]
+  },
+
+  {
+    "service":"revision",
+    "label":"révision en vue du contrôle technique",
+    "photo":"http://blog.autochoc.fr/wp-content/uploads/2015/11/revision-moteur-auto.jpg",
+    "tarifs":[]
+  },
+  {
+    "service":"location",
+    "label":"location courte durée",
+    "description":"https://www.observatoiredelafranchise.fr/images/illustrations/2010-12-15-automobile-location.jpg",
+    "tarifs":[]
+  },
+  {
+    "service":"reparation",
+    "label":"Réparation mécanique",
+    "description":"http://www.performance-auto.fr/wp-content/uploads/2016/06/mecanique_bateaux_port_camargue.jpg",
+    "tarifs":[]
   }
 
 ]

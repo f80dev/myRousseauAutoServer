@@ -21,6 +21,7 @@ import java.nio.charset.Charset;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
 public class Tools {
 
@@ -249,6 +250,22 @@ public class Tools {
     }
 
 
+    public static boolean match(String f1, String f2) {
+        f1=f1.toLowerCase().replace("/","_").replace("*","[a-z0-9]").replaceAll(" ","");
+        Pattern pattern = Pattern.compile(f1);
+        f2=f2.replaceAll(" ","").toLowerCase().replace("/","_");
+        return pattern.matcher(f2).find();
+    }
 
+
+    public static JsonNode loadDataFile(String name){
+        try {
+            String s=rest(Tools.getDomain()+"/assets/"+name+".json");
+            return toJSON(s);
+        } catch (RestAPIException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
 

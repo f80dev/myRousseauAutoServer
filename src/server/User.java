@@ -241,4 +241,9 @@ public class User {
     public void addPoints(int i) {
         this.pts+=i;
     }
+
+    public void delCar(Integer index) {
+        if(index<this.cars.size())
+            this.cars.remove(this.cars.get(index));
+    }
 }

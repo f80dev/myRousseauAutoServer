@@ -1,5 +1,6 @@
 package server;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.google.api.server.spi.config.*;
 
 import java.util.*;
@@ -42,11 +43,35 @@ public class Rest {
         return u;
     }
 
+
+    //http://localhost:8080/_ah/api/rousseau/v1/getcar?modele=renault_clio
     @ApiMethod(name = "getcar", httpMethod = ApiMethod.HttpMethod.GET, path = "getcar")
     public car getcar(@Named("modele") String model) {
         car c=new car(model,null);
         return c;
     }
+
+
+    //http://localhost:8080/_ah/api/rousseau/v1/getservices
+    @ApiMethod(name = "getservices", httpMethod = ApiMethod.HttpMethod.GET, path = "getservices")
+    public JsonNode getservices(@Nullable @Named("modele") String model) {
+        if(model==null)
+            return Tools.loadDataFile("prestations");
+        else{
+            //TODO: a modifier pour integrer le filtre sur le modele
+            return Tools.loadDataFile("prestations");
+        }
+    }
+
+
+    //http://localhost:8080/_ah/api/rousseau/v1/getservices
+    @ApiMethod(name = "getmodeles", httpMethod = ApiMethod.HttpMethod.GET, path = "getmodeles")
+    public JsonNode getmodeles() {
+        return Tools.loadDataFile("modeles");
+    }
+
+
+
 
     @ApiMethod(name = "addcar", httpMethod = ApiMethod.HttpMethod.GET, path = "addcar")
     public User addcar(@Named("email") String email, @Named("modele") String model) {
@@ -55,6 +80,16 @@ public class Rest {
             u.addCar(new car(model,null));
             dao.save(u);
         }
+        return u;
+    }
+
+
+
+    @ApiMethod(name = "delcar", httpMethod = ApiMethod.HttpMethod.GET, path = "delcar")
+    public User delcar(@Named("email") String email, @Named("index") Integer index) {
+        User u=dao.get(email);
+        u.delCar(index);
+        dao.save(u);
         return u;
     }
 
@@ -127,6 +162,11 @@ public class Rest {
         dao.addGift(email,gift);
         return Tools.returnAPI(200,"Gift added",null);
     }
+
+    //http://localhost:8080/_ah/api/rousseau/v1/getprestations?modele=renault_clio
+    //http://localhost:8080/_ah/api/rousseau/v1/getprestations?modele=BMW_serie3
+
+
 
     @ApiMethod(name = "getgifts", httpMethod = ApiMethod.HttpMethod.GET, path = "getgifts")
     public List<Gift> getgifts(@Nullable @Named("email") String email) {
