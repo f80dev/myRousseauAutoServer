@@ -13,6 +13,8 @@
           <element id="library" level="project" name="com.googlecode.objectify:objectify:5.1.22" />
           <element id="library" level="project" name="com.google.endpoints:endpoints-framework:Release" />
           <element id="library" level="project" name="com.google.apis:google-api-services-people:v1-rev375-1.25.0" />
+          <element id="library" level="project" name="com.mashape.unirest:unirest-java:1.4.9" />
+          <element id="library" level="project" name="sugarcrm_pojogen" />
         </element>
       </element>
     </root>
