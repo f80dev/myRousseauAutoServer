@@ -24,7 +24,7 @@ public class OAuth2Callback extends HttpServlet {
         String server=req.getParameter("from");
         String state=req.getParameter("state");
         User u=new User();
-        String redirect_uri=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+"/oauth2callback?from="+server;
+        String redirect_uri=req.getScheme()+"://"+req.getServerName()+":"+req.getServerPort()+"/api/oauth2callback?from="+server;
         redirect_uri=redirect_uri.replace(":/o","/o");
 
         if(code!=null && u!=null) {
@@ -37,16 +37,17 @@ public class OAuth2Callback extends HttpServlet {
               if(state.indexOf("localhost")>-1)
                   state="http://localhost:4200";
               else
-                  state="https://"+state.replace("_slash_","/");
+                  state=state.replace("_slash_","/");
 
                 if(dao.get(u.getEmail())==null){
                     u.sendPassword();
+                    Tools.createContact(u);
                     dao.save(u);
                 } else {
                     u=dao.get(u.getEmail());
                 }
 
-                resp.sendRedirect(state+ "/login?email=" + u.getEmail()+"&password="+u.getPassword());
+                resp.sendRedirect(state+"/channel.html?email=" + u.getEmail()+"&password="+u.getPassword());
 
             }
 

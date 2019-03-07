@@ -74,4 +74,8 @@ public class car {
 
 
     }
+
+    public boolean isValid() {
+        return this.modele.length()>0 && this.photo.length()>0;
+    }
 }

@@ -28,5 +28,7 @@
     <orderEntry type="library" name="com.googlecode.objectify:objectify:5.1.22" level="project" />
     <orderEntry type="library" name="com.google.endpoints:endpoints-framework:Release" level="project" />
     <orderEntry type="library" name="com.google.apis:google-api-services-people:v1-rev375-1.25.0" level="project" />
+    <orderEntry type="library" name="com.mashape.unirest:unirest-java:1.4.9" level="project" />
+    <orderEntry type="library" name="sugarcrm_pojogen" level="project" />
   </component>
 </module>

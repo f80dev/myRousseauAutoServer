@@ -6,6 +6,14 @@
     "appid":"284372708043-7sngqhcfkd6u3m5u8dk5ctehj8gj9lra.apps.googleusercontent.com",
     "secretid":"62p3qJd8b4b7jIk3rQPofQrA",
     "endpoint":"https://www.googleapis.com/oauth2/v4/token",
-    "authpoint":"https://accounts.google.com/o/oauth2/v2/auth"}
-  ]
+    "authpoint":"https://accounts.google.com/o/oauth2/v2/auth"},
+  {
+    "name":"linkedin",
+    "token":"linkedin",
+    "appid":"77thlednxt86mm","secretid":"OLo4FaYiqBJbVLFQ",
+    "scope":"r_basicprofile,r_emailaddress",
+    "endpoint":"https://api.linkedin.com/v1",
+    "authpoint":"https://www.linkedin.com/oauth/v2/authorization"
+  }
+]
 }

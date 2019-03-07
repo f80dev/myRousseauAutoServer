@@ -1,0 +1,62 @@
+<style>
+.tabDetailView
+{
+    border-bottom:2px solid;
+    border-top:2px solid;
+    margin-bottom:10px;
+    margin-top:2px;
+    border-bottom-color:#ABC3D7;
+    border-top-color:#4E8CCF;
+}
+
+.tabDetailView td table td
+{
+    border: 0;
+    background: white;
+}
+
+.tabDetailView tr.pagination td
+{
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom:1px solid #CBDAE6;
+}
+
+.tabDetailView tr.pagination td table td
+{
+    border: none;
+}
+
+.tabDetailViewDL
+{
+    background-color:#F6F6F6;
+    color:#000000;
+    border-bottom:1px solid #CBDAE6;
+    font-size:12px;
+    padding:5px 6px;
+    text-align:left;
+    vertical-align:top;
+}
+
+.tabDetailViewDF
+{
+    background-color:#FFFFFF;
+    color:#444444;
+    border-bottom:1px solid #CBDAE6;
+    font-size:12px;
+    padding:5px 10px 5px 8px;
+    vertical-align:top;
+}
+
+.listViewThS1
+{
+    background:#EBEBED none repeat scroll 0 0;
+    border-color:#CCCCCC -moz-use-text-color;
+    border-style:solid none;
+    border-width:1px medium;
+    font-size:11px;
+    font-weight:bold;
+    padding:4px 5px;
+    text-align:left;
+}
+    </style><table border="0" cellpadding="0" class="tabDetailView"><tr colspan="3">MySQL upgrade_history Definitions:</tr><tr><th class="tabDetailViewDL"><b>name</b></th><th class="tabDetailViewDL"><b>type</b></th><th class="tabDetailViewDL"><b>len</b></th></tr><tr><td class="tabDetailViewDF">id</td><td class="tabDetailViewDF">char</td><td class="tabDetailViewDF">36</td></tr><tr><td class="tabDetailViewDF">filename</td><td class="tabDetailViewDF">varchar</td><td class="tabDetailViewDF">255</td></tr><tr><td class="tabDetailViewDF">md5sum</td><td class="tabDetailViewDF">varchar</td><td class="tabDetailViewDF">32</td></tr><tr><td class="tabDetailViewDF">type</td><td class="tabDetailViewDF">varchar</td><td class="tabDetailViewDF">30</td></tr><tr><td class="tabDetailViewDF">status</td><td class="tabDetailViewDF">varchar</td><td class="tabDetailViewDF">50</td></tr><tr><td class="tabDetailViewDF">version</td><td class="tabDetailViewDF">varchar</td><td class="tabDetailViewDF">64</td></tr><tr><td class="tabDetailViewDF">name</td><td class="tabDetailViewDF">varchar</td><td class="tabDetailViewDF">255</td></tr><tr><td class="tabDetailViewDF">description</td><td class="tabDetailViewDF">text</td></tr><tr><td class="tabDetailViewDF">id_name</td><td class="tabDetailViewDF">varchar</td><td class="tabDetailViewDF">255</td></tr><tr><td class="tabDetailViewDF">manifest</td><td class="tabDetailViewDF">longtext</td></tr><tr><td class="tabDetailViewDF">date_entered</td><td class="tabDetailViewDF">datetime</td></tr><tr><td class="tabDetailViewDF">enabled</td><td class="tabDetailViewDF">tinyint</td><td class="tabDetailViewDF">1</td></tr></table><table border="0" cellpadding="0" class="tabDetailView"><tr colspan="3">MySQL upgrade_history Keys:</tr><tr><th class="tabDetailViewDL"><b>name</b></th><th class="tabDetailViewDL"><b>type</b></th><th class="tabDetailViewDL"><b>fields</b></th></tr><tr><td class="tabDetailViewDF">primary</td><td class="tabDetailViewDF">primary</td><td class="tabDetailViewDF">id</td></tr><tr><td class="tabDetailViewDF">upgrade_history_md5_uk</td><td class="tabDetailViewDF">unique</td><td class="tabDetailViewDF">md5sum</td></tr></table><BR><BR><table border="0" cellpadding="0" class="tabDetailView"><tr><th class="tabDetailViewDL">#</th><th class="tabDetailViewDL">id</th><th class="tabDetailViewDL">filename</th><th class="tabDetailViewDL">md5sum</th><th class="tabDetailViewDL">type</th><th class="tabDetailViewDL">status</th><th class="tabDetailViewDL">version</th><th class="tabDetailViewDL">name</th><th class="tabDetailViewDL">description</th><th class="tabDetailViewDL">id_name</th><th class="tabDetailViewDL">manifest</th><th class="tabDetailViewDL">date_entered</th><th class="tabDetailViewDL">enabled</th></tr></table>

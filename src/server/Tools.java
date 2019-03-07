@@ -5,6 +5,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.utils.SystemProperty;
 import com.google.apphosting.api.ApiProxy;
 import com.google.common.io.CharStreams;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import com.sugaronrest.RequestType;
+import com.sugaronrest.SugarRestClient;
+import com.sugaronrest.SugarRestRequest;
+import com.sugaronrest.SugarRestResponse;
+import com.sugaronrest.modules.Contacts;
+import com.sugaronrest.modules.Emails;
+import com.sugaronrest.modules.Leads;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
+import org.apache.http.impl.nio.client.HttpAsyncClients;
+import org.apache.http.ssl.SSLContexts;
+import org.apache.http.ssl.TrustStrategy;
 
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -12,12 +30,18 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.net.ssl.SSLContext;
+import javax.security.cert.CertificateException;
+import javax.security.cert.X509Certificate;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.security.KeyManagementException;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.logging.Logger;
@@ -26,8 +50,7 @@ import java.util.regex.Pattern;
 public class Tools {
 
     private static final Logger log = Logger.getLogger(Tools.class.getName());
-    private static String domainAppli="http://localhost:4200";
-
+    private static SugarRestClient crm=new SugarRestClient(getCRMServer()+"/service/v4_1/rest.php","hhoareau","hh4271");
     public static HttpURLConnection buildConnection(String link,String body,String authorization,String contentType,String method,Integer delayInSec) throws IOException {
         URL url=null;
         if(method==null)method="GET";else method=method.toUpperCase();
@@ -213,26 +236,28 @@ public class Tools {
     }
 
 
-    public static void sendMail(String dest,String subject,String from,String template,List<String> params){
+    public static boolean sendMail(String dest, String subject, String from, String template, List<String> params){
         String s= null;
         try {
             s = Tools.rest(Tools.getDomain()+"/templates/"+template+".html");
         } catch (RestAPIException e) {
             e.printStackTrace();
+            return false;
         }
         String html=replacePattern(s,params);
-        sendMailByGoogle(dest,subject,from,html);
+        return sendMailByGoogle(dest,subject,from,html);
     }
-
 
     public static  String getDomainAppli() {
-        return domainAppli;
+        return Tools.getDomain();
     }
 
-    public static void setDomainAppli(String domAppli) {
-        domainAppli=domAppli;
-    }
+    public static HashMap<String, String> returnAPI(Integer errorCode) {
+        if(errorCode==500)
+            return returnAPI(500,"Problème technique, veuillez recommencer l'opération",null);
 
+        return returnAPI(200,"",null);
+    }
 
     public static HashMap<String, String> returnAPI(Integer errorCode, String userMessage, String internMessage) {
         HashMap<String, String> rc=new HashMap<>();
@@ -266,6 +291,54 @@ public class Tools {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static String getCRMServer() {
+        String rc="http://"+User.CRM_DOMAIN;
+        return rc;
+    }
+
+    private static CloseableHttpAsyncClient createSSLClient() {
+        TrustStrategy acceptingTrustStrategy = new TrustStrategy() {
+            @Override
+            public boolean isTrusted(java.security.cert.X509Certificate[] x509Certificates, String s) throws java.security.cert.CertificateException {
+                return true;
+            }
+        };
+
+        SSLContext sslContext = null;
+        try {
+            sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
+        } catch (Exception e) {
+
+        }
+
+        return HttpAsyncClients.custom()
+                .setHostnameVerifier(SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+                .setSSLContext(sslContext).build();
+    }
+
+    //A tester : https://172.17.242.201/suitecrm/service/v4_1/rest.php
+
+    //https://support.sugarcrm.com/Documentation/Sugar_Developer/Sugar_Developer_Guide_8.2/Cookbook/Web_Services/REST_API/Bash/How_to_Export_a_List_of_Records/
+    public static Boolean updateCRM(User u)  {
+        SugarRestRequest r_contacts = new SugarRestRequest(Contacts.class, RequestType.Update);
+        r_contacts.setParameter(u.toContact());
+        SugarRestResponse resp = crm.execute(r_contacts);
+        return resp.getStatusCode()==200;
+    }
+
+
+    public static Boolean createContact(User u) {
+        SugarRestRequest r_contacts = new SugarRestRequest(Contacts.class, RequestType.Create);
+        r_contacts.setParameter(u.toContact());
+        SugarRestResponse resp = crm.execute(r_contacts);
+        if(resp.getStatusCode()==200){
+            String id=resp.getJData().substring(1,resp.getJData().length()-1);
+            u.setCrm_contactsID(id);
+            return true;
+        }
+        return false;
     }
 }
 

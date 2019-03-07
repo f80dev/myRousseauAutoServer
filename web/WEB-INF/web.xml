@@ -25,15 +25,13 @@
     </servlet-mapping>
 
 
-
-
     <servlet>
         <servlet-name>connectTo</servlet-name>
         <servlet-class>server.connectTo</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>connectTo</servlet-name>
-        <url-pattern>/_ah/api/rousseau/v1/connectTo</url-pattern>
+        <url-pattern>/api/connectTo</url-pattern>
     </servlet-mapping>
 
 
@@ -43,12 +41,8 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>oauth2Callback</servlet-name>
-        <url-pattern>/oauth2callback/*</url-pattern>
+        <url-pattern>/api/oauth2callback/*</url-pattern>
     </servlet-mapping>
-
-
-
-
 
 
     <filter>
@@ -64,4 +58,9 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.html</location>
+    </error-page>
 </web-app>

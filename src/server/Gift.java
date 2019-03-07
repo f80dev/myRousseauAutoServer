@@ -22,6 +22,7 @@ public class Gift {
     @Index
     private Long dtEnd=0L;
 
+    private Long dtCreate=System.currentTimeMillis();
     private String picture="";
     private String icon="";
 
@@ -112,6 +113,14 @@ public class Gift {
 
     public void setDtEnd(Long dtEnd) {
         this.dtEnd = dtEnd;
+    }
+
+    public Long getDtCreate() {
+        return dtCreate;
+    }
+
+    public void setDtCreate(Long dtCreate) {
+        this.dtCreate = dtCreate;
     }
 
     public String getPicture() {

@@ -6,6 +6,7 @@ import com.google.api.server.spi.config.*;
 import java.util.*;
 
 import static server.User.ADMIN_EMAIL;
+import static server.User.TITLE_APPLI;
 
 @Api(   name = "rousseau",
         description= "Rousseau api rest service",
@@ -28,13 +29,25 @@ public class Rest {
     }
 
     @ApiMethod(name = "adduser", httpMethod = ApiMethod.HttpMethod.GET, path = "adduser")
-    public User adduser(@Named("email") String email,@Named("lastname") String lastname,@Named("firstname") String firstname,@Nullable @Named("modele") String modele) {
+    public User adduser(@Named("email") String email,
+                        @Named("lastname") String lastname,
+                        @Named("firstname") String firstname,
+                        @Nullable @Named("dtlastnotif") Long dtLastNotif,
+                        @Nullable @Named("modele") String modele) {
         //String password=""+new Random().ints(1000,9999);
         String password="1234";
-        User u=new User(email,password,firstname,lastname);
-        u.sendPassword();
+        User u=dao.get(email);
+        if(u!=null){
+            u.setFirstname(firstname);
+            u.setLastname(lastname);
+            u.setDtLastNotif(dtLastNotif);
+        } else {
+            u=new User(email,password,firstname,lastname);
+            u.sendPassword();
+            Tools.createContact(u);
+        }
 
-        if(modele!=null){
+        if(modele!=null && modele.length()>0){
             car c=new car(modele,null);
             u.addCar(c);
         }
@@ -71,8 +84,6 @@ public class Rest {
     }
 
 
-
-
     @ApiMethod(name = "addcar", httpMethod = ApiMethod.HttpMethod.GET, path = "addcar")
     public User addcar(@Named("email") String email, @Named("modele") String model) {
         User u=dao.get(email);
@@ -93,16 +104,13 @@ public class Rest {
         return u;
     }
 
-    @ApiMethod(name = "connect", httpMethod = ApiMethod.HttpMethod.GET, path = "connect")
-    public void connect(@Named("domainAppli") String domainAppli) {
-        Tools.setDomainAppli(domainAppli);
-    }
-
     @ApiMethod(name = "share", httpMethod = ApiMethod.HttpMethod.GET, path = "share")
-    public void share(@Named("email") String email,@Named("dest") String dest,@Nullable @Named("firstname") String firstname) {
+    public HashMap<String, String> share(@Named("email") String email, @Named("dest") String dest, @Nullable @Named("firstname") String firstname) {
         User u=dao.get(email);
+        User t=dao.get(dest);
+        if(t!=null)return Tools.returnAPI(500,"Destinataire dejà enregistré",null);
         List<String> params = new ArrayList<>(Arrays.asList(
-                "url_to_subscibe="+Tools.getDomain()+"/login?email="+dest,
+                "url_to_subscribe="+Tools.getDomainAppli()+"/login?email="+dest,
                 "titre=Rousseau Automobile",
                 "origin.firstname="+u.getFirstname()));
         if(firstname!=null)params.add("firstname="+firstname);
@@ -110,7 +118,10 @@ public class Rest {
         u.addPoints(10);
         dao.save(u);
 
-        Tools.sendMail(dest,"Invitation",ADMIN_EMAIL,"invite",params);
+        if(Tools.sendMail(dest,"Invitation de "+u.getFirstname()+" a rejoindre "+TITLE_APPLI,ADMIN_EMAIL,"invite",params))
+            return Tools.returnAPI(200,"Mail envoyé",null);
+        else
+            return Tools.returnAPI(500);
     }
 
 
@@ -144,11 +155,14 @@ public class Rest {
     public User login(@Named("email") String email,@Nullable @Named("password") String password) {
         User u=dao.get(email);
         if(u!=null){
-            if(password==null || password=="")
+            if(password==null || password=="" || password.equals("null"))
                 return dao.get(email);
             else{
-                if(u.checkPassword(password))
+                if(u.checkPassword(password)){
+                    u.addConnexion();
+                    dao.save(u);
                     return dao.get(email);
+                }
                 else
                     return null;
             }
@@ -162,6 +176,14 @@ public class Rest {
         dao.addGift(email,gift);
         return Tools.returnAPI(200,"Gift added",null);
     }
+
+    @ApiMethod(name = "resend_code", httpMethod = ApiMethod.HttpMethod.GET, path = "resend_code")
+    public void resend_code(@Named("email") String email) {
+        User u=dao.get(email);
+        if(u!=null)
+            u.sendPassword();
+    }
+
 
     //http://localhost:8080/_ah/api/rousseau/v1/getprestations?modele=renault_clio
     //http://localhost:8080/_ah/api/rousseau/v1/getprestations?modele=BMW_serie3
@@ -184,29 +206,12 @@ public class Rest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //    test : http://localhost:8080/_ah/api/rousseau/v1/raz
     @ApiMethod(name = "raz", httpMethod = ApiMethod.HttpMethod.GET, path = "raz")
     public HashMap<String, String> raz() {
         dao.raz();
 
-        User u=new User("rv@f80.fr","1234","hervé","hoareau");
         car c=new car("Renault Fuego","https://rzpict1.blob.core.windows.net/images/360/autoscout24.fr/RZCATSFRBC44A5EEECF2/RENAULT-FUEGO-0.jpg");
-        u.addCar(c);
 
         Gift g1=new Gift(
                 "50% sur vos nouveaux pneux",
@@ -241,16 +246,13 @@ public class Rest {
         dao.save(g3);
         dao.save(g4);
 
-        dao.save(u);
-
         User u2=new User("paul.dudule@gmail.com","4271","Paul","Dudule");
         car c2=new car("Ferrari F40","https://www.auto-forever.com/wp-content/uploads/2015/11/F40_1987-1992_2-1030x773.jpg");
         u2.addGift(g1.Id);
         u2.addCar(c2);
 
-        dao.save(u);
 
-        u=new User("paul.dudule@gmail.com","4271","Paul","Dudule");
+        User u=new User("paul.dudule@gmail.com","4271","Paul","Dudule");
         u.addCar(new car("Boxter Porshe","https://upload.wikimedia.org/wikipedia/commons/9/95/Porsche_Boxster_2.7_-_Flickr_-_The_Car_Spy_%282%29.jpg"));
         dao.save(u);
 

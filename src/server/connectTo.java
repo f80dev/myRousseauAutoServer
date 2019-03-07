@@ -19,7 +19,7 @@ public class connectTo extends HttpServlet {
     JsonNode service = Tools.getService(this.getClass(), req.getParameter("service"));
 
     String from=service.get("token").asText().replace("\"","");
-    String urlcallback=Tools.getDomain()+"/oauth2callback?from="+from;
+    String urlcallback=Tools.getDomain()+"/api/oauth2callback?from="+from;
     String appid=service.get("appid").asText().replace("\"","");
     String scope=service.get("scope").asText().replace("\"","");
 
@@ -33,7 +33,7 @@ public class connectTo extends HttpServlet {
                  +"&scope="+URLEncoder.encode(scope,"UTF-8")
                  +"&perms="+URLEncoder.encode(scope,"UTF-8")
                  +"&response_type=code"
-                 +"&state="+ req.getParameter("domain");
+                 +"&state="+ URLEncoder.encode(req.getParameter("domain"),"UTF-8");
 
     resp.addHeader("X-FRAME-OPTIONS", "ALLOW-FROM *");
     resp.sendRedirect(url);
