@@ -7,7 +7,7 @@ mkdir /home/suitecrm_data
 sudo chown -R 1001:1001 /home/mariadb_data
 sudo chown -R 1001:1001 /home/suitecrm_data
 
-#ajouter ici le telechargement du script docker-compose.yml
+wget https://raw.githubusercontent.com/f80dev/myRousseauAutoServer/master/crm/docker-compose.yml
 docker-compose up -d
 
 #ouvrir le browser sur http://<adresse du serveur>/index.php?module=Home&action=index
