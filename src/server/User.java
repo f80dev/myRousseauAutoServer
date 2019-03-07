@@ -33,7 +33,8 @@ import java.util.*;
 public class User {
     public static final String ADMIN_EMAIL = "rv@f80.fr";
     public static final String TITLE_APPLI = "MyRousseauAutomobile";
-    public static final String CRM_DOMAIN = "172.17.242.201";
+    //public static final String CRM_DOMAIN = "172.17.242.201"; //en local
+    public static final String CRM_DOMAIN = "207.180.198.227"; //distant
     private static final String CRM_USER = "admin";
     private static final String CRM_PASSWORD = "hh4271";
 
