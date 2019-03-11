@@ -43,7 +43,7 @@ services:
     depends_on:
       - mariadb
       
-  proxy:
+  nginx-proxy:
     image: 'jwilder/nginx-proxy:alpine'
     restart: always
     container_name: nginx-proxy
