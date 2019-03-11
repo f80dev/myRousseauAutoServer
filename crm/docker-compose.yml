@@ -16,7 +16,7 @@ services:
       - MARIADB_DATABASE=ra_db_suitecrm
       - ALLOW_EMPTY_PASSWORD=yes
     volumes:
-      - '/home/mariadb_data:/bitnami'
+      - '/opt/bitnami/mariadb_data:/bitnami'
   suitecrm:
     image: 'bitnami/suitecrm:latest'
     environment:
@@ -37,7 +37,7 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - '/home/suitecrm_data:/bitnami'
+      - '/opt/bitnami/suitecrm_data:/bitnami'
     depends_on:
       - mariadb
 volumes:
