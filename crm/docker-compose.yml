@@ -40,6 +40,32 @@ services:
       - '/opt/bitnami/suitecrm_data:/bitnami'
     depends_on:
       - mariadb
+  proxy:
+    image: 'jwilder/nginx-proxy:alpine'
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    labels: com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    volumes:
+      - certs:/etc/nginx/certs:ro
+      - conf.d:/etc/nginx/conf.d
+      - vhost.d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:r
+      
+  letsencrypt-companion:
+        image: jrcs/letsencrypt-nginx-proxy-companion
+        restart: always
+        volumes:
+          - certs:/etc/nginx/certs
+          - conf.d:/etc/nginx/conf.d
+          - vhost.d:/etc/nginx/vhost.d
+          - html:/usr/share/nginx/html
+          - /var/run/docker.sock:/var/run/docker.sock:ro
+        depends_on:
+          - proxy
+    
 volumes:
   mariadb_data:
     driver: local
