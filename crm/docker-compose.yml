@@ -1,9 +1,6 @@
 #installer docker :
 #curl -fsSL https://get.docker.com -o get-docker.sh && sh get-docker.sh
 
-#remove all image
-#docker rm $(docker ps -a -q) && docker rmi $(docker images -q)
-
 #demarrage du daemon :
 #sudo systemctl start docker
 
@@ -55,19 +52,23 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:r
       
   letsencrypt-companion:
-        image: jrcs/letsencrypt-nginx-proxy-companion
-        restart: always
-        volumes:
-          - certs:/etc/nginx/certs
-          - conf.d:/etc/nginx/conf.d
-          - vhost.d:/etc/nginx/vhost.d
-          - html:/usr/share/nginx/html
-          - /var/run/docker.sock:/var/run/docker.sock:ro
-        depends_on:
-          - proxy
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    volumes:
+      - certs:/etc/nginx/certs
+      - conf.d:/etc/nginx/conf.d
+      - vhost.d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - proxy
     
 volumes:
   mariadb_data:
     driver: local
   suitecrm_data:
     driver: local
+  certs:
+  conf.d:
+  vhost.d:
+  html:
