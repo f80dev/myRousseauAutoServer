@@ -1,7 +1,6 @@
 <component name="libraryTable">
-  <library name="sugarcrm_pojogen">
+  <library name="sugaronrest-1.0.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/sugarcrm_pojogen.jar!/" />
       <root url="jar://$USER_HOME$/Downloads/sugaronrest-1.0.0.jar!/" />
     </CLASSES>
     <JAVADOC />

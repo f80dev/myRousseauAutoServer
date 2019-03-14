@@ -8,13 +8,9 @@ import com.google.common.io.CharStreams;
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import com.sugaronrest.RequestType;
-import com.sugaronrest.SugarRestClient;
-import com.sugaronrest.SugarRestRequest;
-import com.sugaronrest.SugarRestResponse;
-import com.sugaronrest.modules.Contacts;
-import com.sugaronrest.modules.Emails;
-import com.sugaronrest.modules.Leads;
+import com.mashape.unirest.request.body.MultipartBody;
+import com.sugaronrest.*;
+import com.sugaronrest.modules.*;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -31,17 +27,14 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.net.ssl.SSLContext;
-import javax.security.cert.CertificateException;
-import javax.security.cert.X509Certificate;
+
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
+
 import java.text.DateFormat;
 import java.util.*;
 import java.util.logging.Logger;
@@ -50,7 +43,7 @@ import java.util.regex.Pattern;
 public class Tools {
 
     private static final Logger log = Logger.getLogger(Tools.class.getName());
-    private static SugarRestClient crm=new SugarRestClient(getCRMServer()+"/service/v4_1/rest.php","hhoareau","hh4271");
+    private static SugarRestClient crm=new SugarRestClient(getCRMServer()+"/service/v4_1/rest.php",User.CRM_USER,User.CRM_PASSWORD);
     public static HttpURLConnection buildConnection(String link,String body,String authorization,String contentType,String method,Integer delayInSec) throws IOException {
         URL url=null;
         if(method==null)method="GET";else method=method.toUpperCase();
@@ -294,7 +287,7 @@ public class Tools {
     }
 
     public static String getCRMServer() {
-        String rc="http://"+User.CRM_DOMAIN;
+        String rc=User.CRM_DOMAIN;
         return rc;
     }
 
@@ -329,6 +322,8 @@ public class Tools {
     }
 
 
+
+
     public static Boolean createContact(User u) {
         SugarRestRequest r_contacts = new SugarRestRequest(Contacts.class, RequestType.Create);
         r_contacts.setParameter(u.toContact());
@@ -337,8 +332,74 @@ public class Tools {
             String id=resp.getJData().substring(1,resp.getJData().length()-1);
             u.setCrm_contactsID(id);
             return true;
+        } else {
+            log.severe("pas d'ajout dans le CRM "+resp.getError().getMessage());
         }
         return false;
     }
+
+    public static <T> String executeCRM(T obj,RequestType rt) {
+        SugarRestRequest r_objs = new SugarRestRequest(obj.getClass(), rt);
+        r_objs.setParameter(obj);
+        SugarRestResponse resp=crm.execute(r_objs);
+        if(resp.getStatusCode()==200){
+            return resp.getJData().substring(1,resp.getJData().length()-1);
+        } else {
+            log.severe("pas d'ajout dans le CRM "+resp.getError().getMessage());
+        }
+        return null;
+    }
+
+
+    public static <T> List<T> readCRM(String moduleName,int maxRespons, List<String> selectFields,RequestType requestType) {
+        SugarRestRequest request = new SugarRestRequest(moduleName, RequestType.BulkRead);
+        request.getOptions().setSelectFields(selectFields);
+        request.getOptions().setMaxResult(maxRespons);
+        SugarRestResponse response = crm.execute(request);
+        return (List<T>) response.getData();
+    }
+
+    public static void getAccessToken(){
+        try {
+            HttpResponse<String> s = Unirest.post(getCRMServer() + "/api/oauth/access_token")
+                    .header("Content-type", "application/vnd.api+json")
+                    .header("Accept:", "application/vnd.api+json")
+                    .field("client_id", "selfapp")
+                    .field("client_secret", "hh4271")
+                    .field("username", "hhoareau")
+                    .field("password", "hh4271")
+                    .field("grant_type", "password")
+                    .field("scope", "")
+                    .asString();
+            log.info(s.getBody());
+        } catch (UnirestException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void readRelation(String moduleName,Class c,String id) {
+
+//        try {
+//            HttpResponse<String> r = Unirest.post(getCRMServer() + "/service/v4_1/rest.php")
+//                    .field("user_auth[user_name]", "selfapp")
+//                    .field("user_auth[password]", "hh4271")
+//                    .asString();
+//
+//            Unirest.post(getCRMServer() + "/service/v4_1/rest.php")
+//                    .field("method", "get_relationships")
+//                    .field("input_type", "json")
+//                    .field("module_name", "Campaigns")
+//                    .field("module_id", id)
+//                    .field("link_field_name", "id")
+//                    .field("related_module_query", "target_list")
+//                    .field("related_fields", "id")
+//                    .asString();
+//        } catch (UnirestException e) {
+//            e.printStackTrace();
+//        }
+
+
+    }
 }
+
 

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="serveur local">
+  <component name="PublishConfigData" autoUpload="Always" serverName="serveur">
     <serverData>
-      <paths name="serveur local">
+      <paths name="serveur">
         <serverdata>
           <mappings>
             <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/root" local="$PROJECT_DIR$/crm" />
           </mappings>
         </serverdata>
       </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>

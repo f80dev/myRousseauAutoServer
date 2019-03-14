@@ -19,6 +19,7 @@ public class connectTo extends HttpServlet {
     JsonNode service = Tools.getService(this.getClass(), req.getParameter("service"));
 
     String from=service.get("token").asText().replace("\"","");
+
     String urlcallback=Tools.getDomain()+"/api/oauth2callback?from="+from;
     String appid=service.get("appid").asText().replace("\"","");
     String scope=service.get("scope").asText().replace("\"","");

@@ -2,8 +2,15 @@ package server;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.api.server.spi.config.*;
+import com.sugaronrest.NameOf;
+import com.sugaronrest.RequestType;
+import com.sugaronrest.modules.Campaigns;
+import com.sugaronrest.modules.Cases;
+import com.sugaronrest.modules.Contacts;
+import com.sugaronrest.modules.ProspectListCampaigns;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 import static server.User.ADMIN_EMAIL;
 import static server.User.TITLE_APPLI;
@@ -16,6 +23,7 @@ import static server.User.TITLE_APPLI;
 public class Rest {
 
     private static final DAO dao = DAO.getInstance();
+    private static final Logger log = Logger.getLogger(Rest.class.getName());
 
     @ApiMethod(name = "getuser", httpMethod = ApiMethod.HttpMethod.GET, path = "getuser")
     public User getuser(@Named("email") String user) {
@@ -76,6 +84,12 @@ public class Rest {
         }
     }
 
+    //http://localhost:8080/_ah/api/rousseau/v1/test
+    @ApiMethod(name = "test", httpMethod = ApiMethod.HttpMethod.GET, path = "test")
+    public void test(@Nullable @Named("modele") String model) {
+        Tools.getAccessToken();
+    }
+
 
     //http://localhost:8080/_ah/api/rousseau/v1/getservices
     @ApiMethod(name = "getmodeles", httpMethod = ApiMethod.HttpMethod.GET, path = "getmodeles")
@@ -104,6 +118,7 @@ public class Rest {
         return u;
     }
 
+
     @ApiMethod(name = "share", httpMethod = ApiMethod.HttpMethod.GET, path = "share")
     public HashMap<String, String> share(@Named("email") String email, @Named("dest") String dest, @Nullable @Named("firstname") String firstname) {
         User u=dao.get(email);
@@ -127,10 +142,11 @@ public class Rest {
 
 
     @ApiMethod(name = "askforappointment", httpMethod = ApiMethod.HttpMethod.GET, path = "askforappointment")
-    public HashMap<String, String> askforappointment(@Named("email") String email, @Named("dt") Long dt, @Nullable @Named("motif") String motif) {
+    public HashMap<String, String> askforappointment(@Named("email") String email, @Named("durationInMin") Integer duration,@Named("dt") Long dt, @Nullable @Named("motif") String motif) {
         Appointment a = new Appointment();
         a.setDtStart(dt);
         a.setUser(email);
+        a.setDuration((long) (duration*1000*60));
         a.setConfirm(true);
         a.setMotif(motif);
         dao.save(a);
@@ -192,7 +208,10 @@ public class Rest {
 
     @ApiMethod(name = "getgifts", httpMethod = ApiMethod.HttpMethod.GET, path = "getgifts")
     public List<Gift> getgifts(@Nullable @Named("email") String email) {
-        List<Gift> gifts = dao.getGifs();
+        List<Gift> gifts = dao.getGifsFromCRM();
+
+        Tools.readRelation("Campaigns", ProspectListCampaigns.class,gifts.get(0).getId());
+
         User u=dao.get(email);
         if(u==null)return gifts;
 
@@ -241,20 +260,18 @@ public class Rest {
                 "http://www.voitures-de-sport.net/wp-content/uploads/2015/03/voiture-sport.jpg"
                 ,0.5,2d);
 
+        g1.setCrmID(Tools.executeCRM(g1.toCampaign(), RequestType.Create));
+        g2.setCrmID(Tools.executeCRM(g2.toCampaign(), RequestType.Create));
+        g3.setCrmID(Tools.executeCRM(g3.toCampaign(), RequestType.Create));
+        g4.setCrmID(Tools.executeCRM(g4.toCampaign(), RequestType.Create));
+
+
         dao.save(g1);
         dao.save(g2);
         dao.save(g3);
         dao.save(g4);
 
-        User u2=new User("paul.dudule@gmail.com","4271","Paul","Dudule");
-        car c2=new car("Ferrari F40","https://www.auto-forever.com/wp-content/uploads/2015/11/F40_1987-1992_2-1030x773.jpg");
-        u2.addGift(g1.Id);
-        u2.addCar(c2);
 
-
-        User u=new User("paul.dudule@gmail.com","4271","Paul","Dudule");
-        u.addCar(new car("Boxter Porshe","https://upload.wikimedia.org/wikipedia/commons/9/95/Porsche_Boxster_2.7_-_Flickr_-_The_Car_Spy_%282%29.jpg"));
-        dao.save(u);
 
         return Tools.returnAPI(200,"Database erased",null);
     }

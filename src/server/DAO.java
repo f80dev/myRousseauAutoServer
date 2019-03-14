@@ -3,7 +3,11 @@ package server;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
+import com.sugaronrest.NameOf;
+import com.sugaronrest.RequestType;
+import com.sugaronrest.modules.Campaigns;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
@@ -91,6 +95,25 @@ public class DAO {
 
     public List<Gift> getGifs() {
         return ofy().load().type(Gift.class).list();
+    }
+
+    public List<Gift> getGifsFromCRM() {
+        List<Campaigns> result=Tools.readCRM("Campaigns",
+                5,
+                Arrays.asList(
+                        NameOf.Campaigns.Id,
+                        NameOf.Campaigns.Name,
+                        NameOf.Campaigns.Content,
+                        NameOf.Campaigns.TrackerKey,
+                        NameOf.Campaigns.StartDate,
+                        NameOf.Campaigns.EndDate),
+                RequestType.BulkRead);
+
+        List<Gift> rc=new ArrayList<>();
+        for(Campaigns c:result)
+            rc.add(new Gift(c));
+
+        return rc;
     }
 
     public Appointment getAppointment(String id) {

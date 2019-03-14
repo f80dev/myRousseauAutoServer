@@ -3,7 +3,9 @@ package server;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
+import com.sugaronrest.modules.Campaigns;
 
+import java.util.Date;
 import java.util.Random;
 
 @Entity
@@ -15,6 +17,9 @@ public class Gift {
     private String message="";
     private String messageColor="white";
     private String manual="";
+
+    @Index
+    private String crmID="";
 
     @Index
     private Long dtStart=0L;
@@ -51,6 +56,23 @@ public class Gift {
         this.manual=manual;
     }
 
+    public Gift(Campaigns c) {
+        this.message=c.getName();
+        if(c.getStartDate()!=null)
+            this.dtStart=c.getStartDate().getTime();
+        else
+            this.dtStart=System.currentTimeMillis();
+
+        if(c.getEndDate()!=null)
+            this.dtEnd=c.getEndDate().getTime();
+        else
+            this.dtEnd=this.dtStart+10000000;
+
+        this.picture=c.getContent();
+        this.crmID=c.getId();
+        this.setId(c.getId());
+    }
+
     public String getManual() {
         return manual;
     }
@@ -65,6 +87,14 @@ public class Gift {
 
     public void setId(String id) {
         Id = id;
+    }
+
+    public String getCrmID() {
+        return crmID;
+    }
+
+    public void setCrmID(String crmID) {
+        this.crmID = crmID;
     }
 
     public String getMessageColor() {
@@ -129,5 +159,14 @@ public class Gift {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public Campaigns toCampaign() {
+        Campaigns c=new Campaigns();
+        c.setContent(this.picture);
+        c.setStartDate(new Date(this.getDtStart()));
+        c.setEndDate(new Date(this.getDtEnd()));
+        c.setName(this.message);
+        return c;
     }
 }

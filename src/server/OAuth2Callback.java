@@ -36,8 +36,11 @@ public class OAuth2Callback extends HttpServlet {
             if (u.updateIdentity(server)) {
               if(state.indexOf("localhost")>-1)
                   state="http://localhost:4200";
-              else
+              else{
                   state=state.replace("_slash_","/");
+                  if(!state.startsWith("https"))state="https://"+state;
+              }
+
 
                 if(dao.get(u.getEmail())==null){
                     u.sendPassword();

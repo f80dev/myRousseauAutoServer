@@ -23,12 +23,12 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Google App Engine Standard Local Server" level="application_server_libraries" />
-    <orderEntry type="library" scope="PROVIDED" name="javax.servlet:servlet-api:2.5" level="project" />
-    <orderEntry type="library" name="com.google.appengine:appengine-api-1.0-sdk:Release" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="javax.servlet:servlet-api:3.0-alpha-1" level="project" />
     <orderEntry type="library" name="com.googlecode.objectify:objectify:5.1.22" level="project" />
+    <orderEntry type="library" name="com.google.apis:google-api-services-people:v1-rev20190304-1.28.0" level="project" />
+    <orderEntry type="library" name="com.google.appengine:appengine-api-1.0-sdk:Release" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" name="com.google.endpoints:endpoints-framework:Release" level="project" />
-    <orderEntry type="library" name="com.google.apis:google-api-services-people:v1-rev375-1.25.0" level="project" />
-    <orderEntry type="library" name="com.mashape.unirest:unirest-java:1.4.9" level="project" />
-    <orderEntry type="library" name="sugarcrm_pojogen" level="project" />
+    <orderEntry type="library" name="sugaronrest-1.0.0" level="project" />
   </component>
 </module>

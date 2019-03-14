@@ -18,9 +18,7 @@ sudo chown -R 1001:1001 /opt/bitnami/suitecrm_data
 #Installation de suitecrm
 cd /root
 rm -f docker-compose.yml && wget https://raw.githubusercontent.com/f80dev/myRousseauAutoServer/master/crm/docker-compose.yml
-docker stop $(docker ps -aq)
-docker rm $(docker ps -aq)
-docker rmi $(docker images -q)
+docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker rmi $(docker images -q)
 docker-compose up
 
 
