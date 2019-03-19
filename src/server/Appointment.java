@@ -100,7 +100,7 @@ public class Appointment {
 
     @OnSave
     void onSave(){
-        this.setCrmID(Tools.executeCRM(this.toMeetings(), RequestType.Create));
+        this.setCrmID(SuiteCRM.executeCRM(this.toMeetings(), RequestType.Create));
     }
 
 }

@@ -43,7 +43,7 @@ import java.util.regex.Pattern;
 public class Tools {
 
     private static final Logger log = Logger.getLogger(Tools.class.getName());
-    private static SugarRestClient crm=new SugarRestClient(getCRMServer()+"/service/v4_1/rest.php",User.CRM_USER,User.CRM_PASSWORD);
+
     public static HttpURLConnection buildConnection(String link,String body,String authorization,String contentType,String method,Integer delayInSec) throws IOException {
         URL url=null;
         if(method==null)method="GET";else method=method.toUpperCase();
@@ -313,51 +313,9 @@ public class Tools {
 
     //A tester : https://172.17.242.201/suitecrm/service/v4_1/rest.php
 
-    //https://support.sugarcrm.com/Documentation/Sugar_Developer/Sugar_Developer_Guide_8.2/Cookbook/Web_Services/REST_API/Bash/How_to_Export_a_List_of_Records/
-    public static Boolean updateCRM(User u)  {
-        SugarRestRequest r_contacts = new SugarRestRequest(Contacts.class, RequestType.Update);
-        r_contacts.setParameter(u.toContact());
-        SugarRestResponse resp = crm.execute(r_contacts);
-        return resp.getStatusCode()==200;
-    }
 
+    //User.CRM_USER,User.CRM_PASSWORD
 
-
-
-    public static Boolean createContact(User u) {
-        SugarRestRequest r_contacts = new SugarRestRequest(Contacts.class, RequestType.Create);
-        r_contacts.setParameter(u.toContact());
-        SugarRestResponse resp = crm.execute(r_contacts);
-        if(resp.getStatusCode()==200){
-            String id=resp.getJData().substring(1,resp.getJData().length()-1);
-            u.setCrm_contactsID(id);
-            return true;
-        } else {
-            log.severe("pas d'ajout dans le CRM "+resp.getError().getMessage());
-        }
-        return false;
-    }
-
-    public static <T> String executeCRM(T obj,RequestType rt) {
-        SugarRestRequest r_objs = new SugarRestRequest(obj.getClass(), rt);
-        r_objs.setParameter(obj);
-        SugarRestResponse resp=crm.execute(r_objs);
-        if(resp.getStatusCode()==200){
-            return resp.getJData().substring(1,resp.getJData().length()-1);
-        } else {
-            log.severe("pas d'ajout dans le CRM "+resp.getError().getMessage());
-        }
-        return null;
-    }
-
-
-    public static <T> List<T> readCRM(String moduleName,int maxRespons, List<String> selectFields,RequestType requestType) {
-        SugarRestRequest request = new SugarRestRequest(moduleName, RequestType.BulkRead);
-        request.getOptions().setSelectFields(selectFields);
-        request.getOptions().setMaxResult(maxRespons);
-        SugarRestResponse response = crm.execute(request);
-        return (List<T>) response.getData();
-    }
 
     public static void getAccessToken(){
         try {
@@ -377,7 +335,8 @@ public class Tools {
         }
     }
 
-    public static void readRelation(String moduleName,Class c,String id) {
+
+    public static void readRelation_old(String moduleName,Class c,String id) {
 
 //        try {
 //            HttpResponse<String> r = Unirest.post(getCRMServer() + "/service/v4_1/rest.php")

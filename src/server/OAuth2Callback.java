@@ -1,5 +1,6 @@
 package server;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.sugaronrest.modules.Prospects;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -44,7 +45,7 @@ public class OAuth2Callback extends HttpServlet {
 
                 if(dao.get(u.getEmail())==null){
                     u.sendPassword();
-                    Tools.createContact(u);
+                    SuiteCRM.createFromUser(u, Prospects.class);
                     dao.save(u);
                 } else {
                     u=dao.get(u.getEmail());

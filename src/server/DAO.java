@@ -32,6 +32,7 @@ public class DAO {
         factory().register(User.class);
         factory().register(Gift.class);
         factory().register(Appointment.class);
+        SuiteCRM.init(User.CRM_USER,User.CRM_PASSWORD);
     }
 
 
@@ -39,6 +40,7 @@ public class DAO {
         ofy().delete().keys(ofy().load().type(User.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Gift.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Appointment.class).keys().list()).now();
+        SuiteCRM.raz();
     }
 
 
@@ -98,7 +100,7 @@ public class DAO {
     }
 
     public List<Gift> getGifsFromCRM() {
-        List<Campaigns> result=Tools.readCRM("Campaigns",
+        List<Campaigns> result=SuiteCRM.readCRM("Campaigns",
                 5,
                 Arrays.asList(
                         NameOf.Campaigns.Id,

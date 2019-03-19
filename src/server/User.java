@@ -333,7 +333,7 @@ public class User {
 
 
     public Boolean updateCRM() {
-       return Tools.updateCRM(this);
+       return SuiteCRM.updateCRM(this);
     }
 
     public Contacts toContact(){

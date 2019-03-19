@@ -1,0 +1,13 @@
+[
+  {
+    "prospects":[
+      {
+        "id":"40291ed3-9f4c-c9e6-bfd8-5c8bb15deb16",
+        "first_name":"Hervé"
+      }
+  ],
+    "name":"Nouveaux clients",
+    "id":"32c124a3-7e63-45a4-a5dc-5c8bb1b53713"
+  },
+  {
+    "prospects":[{"id":"40291ed3-9f4c-c9e6-bfd8-5c8bb15deb16","first_name":"Hervé"}],"name":"client premium","id":"42575a21-f168-161e-1eb4-5c8b7aa8b526"}]

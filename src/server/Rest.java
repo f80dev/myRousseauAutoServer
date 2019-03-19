@@ -4,10 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.google.api.server.spi.config.*;
 import com.sugaronrest.NameOf;
 import com.sugaronrest.RequestType;
-import com.sugaronrest.modules.Campaigns;
-import com.sugaronrest.modules.Cases;
-import com.sugaronrest.modules.Contacts;
-import com.sugaronrest.modules.ProspectListCampaigns;
+import com.sugaronrest.modules.*;
 
 import java.util.*;
 import java.util.logging.Logger;
@@ -52,7 +49,7 @@ public class Rest {
         } else {
             u=new User(email,password,firstname,lastname);
             u.sendPassword();
-            Tools.createContact(u);
+            SuiteCRM.createFromUser(u,Prospects.class);
         }
 
         if(modele!=null && modele.length()>0){
@@ -87,7 +84,10 @@ public class Rest {
     //http://localhost:8080/_ah/api/rousseau/v1/test
     @ApiMethod(name = "test", httpMethod = ApiMethod.HttpMethod.GET, path = "test")
     public void test(@Nullable @Named("modele") String model) {
-        Tools.getAccessToken();
+        JsonNode jn=SuiteCRM.read("ProspectLists","ProspectListCampaigns",
+                Arrays.asList("id"),
+                Arrays.asList(NameOf.ProspectListCampaigns.Id));
+        Object a = jn;
     }
 
 
@@ -143,6 +143,11 @@ public class Rest {
 
     @ApiMethod(name = "askforappointment", httpMethod = ApiMethod.HttpMethod.GET, path = "askforappointment")
     public HashMap<String, String> askforappointment(@Named("email") String email, @Named("durationInMin") Integer duration,@Named("dt") Long dt, @Nullable @Named("motif") String motif) {
+
+        User u=dao.get(email);
+        if(SuiteCRM.createFromUser(u,Leads.class))
+            dao.save(u);
+
         Appointment a = new Appointment();
         a.setDtStart(dt);
         a.setUser(email);
@@ -210,7 +215,7 @@ public class Rest {
     public List<Gift> getgifts(@Nullable @Named("email") String email) {
         List<Gift> gifts = dao.getGifsFromCRM();
 
-        Tools.readRelation("Campaigns", ProspectListCampaigns.class,gifts.get(0).getId());
+        //Tools.readRelation("Campaigns", ProspectListCampaigns.class,gifts.get(0).getId());
 
         User u=dao.get(email);
         if(u==null)return gifts;
@@ -260,10 +265,10 @@ public class Rest {
                 "http://www.voitures-de-sport.net/wp-content/uploads/2015/03/voiture-sport.jpg"
                 ,0.5,2d);
 
-        g1.setCrmID(Tools.executeCRM(g1.toCampaign(), RequestType.Create));
-        g2.setCrmID(Tools.executeCRM(g2.toCampaign(), RequestType.Create));
-        g3.setCrmID(Tools.executeCRM(g3.toCampaign(), RequestType.Create));
-        g4.setCrmID(Tools.executeCRM(g4.toCampaign(), RequestType.Create));
+        g1.setCrmID(SuiteCRM.executeCRM(g1.toCampaign(), RequestType.Create));
+        g2.setCrmID(SuiteCRM.executeCRM(g2.toCampaign(), RequestType.Create));
+        g3.setCrmID(SuiteCRM.executeCRM(g3.toCampaign(), RequestType.Create));
+        g4.setCrmID(SuiteCRM.executeCRM(g4.toCampaign(), RequestType.Create));
 
 
         dao.save(g1);
