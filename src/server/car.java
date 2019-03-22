@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class car {
+public class car extends product {
 
     private String photo="";
     private String modele="";
@@ -27,7 +27,6 @@ public class car {
         this.initPrestas("prestations");
     }
 
-
     public void initPrestas(String presta_file){
         this.prestas=new HashMap<>();
         for(JsonNode service:Tools.loadDataFile(presta_file))
@@ -37,31 +36,6 @@ public class car {
                     if(!this.prestas.containsKey(service.get("service").asText()))
                         this.prestas.put(service.get("service").asText(),tarif.get("prix").asDouble());
             }
-    }
-
-
-    public HashMap<String, Double> getPrestas() {
-        return prestas;
-    }
-
-    public void setPrestas(HashMap<String, Double> prestas) {
-        this.prestas = prestas;
-    }
-
-    public String getModele() {
-        return modele;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
-    }
-
-    public void setModele(String modele) {
-        this.modele = modele;
     }
 
     public void initPhoto(String modelesFile) {
@@ -74,6 +48,8 @@ public class car {
 
 
     }
+
+
 
     public boolean isValid() {
         return this.modele.length()>0 && this.photo.length()>0;

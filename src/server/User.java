@@ -12,10 +12,7 @@ import com.google.api.services.people.v1.PeopleService;
 import com.google.api.services.people.v1.model.Person;
 import com.google.common.hash.Hashing;
 import com.google.common.io.BaseEncoding;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
-import com.googlecode.objectify.annotation.Index;
-import com.googlecode.objectify.annotation.OnSave;
+import com.googlecode.objectify.annotation.*;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.sugaronrest.modules.Contacts;
 
@@ -28,11 +25,12 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
-
+@Cache
 @Entity
 public class User {
     public static final String ADMIN_EMAIL = "rv@f80.fr";
-    public static final String TITLE_APPLI = "MyRousseauAutomobile";
+    //public static final String TITLE_APPLI = "My Rousseau Automobile";
+    public static final String TITLE_APPLI = "SelfApp";
     //public static final String CRM_DOMAIN = "http://172.17.242.201"; //en local
     public static final String CRM_DOMAIN = "https://server.f80.fr"; //distant
     public static final String CRM_USER = "selfapp";
@@ -52,6 +50,9 @@ public class User {
     String lang = "";
     String lastname = "";
     String firstname = "";
+    String phone="";
+    Boolean shareProfil=false;
+
     Long dtLastNotif=100000000000L;
 
     Integer pts = 100;
@@ -61,7 +62,7 @@ public class User {
 
     HashMap<String, Long> gifts = new HashMap<>(); //Liste des cadeaux attribués
 
-    List<car> cars = new ArrayList<>();
+    List<String> products = new ArrayList<>();
 
     public User() {
     }
@@ -96,6 +97,22 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public Boolean getShareProfil() {
+        return shareProfil;
+    }
+
+    public void setShareProfil(Boolean shareProfil) {
+        this.shareProfil = shareProfil;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getFirstname() {
@@ -134,8 +151,8 @@ public class User {
         this.connexions.add(System.currentTimeMillis());
     }
 
-    public List<car> getCars() {
-        return cars;
+    public List<String> getProducts() {
+        return products;
     }
 
     public String getPhoto() {
@@ -154,15 +171,35 @@ public class User {
         this.gifts = gifts;
     }
 
-    public void setCars(List<car> cars) {
-        this.cars = cars;
+//    public void setCars(List<car> cars) {
+//        this.cars = cars;
+//    }
+//
+//    public void addCar(car c) {
+//        if (c.isValid())
+//            this.cars.add(c);
+//    }
+//
+//    public void delCar(Integer index) {
+//        if (index < this.cars.size())
+//            this.cars.remove(this.cars.get(index));
+//    }
+
+    public void setproducts(List<String> products) {
+        this.products = products;
     }
 
-    public void addCar(car c) {
+    public void addproduct(product c) {
         if (c.isValid())
-            this.cars.add(c);
+            this.products.add(c.getId());
     }
 
+    public void delproduct(Integer index) {
+        if (index < this.products.size())
+            this.products.remove(this.products.get(index));
+    }
+
+    
 
     public void addGift(String gift) {
         this.gifts.put(gift, System.currentTimeMillis());
@@ -239,21 +276,21 @@ public class User {
 
         if (service_name.equals("linkedin")) {
             token service = this.accessTokens.get(service_name);
-            String s = service.getEndpoint() + "/people/~:(location,first-name,picture-url,site-standard-profile-request,last-name,email-address)?format=json&oauth2_access_token=" + service.getToken();
-            JsonNode u = Tools.toJSON(Tools.rest(s));
+            String s = service.getEndpoint() + "/me?projection=(firstName,lastName,profilePicture)";
+            JsonNode u = Tools.toJSON(Tools.rest(s,null,"Bearer "+service.getToken(),"application/json","GET"));
+            s=service.getEndpoint()+"/emailAddress?q=members&projection=(elements*(handle~))";
+            JsonNode u2 = Tools.toJSON(Tools.rest(s,null,"Bearer "+service.getToken(),"application/json","GET"));
             this.initUserFromLinkedin(u);
+            this.email=u2.get("elements").get(0).get("handle~").get("emailAddress").asText();
         }
 
         return true;
     }
 
     private void initUserFromLinkedin(JsonNode u) {
-        if (u.has("firstName") && this.firstname.length() == 0) this.firstname = u.get("firstName").asText();
-        if (u.has("pictureUrl")) this.setPhoto(u.get("pictureUrl").asText());
+        this.firstname = u.get("firstName").get("localized").get("fr_FR").asText();
+        this.lastname= u.get("lastName").get("localized").get("fr_FR").asText();
         if (u.has("emailAddress") && this.getEmail().length() == 0) this.setEmail(u.get("emailAddress").asText());
-        if (u.has("location")) {
-            this.setLang(u.get("location").get("country").get("code").asText());
-        }
     }
 
 
@@ -325,12 +362,7 @@ public class User {
     public void addPoints(int i) {
         this.pts += i;
     }
-
-    public void delCar(Integer index) {
-        if (index < this.cars.size())
-            this.cars.remove(this.cars.get(index));
-    }
-
+    
 
     public Boolean updateCRM() {
        return SuiteCRM.updateCRM(this);

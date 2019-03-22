@@ -5,6 +5,7 @@
 
   <static-files>
     <include path="/**.htlm" ></include>
+    <include path="/**.js" ></include>
     <include path="/**.jpeg" ></include>
     <include path="/**.png" ></include>
   </static-files>
@@ -14,8 +15,9 @@
     <property name="file.encoding" value="UTF-8" />
     <property name="scaling" value="auto"></property>
     <property name="password" value="hh4271"></property>
-    <property name="application" value="rousseauautomobile"></property>
-    <property name="settings" value="https://raw.githubusercontent.com/shifumix/shifumix/master/shifumix_settings.json"></property>
+    <!--<property name="application" value="rousseauautomobile"></property>-->
+    <property name="application" value="selfapp"></property>
+    <!--<property name="settings" value="https://raw.githubusercontent.com/shifumix/shifumix/master/shifumix_settings.json"></property>-->
   </system-properties>
 
 <instance-class>F1</instance-class>

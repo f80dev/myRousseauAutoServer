@@ -95,13 +95,14 @@ public class DAO {
         ofy().save().entity(g).now();
     }
 
-    public List<Gift> getGifs() {
-        return ofy().load().type(Gift.class).list();
+    public List<Gift> getGifs(Integer limit) {
+        return ofy().load().type(Gift.class).limit(limit).list();
     }
 
-    public List<Gift> getGifsFromCRM() {
+    public List<Gift> getGifsFromCRM(Integer limit) {
+        if(limit==null)limit=1000;
         List<Campaigns> result=SuiteCRM.readCRM("Campaigns",
-                5,
+                limit,
                 Arrays.asList(
                         NameOf.Campaigns.Id,
                         NameOf.Campaigns.Name,

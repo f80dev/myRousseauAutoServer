@@ -1,18 +1,10 @@
 {"services":[
   {
-    "name":"contact",
-    "token":"contact",
-    "scope":"https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/contacts.readonly",
-    "appid":"284372708043-7sngqhcfkd6u3m5u8dk5ctehj8gj9lra.apps.googleusercontent.com",
-    "secretid":"62p3qJd8b4b7jIk3rQPofQrA",
-    "endpoint":"https://www.googleapis.com/oauth2/v4/token",
-    "authpoint":"https://accounts.google.com/o/oauth2/v2/auth"},
-  {
     "name":"linkedin",
     "token":"linkedin",
-    "appid":"77thlednxt86mm","secretid":"OLo4FaYiqBJbVLFQ",
-    "scope":"r_basicprofile,r_emailaddress",
-    "endpoint":"https://api.linkedin.com/v1",
+    "appid":"86jsc7wyces0n0","secretid":"FQTQPxOHDxKftdCh",
+    "scope":"r_liteprofile,r_emailaddress",
+    "endpoint":"https://api.linkedin.com/v2",
     "authpoint":"https://www.linkedin.com/oauth/v2/authorization"
   }
 ]

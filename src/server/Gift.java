@@ -68,7 +68,10 @@ public class Gift {
         else
             this.dtEnd=this.dtStart+10000000;
 
-        this.picture=c.getContent();
+        String[] contents = c.getContent().split(",");
+
+        this.picture=contents[0].split("=")[1];
+        this.manual=contents[1].split("=")[1];
         this.crmID=c.getId();
         this.setId(c.getId());
     }
@@ -163,7 +166,7 @@ public class Gift {
 
     public Campaigns toCampaign() {
         Campaigns c=new Campaigns();
-        c.setContent(this.picture);
+        c.setContent("image="+this.picture+",description="+this.manual);
         c.setStartDate(new Date(this.getDtStart()));
         c.setEndDate(new Date(this.getDtEnd()));
         c.setName(this.message);

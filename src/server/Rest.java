@@ -1,6 +1,8 @@
 package server;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.api.server.spi.config.*;
 import com.sugaronrest.NameOf;
 import com.sugaronrest.RequestType;
@@ -12,9 +14,14 @@ import java.util.logging.Logger;
 import static server.User.ADMIN_EMAIL;
 import static server.User.TITLE_APPLI;
 
-@Api(   name = "rousseau",
-        description= "Rousseau api rest service",
-        namespace = @ApiNamespace(ownerDomain = "rousseauauto.appspot.com",ownerName = "rousseauauto.appspot.com",packagePath = ""),
+
+//@Api(   name = "rousseau",
+//        description= "Rousseau api rest service",
+//        namespace = @ApiNamespace(ownerDomain = "rousseauauto.appspot.com",ownerName = "rousseauauto.appspot.com",packagePath = ""),
+//        version = "v1")
+@Api(   name = "selfapp",
+        description= "Selfapp api rest service",
+        namespace = @ApiNamespace(ownerDomain = "selfapp.appspot.com",ownerName = "selfapp.appspot.com",packagePath = ""),
         version = "v1")
 
 public class Rest {
@@ -52,10 +59,10 @@ public class Rest {
             SuiteCRM.createFromUser(u,Prospects.class);
         }
 
-        if(modele!=null && modele.length()>0){
-            car c=new car(modele,null);
-            u.addCar(c);
-        }
+//        if(modele!=null && modele.length()>0){
+//            car c=new car(modele,null);
+//            u.addCar(c);
+//        }
 
         dao.save(u);
         return u;
@@ -70,39 +77,78 @@ public class Rest {
     }
 
 
-    //http://localhost:8080/_ah/api/rousseau/v1/getservices
-    @ApiMethod(name = "getservices", httpMethod = ApiMethod.HttpMethod.GET, path = "getservices")
-    public JsonNode getservices(@Nullable @Named("modele") String model) {
-        if(model==null)
-            return Tools.loadDataFile("prestations");
-        else{
-            //TODO: a modifier pour integrer le filtre sur le modele
-            return Tools.loadDataFile("prestations");
-        }
+    //http://localhost:8080/_ah/api/rousseau/v1/test
+    @ApiMethod(name = "test", httpMethod = ApiMethod.HttpMethod.GET, path = "test")
+    public HashMap<String,JsonNode> test(@Nullable @Named("modele") String model) {
+        return null;
     }
 
     //http://localhost:8080/_ah/api/rousseau/v1/test
-    @ApiMethod(name = "test", httpMethod = ApiMethod.HttpMethod.GET, path = "test")
-    public void test(@Nullable @Named("modele") String model) {
-        JsonNode jn=SuiteCRM.read("ProspectLists","ProspectListCampaigns",
-                Arrays.asList("id"),
-                Arrays.asList(NameOf.ProspectListCampaigns.Id));
-        Object a = jn;
+    @ApiMethod(name = "getproducts", httpMethod = ApiMethod.HttpMethod.GET, path = "getproducts")
+    public HashMap<String,JsonNode> getproducts() {
+        HashMap<String,JsonNode> products=new HashMap<>();
+        HashMap<String,JsonNode> services=new HashMap<>();
+        JsonNode nodes = Tools.loadDataFile("products");
+        int k=0;
+        for(JsonNode product:nodes.get("products")){
+            List<JsonNode> l_services=new ArrayList<>();
+            for(JsonNode serv:product.get("services")){
+                String id=serv.get("id").asText();
+                if(services.containsKey(id)){
+                    JsonNode _new = services.get(id);
+                    Iterator<String> iter = serv.fieldNames();
+                    while(iter.hasNext()){
+                        String fieldname=iter.next();
+                        ((ObjectNode)_new).put(fieldname,serv.get(fieldname).asText());
+                    }
+                    serv=_new;
+                } else
+                    services.put(id,serv);
+
+                l_services.add(serv);
+            }
+            ((ObjectNode) product).put("services",new ObjectMapper().valueToTree(l_services));
+            String id=""+(k++);
+            if(product.has("id"))id=product.get("id").asText();
+            ((ObjectNode) product).put("id",id);
+            products.put(id,product);
+        }
+        return products;
     }
 
 
     //http://localhost:8080/_ah/api/rousseau/v1/getservices
+
+
+
+
     @ApiMethod(name = "getmodeles", httpMethod = ApiMethod.HttpMethod.GET, path = "getmodeles")
     public JsonNode getmodeles() {
         return Tools.loadDataFile("modeles");
     }
 
+    @ApiMethod(name = "getservices", httpMethod = ApiMethod.HttpMethod.GET, path = "getservices")
+    public JsonNode getservices(@Named("product") String id) {
+        JsonNode jn=Tools.loadDataFile("products").get("products");
+        return jn.get(Integer.valueOf(id)).get("services");
+    }
 
-    @ApiMethod(name = "addcar", httpMethod = ApiMethod.HttpMethod.GET, path = "addcar")
-    public User addcar(@Named("email") String email, @Named("modele") String model) {
+
+//    @ApiMethod(name = "addcar", httpMethod = ApiMethod.HttpMethod.GET, path = "addcar")
+//    public User addcar(@Named("email") String email, @Named("modele") String model) {
+//        User u=dao.get(email);
+//        if(u!=null){
+//            u.addCar(new car(model,null));
+//            dao.save(u);
+//        }
+//        return u;
+//    }
+
+    @ApiMethod(name = "addproduct", httpMethod = ApiMethod.HttpMethod.POST, path = "addproduct")
+    public User addproduct(@Named("email") String email, room r) {
         User u=dao.get(email);
         if(u!=null){
-            u.addCar(new car(model,null));
+            u.addproduct(r);
             dao.save(u);
         }
         return u;
@@ -110,10 +156,10 @@ public class Rest {
 
 
 
-    @ApiMethod(name = "delcar", httpMethod = ApiMethod.HttpMethod.GET, path = "delcar")
-    public User delcar(@Named("email") String email, @Named("index") Integer index) {
+    @ApiMethod(name = "delproduct", httpMethod = ApiMethod.HttpMethod.GET, path = "delproduct")
+    public User delproduct(@Named("email") String email, @Named("index") Integer index) {
         User u=dao.get(email);
-        u.delCar(index);
+        u.delproduct(index);
         dao.save(u);
         return u;
     }
@@ -126,7 +172,7 @@ public class Rest {
         if(t!=null)return Tools.returnAPI(500,"Destinataire dejà enregistré",null);
         List<String> params = new ArrayList<>(Arrays.asList(
                 "url_to_subscribe="+Tools.getDomainAppli()+"/login?email="+dest,
-                "titre=Rousseau Automobile",
+                "titre="+User.TITLE_APPLI,
                 "origin.firstname="+u.getFirstname()));
         if(firstname!=null)params.add("firstname="+firstname);
 
@@ -176,7 +222,7 @@ public class Rest {
     public User login(@Named("email") String email,@Nullable @Named("password") String password) {
         User u=dao.get(email);
         if(u!=null){
-            if(password==null || password=="" || password.equals("null"))
+            if(password==null || password=="" || password.equals("null") || password.equals("undefined"))
                 return dao.get(email);
             else{
                 if(u.checkPassword(password)){
@@ -212,10 +258,9 @@ public class Rest {
 
 
     @ApiMethod(name = "getgifts", httpMethod = ApiMethod.HttpMethod.GET, path = "getgifts")
-    public List<Gift> getgifts(@Nullable @Named("email") String email) {
-        List<Gift> gifts = dao.getGifsFromCRM();
-
-        //Tools.readRelation("Campaigns", ProspectListCampaigns.class,gifts.get(0).getId());
+    public List<Gift> getgifts(@Nullable @Named("email") String email,@Nullable @Named("limit") Integer limit) {
+        List<Gift> gifts = dao.getGifs(limit);
+        //List<Gift> gifts = dao.getGifsFromCRM(limit);
 
         User u=dao.get(email);
         if(u==null)return gifts;
@@ -237,46 +282,57 @@ public class Rest {
 
         car c=new car("Renault Fuego","https://rzpict1.blob.core.windows.net/images/360/autoscout24.fr/RZCATSFRBC44A5EEECF2/RENAULT-FUEGO-0.jpg");
 
+//        Gift g1=new Gift(
+//                "50% sur vos nouveaux pneux",
+//                "Rendez-vous directement dans le magasin, sans prendre rendez-vous avec votre véhicule",
+//                "https://staticjn.1001pneus.fr/images/profils/ProfilsGoogle/ENERGY_SAVER.png",
+//                "https://img.autoplus.fr/news/2018/07/26/1529508/1350%7C900%7C299cfbd66d72e472a85c7b9b.jpg?r",
+//                0.1,0.0);
+//
+//        Gift g2=new Gift(
+//                "une vidange offerte",
+//                "Rendez-vous directement dans le magasin, sans prendre rendez-vous avec votre véhicule",
+//                "http://motoconseil.fr/wp-content/uploads/2017/04/vidange7.png",
+//                "https://nitifilter.com/wp-content/uploads/2015/08/20952739_l-1288x724.jpg"
+//                ,0.2,0d);
+//
+//        Gift g3=new Gift(
+//                "une révision de sécurité",
+//                "Rendez-vous directement dans le magasin, sans prendre rendez-vous avec votre véhicule",
+//                "https://www.gameandme.fr/wp-content/uploads/2007/04/search.png",
+//                "https://img.autoplus.fr/news/2017/12/12/1522937/1350%7C900%7Cdc37824ada9ef507d4ddd68a.jpg?r"
+//                ,0.05,0d);
+//
+//        Gift g4=new Gift(
+//                "une journée en voiture de sport",
+//                "Rendez-vous directement dans le magasin, sans prendre rendez-vous avec votre véhicule",
+//                "http://download.seaicons.com/download/i41039/cemagraphics/classic-cars/cemagraphics-classic-cars-ferrari.ico",
+//                "http://www.voitures-de-sport.net/wp-content/uploads/2015/03/voiture-sport.jpg"
+//                ,0.5,2d);
+//
+//        g1.setCrmID(SuiteCRM.executeCRM(g1.toCampaign(), RequestType.Create));
+//        g2.setCrmID(SuiteCRM.executeCRM(g2.toCampaign(), RequestType.Create));
+//        g3.setCrmID(SuiteCRM.executeCRM(g3.toCampaign(), RequestType.Create));
+//        g4.setCrmID(SuiteCRM.executeCRM(g4.toCampaign(), RequestType.Create));
+
+
         Gift g1=new Gift(
-                "50% sur vos nouveaux pneux",
-                "Rendez-vous directement dans le magasin, sans prendre rendez-vous avec votre véhicule",
-                "https://staticjn.1001pneus.fr/images/profils/ProfilsGoogle/ENERGY_SAVER.png",
-                "https://img.autoplus.fr/news/2018/07/26/1529508/1350%7C900%7C299cfbd66d72e472a85c7b9b.jpg?r",
+                "Un dessert offert",
+                "Commander le directement",
+                "",
+                "https://media.cdnws.com/_i/60780/172/3964/73/tiramisu.jpeg",
                 0.1,0.0);
 
         Gift g2=new Gift(
-                "une vidange offerte",
-                "Rendez-vous directement dans le magasin, sans prendre rendez-vous avec votre véhicule",
-                "http://motoconseil.fr/wp-content/uploads/2017/04/vidange7.png",
-                "https://nitifilter.com/wp-content/uploads/2015/08/20952739_l-1288x724.jpg"
+                "Un américano maison offert",
+                "Commander le directement",
+                "",
+                "https://static.cuisineaz.com/680x357/i139165-americano.jpeg"
                 ,0.2,0d);
-
-        Gift g3=new Gift(
-                "une révision de sécurité",
-                "Rendez-vous directement dans le magasin, sans prendre rendez-vous avec votre véhicule",
-                "https://www.gameandme.fr/wp-content/uploads/2007/04/search.png",
-                "https://img.autoplus.fr/news/2017/12/12/1522937/1350%7C900%7Cdc37824ada9ef507d4ddd68a.jpg?r"
-                ,0.05,0d);
-
-        Gift g4=new Gift(
-                "une journée en voiture de sport",
-                "Rendez-vous directement dans le magasin, sans prendre rendez-vous avec votre véhicule",
-                "http://download.seaicons.com/download/i41039/cemagraphics/classic-cars/cemagraphics-classic-cars-ferrari.ico",
-                "http://www.voitures-de-sport.net/wp-content/uploads/2015/03/voiture-sport.jpg"
-                ,0.5,2d);
-
-        g1.setCrmID(SuiteCRM.executeCRM(g1.toCampaign(), RequestType.Create));
-        g2.setCrmID(SuiteCRM.executeCRM(g2.toCampaign(), RequestType.Create));
-        g3.setCrmID(SuiteCRM.executeCRM(g3.toCampaign(), RequestType.Create));
-        g4.setCrmID(SuiteCRM.executeCRM(g4.toCampaign(), RequestType.Create));
 
 
         dao.save(g1);
         dao.save(g2);
-        dao.save(g3);
-        dao.save(g4);
-
-
 
         return Tools.returnAPI(200,"Database erased",null);
     }

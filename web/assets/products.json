@@ -1,0 +1,65 @@
+{
+  "products": [
+    {
+      "label": "Double Room with Pool View",
+      "photo": "https://cdn.webhotelier.net/photos/w=390:q=90/bluea-dbl/L337491.jpg",
+      "services":[
+        {
+          "id":"room_service",
+          "label":"Service en chambre",
+          "photo":"https://hotel-diana.fr/wp-content/uploads/2015/06/roomservice.jpg",
+          "tarif":"200"
+        },
+        {
+          "id":"spa",
+          "label":"Accès au SPA",
+          "photo":"https://www.lapleta.com/files-sbbasic/sr_lapleta_com/rafael-hotels-by-la-pleta-home-occitania-spa-3.jpg",
+          "tarif":"250"
+        },
+        {
+          "id":"visite",
+          "label":"Visite guidée",
+          "photo":"http://blog.messortiesculture.com/uploads/post-685.jpg",
+          "tarif":"300"
+        }
+      ]
+    },
+    {
+      "label": "Junior Suite with Pool View",
+      "photo": "https://cdn.webhotelier.net/photos/w=390:q=90/bluea-jun/L342097.jpg",
+      "services":[
+        {
+          "id":"room_service",
+          "tarif":"100"
+        },
+        {
+          "id":"spa",
+          "tarif":"150"
+        },
+        {
+          "id":"visite",
+          "tarif":"200"
+        }
+      ]
+    },
+    {
+      "label": "One Bedroom Suite with Pool View",
+      "photo": "https://cdn.webhotelier.net/photos/w=390:q=90/bluea-oneb/L337496.jpg",
+      "services":[
+        {
+          "id":"room_service",
+          "tarif":"100"
+        },
+        {
+          "id":"visite",
+          "tarif":"200"
+        }
+      ]
+    },
+    {
+      "label": "Two Bedroom Family Suite with Pool View",
+      "photo": "https://cdn.webhotelier.net/photos/w=390:q=90/bluea-2bed/L337501.jpg",
+      "services":[]
+    }
+  ]
+}
