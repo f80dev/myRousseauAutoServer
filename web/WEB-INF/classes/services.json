@@ -1,11 +1,30 @@
-{"services":[
+{
+  "comment":"Ce fichier décrit les services tiers d'authentification utilisé par l'application. Redirection : https://creche.appspot.com/api/oauth2callback?from=facebook",
+  "services":[
   {
-    "name":"linkedin",
-    "token":"linkedin",
-    "appid":"86jsc7wyces0n0","secretid":"FQTQPxOHDxKftdCh",
-    "scope":"r_liteprofile,r_emailaddress",
-    "endpoint":"https://api.linkedin.com/v2",
-    "authpoint":"https://www.linkedin.com/oauth/v2/authorization"
-  }
-]
+    "name":"facebook",
+    "token":"facebook",
+    "appid":"308318623167504","secretid":"bbb821bb6b3da22bed51d1ecaeeace19",
+    "scope":"public_profile,email",
+    "endpoint":"https://graph.facebook.com/2.7",
+    "authpoint":"https://www.facebook.com/v2.7/dialog/oauth"
+  },
+    {
+      "name":"linkedin",
+      "token":"linkedin",
+      "appid":"77thlednxt86mm","secretid":"OLo4FaYiqBJbVLFQ",
+      "scope":"r_basicprofile,r_emailaddress",
+      "endpoint":"https://api.linkedin.com/v1",
+      "authpoint":"https://www.linkedin.com/oauth/v2/authorization"
+    },
+    {
+      "name":"contact",
+      "token":"contact",
+      "appid":"1039875991035-nka20l1p6ghvluhjl1h0q6eqttea3r6f.apps.googleusercontent.com","secretid":"PQBcdXCwziB0QdktJir_YlIq",
+      "scope":"https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
+      "endpoint":"https://www.googleapis.com/oauth2/v4/token",
+      "authpoint":"https://accounts.google.com/o/oauth2/v2/auth"
+    }
+  ]
+
 }

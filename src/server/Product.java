@@ -1,18 +1,17 @@
 package server;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.googlecode.objectify.annotation.Subclass;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
-public abstract class product implements Serializable {
+public class Product implements Serializable {
     protected String photo="";
     protected String label="";
     protected String id="";
     protected HashMap<String,Double> prestas=new HashMap<>();
 
-    public product() {
+    public Product() {
     }
 
     public String getPhoto() {
@@ -47,8 +46,9 @@ public abstract class product implements Serializable {
         this.prestas = prestas;
     }
 
-    public abstract void initPrestas(String presta_file);
-    public abstract void initPhoto(String modelesFile);
-
-    public abstract boolean isValid();
+//    public abstract void initPrestas(String presta_file);
+//    public abstract void initPhoto(String modelesFile);
+    public boolean isValid(){
+        return true;
+    }
 }

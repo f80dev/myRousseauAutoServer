@@ -11,18 +11,13 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.people.v1.PeopleService;
 import com.google.api.services.people.v1.model.Person;
 import com.google.common.hash.Hashing;
-import com.google.common.io.BaseEncoding;
 import com.googlecode.objectify.annotation.*;
-import com.mashape.unirest.http.exceptions.UnirestException;
+import com.restfb.*;
 import com.sugaronrest.modules.Contacts;
 
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.security.KeyManagementException;
-import java.security.KeyStoreException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 @Cache
@@ -36,6 +31,9 @@ public class User {
     public static final String CRM_USER = "selfapp";
     public static final String CRM_PASSWORD = "hh4271";
 
+    @JsonIgnore
+    @Ignore
+    private FacebookClient facebook = null;
 
     @Id
     String email = "";
@@ -45,6 +43,8 @@ public class User {
 
     @Index
     String crm_contactsID="";
+
+    private Long dtStartWork=0L; //Utilisé pour créer des work a la volé
 
     private List<Long> connexions = new ArrayList<>();
     String lang = "";
@@ -62,7 +62,9 @@ public class User {
 
     HashMap<String, Long> gifts = new HashMap<>(); //Liste des cadeaux attribués
 
-    List<String> products = new ArrayList<>();
+    List<Product> products = new ArrayList<>();
+
+    List<String> messagesReaded = new ArrayList<>();
 
     public User() {
     }
@@ -127,6 +129,23 @@ public class User {
         return dtLastNotif;
     }
 
+    public Long getDtStartWork() {
+        return dtStartWork;
+    }
+
+    public void setDtStartWork(Long dtStartWork) {
+        this.dtStartWork = dtStartWork;
+    }
+
+
+    public List<String> getMessagesReaded() {
+        return messagesReaded;
+    }
+
+    public void setMessagesReaded(List<String> messagesReaded) {
+        this.messagesReaded = messagesReaded;
+    }
+
     public void setDtLastNotif(Long dtLastNotif) {
         this.dtLastNotif = dtLastNotif;
     }
@@ -151,9 +170,6 @@ public class User {
         this.connexions.add(System.currentTimeMillis());
     }
 
-    public List<String> getProducts() {
-        return products;
-    }
 
     public String getPhoto() {
         return photo;
@@ -185,13 +201,13 @@ public class User {
 //            this.cars.remove(this.cars.get(index));
 //    }
 
-    public void setproducts(List<String> products) {
+    public void setproducts(List<Product> products) {
         this.products = products;
     }
 
-    public void addproduct(product c) {
+    public void addproduct(Product c) {
         if (c.isValid())
-            this.products.add(c.getId());
+            this.products.add(c);
     }
 
     public void delproduct(Integer index) {
@@ -273,6 +289,15 @@ public class User {
                 this.setPhoto(url);
             }
         }
+
+        if(service_name.startsWith("facebook")) {
+            this.facebook=new DefaultFacebookClient(getAccessTokens().get("facebook").getToken(),new DefaultWebRequestor(),new DefaultJsonMapper(), Version.VERSION_2_8);
+            com.restfb.types.User fbUser = this.facebook.fetchObject("me", com.restfb.types.User.class, Parameter.with("fields", "email,picture,first_name"));
+            this.setEmail(fbUser.getEmail());
+            this.setFirstname(fbUser.getFirstName());
+            this.setPhoto(fbUser.getPicture().getUrl());
+        }
+
 
         if (service_name.equals("linkedin")) {
             token service = this.accessTokens.get(service_name);
@@ -378,11 +403,27 @@ public class User {
     }
 
 
+    public List<Product> getProducts() {
+        return products;
+    }
 
+    public void setProducts(List<Product> products) {
+        this.products = products;
+    }
 
     @OnSave
     void onSave(){
         this.updateCRM();
     }
 
+    public boolean alreadyView(String messageId) {
+        return this.messagesReaded.contains(messageId);
+    }
+
+    public boolean addReadedMessage(String messageId){
+        if(alreadyView(messageId))return false;
+
+        this.messagesReaded.add(messageId);
+        return true;
+    }
 }

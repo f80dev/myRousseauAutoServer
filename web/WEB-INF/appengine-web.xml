@@ -4,10 +4,11 @@
   <runtime>java8</runtime>
 
   <static-files>
-    <include path="/**.htlm" ></include>
-    <include path="/**.js" ></include>
-    <include path="/**.jpeg" ></include>
-    <include path="/**.png" ></include>
+    <include path="/applis/**.htlm" ></include>
+    <include path="/applis/**.js" ></include>
+    <include path="/applis/**.css" ></include>
+    <include path="/applis/**.jpeg" ></include>
+    <include path="/applis/**.png" ></include>
   </static-files>
 
   <system-properties>
@@ -16,7 +17,8 @@
     <property name="scaling" value="auto"></property>
     <property name="password" value="hh4271"></property>
     <!--<property name="application" value="rousseauautomobile"></property>-->
-    <property name="application" value="selfapp"></property>
+    <!--<property name="application" value="selfapp"></property>-->
+    <property name="application" value="creche"></property>
     <!--<property name="settings" value="https://raw.githubusercontent.com/shifumix/shifumix/master/shifumix_settings.json"></property>-->
   </system-properties>
 

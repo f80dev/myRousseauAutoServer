@@ -12,6 +12,8 @@
           <element id="library" level="project" name="com.google.appengine:appengine-api-1.0-sdk:Release" />
           <element id="library" level="project" name="sugaronrest-1.0.0" />
           <element id="library" level="project" name="com.google.endpoints:endpoints-framework:Release" />
+          <element id="library" level="project" name="com.restfb:restfb:2.18.1" />
+          <element id="library" level="project" name="com.googlecode.objectify:objectify:6.0.3" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="myRousseauAutoServer/web/Web" />

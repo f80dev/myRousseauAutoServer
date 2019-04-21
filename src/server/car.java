@@ -1,14 +1,11 @@
 package server;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.googlecode.objectify.annotation.Entity;
-import com.googlecode.objectify.annotation.Id;
 
 import java.util.HashMap;
-import java.util.Map;
 
 
-public class car extends product {
+public class car extends Product {
 
     private String photo="";
     private String modele="";

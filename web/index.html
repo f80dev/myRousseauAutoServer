@@ -1,69 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-  <meta charset="utf-8">
-  <title>My Rousseau Automobile</title>
-  <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href=" favicon.ico">
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1976d2">
-<link rel="stylesheet" href="styles.2759878602ad5c0e362c.css"></head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 <body>
 
-
-<script>
-  fetch("./assets/config.json").then(function(response) {return response.json();})
-    .then(function(config) {
-      document.getElementById("page").src=config.splash_screen;
-      document.getElementById("name_appli").innerHTML=config.appli_name;
-      document.title=config.appli_name;
-      (function () {
-        // Retrieve the URL the user was trying to access when receiving the 404.
-        var redirect = sessionStorage.redirect;
-        // Remove the URL from sessionStorage.
-        delete sessionStorage.redirect;
-        // Check if we actually need to redirect.
-        if (redirect && redirect != location.href) {
-          // We need to redirect to the URL the user was trying to access.
-          history.replaceState(null, null, redirect);
-        }
-      })();
-    });
-</script>
-
-  <app-root>
-
-    <img class="cover"
-         src=""
-         style="height: 100%;width: 100%;"
-         id="page">
-
-    <img style="position: absolute;left:20px;top:20px;width: 40px;height: 40px;"
-         src="./assets/img/wait.gif">
-
-    <div id="name_appli"
-         style="font-family: Arial, Helvetica, serif;font-size:6vw;color:white;font-weight:lighter;position: absolute;left:0px;top:25%;width: 100%;text-align: center;">
-    </div>
-
-
-    <!--<br><br><br><br><br><br>-->
-    <!--<div style="width: 100%;text-align: center;">-->
-      <!--<br><br>-->
-      <!--Votre espace client-->
-      <!--<br>-->
-      <!--<img src="./assets/img/splash_screen.jpg" style="width: 80%;max-width: 400px;";>-->
-      <!--<br><br><br><br>-->
-      <!--Chargement ...-->
-    <!--</div>-->
-  </app-root>
-
-
-
-  <noscript>Veuillez activer JavaScript pour faire fonctionner MyRousseauAutomobile</noscript>
-
-<script type="text/javascript" src="runtime.06daa30a2963fa413676.js"></script><script type="text/javascript" src="polyfills.898576310992865ac2b8.js"></script><script type="text/javascript" src="main.ad6d04db1abafa67cff4.js"></script></body>
+</body>
 </html>

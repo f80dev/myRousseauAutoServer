@@ -4,10 +4,16 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.api.server.spi.config.*;
+import com.googlecode.objectify.ObjectifyService;
 import com.sugaronrest.NameOf;
 import com.sugaronrest.RequestType;
 import com.sugaronrest.modules.*;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -19,12 +25,19 @@ import static server.User.TITLE_APPLI;
 //        description= "Rousseau api rest service",
 //        namespace = @ApiNamespace(ownerDomain = "rousseauauto.appspot.com",ownerName = "rousseauauto.appspot.com",packagePath = ""),
 //        version = "v1")
-@Api(   name = "selfapp",
-        description= "Selfapp api rest service",
-        namespace = @ApiNamespace(ownerDomain = "selfapp.appspot.com",ownerName = "selfapp.appspot.com",packagePath = ""),
+//@Api(   name = "selfapp",
+//        description= "Selfapp api rest service",
+//        namespace = @ApiNamespace(ownerDomain = "selfapp.appspot.com",ownerName = "selfapp.appspot.com",packagePath = ""),
+//        version = "v1")
+
+@Api(   name = "creche",
+        description= "creche api rest service",
+        namespace = @ApiNamespace(ownerDomain = "creche.appspot.com",ownerName = "creche.appspot.com",packagePath = ""),
         version = "v1")
 
 public class Rest {
+
+//    static {ObjectifyService.init();} code pour objectify 6
 
     private static final DAO dao = DAO.getInstance();
     private static final Logger log = Logger.getLogger(Rest.class.getName());
@@ -37,8 +50,21 @@ public class Rest {
 
     @ApiMethod(name = "getusers", httpMethod = ApiMethod.HttpMethod.GET, path = "getusers")
     public List<User> getusers() {
-        return dao.getUsers(null);
+        List<User> rc = dao.getUsers(null);
+        return rc;
     }
+
+    @ApiMethod(name = "updateuser", httpMethod = ApiMethod.HttpMethod.POST, path = "updateuser")
+    public User updateuser(@Named("email") String email,JsonNode jn) {
+        User u=dao.get(email);
+        if(jn.has("dtStartWork"))u.setDtStartWork(jn.get("dtStartWork").asLong());
+        if(jn.has("firstname"))u.setFirstname(jn.get("firstname").asText());
+        if(jn.has("photo"))u.setPhoto(jn.get("photo").asText());
+        dao.save(u);
+        return u;
+    }
+
+
 
     @ApiMethod(name = "adduser", httpMethod = ApiMethod.HttpMethod.GET, path = "adduser")
     public User adduser(@Named("email") String email,
@@ -79,47 +105,56 @@ public class Rest {
 
     //http://localhost:8080/_ah/api/rousseau/v1/test
     @ApiMethod(name = "test", httpMethod = ApiMethod.HttpMethod.GET, path = "test")
-    public HashMap<String,JsonNode> test(@Nullable @Named("modele") String model) {
-        return null;
+    public void test(ServletContext res, @Nullable @Named("modele") String model) {
+        //dao.addGifts(Tools.loadDataFile("promotions").get("gifts"));
     }
 
     //http://localhost:8080/_ah/api/rousseau/v1/test
     @ApiMethod(name = "getproducts", httpMethod = ApiMethod.HttpMethod.GET, path = "getproducts")
     public HashMap<String,JsonNode> getproducts() {
-        HashMap<String,JsonNode> products=new HashMap<>();
-        HashMap<String,JsonNode> services=new HashMap<>();
-        JsonNode nodes = Tools.loadDataFile("products");
-        int k=0;
-        for(JsonNode product:nodes.get("products")){
-            List<JsonNode> l_services=new ArrayList<>();
-            for(JsonNode serv:product.get("services")){
-                String id=serv.get("id").asText();
-                if(services.containsKey(id)){
-                    JsonNode _new = services.get(id);
-                    Iterator<String> iter = serv.fieldNames();
-                    while(iter.hasNext()){
-                        String fieldname=iter.next();
-                        ((ObjectNode)_new).put(fieldname,serv.get(fieldname).asText());
-                    }
-                    serv=_new;
-                } else
-                    services.put(id,serv);
+        return dao.getProducts();
+    }
 
-                l_services.add(serv);
-            }
-            ((ObjectNode) product).put("services",new ObjectMapper().valueToTree(l_services));
-            String id=""+(k++);
-            if(product.has("id"))id=product.get("id").asText();
-            ((ObjectNode) product).put("id",id);
-            products.put(id,product);
-        }
-        return products;
+    //http://localhost:8080/_ah/api/rousseau/v1/test
+    @ApiMethod(name = "getmessages", httpMethod = ApiMethod.HttpMethod.GET, path = "getmessages")
+    public List<Message> getmessages(@Named("email") String email) {
+        return dao.getMessages(dao.get(email));
+    }
+
+    //http://localhost:8080/_ah/api/rousseau/v1/test
+    @ApiMethod(name = "getworks", httpMethod = ApiMethod.HttpMethod.GET, path = "getworks")
+    public List<Work> getworks(@Named("productid") String productid) {
+        List<Work> rc = dao.getWorks(productid);
+        Collections.sort(rc);
+        return rc;
+    }
+
+    @ApiMethod(name = "addwork", httpMethod = ApiMethod.HttpMethod.POST, path = "addwork")
+    public void addwork(Work w) {
+        dao.save(w);
+    }
+
+    //http://localhost:8080/_ah/api/rousseau/v1/test
+    @ApiMethod(name = "addmessage", httpMethod = ApiMethod.HttpMethod.POST, path = "addmessage")
+    public void addmessage(Message m) {
+        dao.save(m);
+    }
+
+    @ApiMethod(name = "readmessage", httpMethod = ApiMethod.HttpMethod.GET, path = "readmessage")
+    public void readmessage(@Named("email") String email,@Named("message") String message) {
+        User u=dao.get(email);
+        if(u.addReadedMessage(message))
+            dao.save(u);
+    }
+
+    //http://localhost:8080/_ah/api/creche/v1/exportworks
+    @ApiMethod(name = "exportworks", httpMethod = ApiMethod.HttpMethod.GET, path = "exportworks")
+    public HashMap<String,String> exportworks() {
+        return Tools.returnAPI(200,dao.exportWorksToCSV(),null);
     }
 
 
     //http://localhost:8080/_ah/api/rousseau/v1/getservices
-
-
 
 
     @ApiMethod(name = "getmodeles", httpMethod = ApiMethod.HttpMethod.GET, path = "getmodeles")
@@ -127,39 +162,39 @@ public class Rest {
         return Tools.loadDataFile("modeles");
     }
 
-    @ApiMethod(name = "getservices", httpMethod = ApiMethod.HttpMethod.GET, path = "getservices")
-    public JsonNode getservices(@Named("product") String id) {
-        JsonNode jn=Tools.loadDataFile("products").get("products");
-        return jn.get(Integer.valueOf(id)).get("services");
-    }
-
-
-//    @ApiMethod(name = "addcar", httpMethod = ApiMethod.HttpMethod.GET, path = "addcar")
-//    public User addcar(@Named("email") String email, @Named("modele") String model) {
-//        User u=dao.get(email);
-//        if(u!=null){
-//            u.addCar(new car(model,null));
-//            dao.save(u);
-//        }
-//        return u;
-//    }
 
     @ApiMethod(name = "addproduct", httpMethod = ApiMethod.HttpMethod.POST, path = "addproduct")
-    public User addproduct(@Named("email") String email, room r) {
+    public User addproduct(@Named("email") String email, Product p) {
         User u=dao.get(email);
         if(u!=null){
-            u.addproduct(r);
+            u.addproduct(p);
             dao.save(u);
         }
         return u;
     }
 
 
+    @ApiMethod(name = "getservices", httpMethod = ApiMethod.HttpMethod.GET, path = "getservices")
+    public JsonNode getservices(@Named("Product") String id) {
+        HashMap<String, JsonNode> products = dao.getProducts();
+        return products.get(id).get("services");
+    }
+
 
     @ApiMethod(name = "delproduct", httpMethod = ApiMethod.HttpMethod.GET, path = "delproduct")
     public User delproduct(@Named("email") String email, @Named("index") Integer index) {
         User u=dao.get(email);
         u.delproduct(index);
+        dao.save(u);
+        return u;
+    }
+
+    @ApiMethod(name = "sendphoto", httpMethod = ApiMethod.HttpMethod.POST, path = "sendphoto")
+    public User sendphoto(@Named("email") String email, JsonNode photo) {
+        User u=dao.get(email);
+        String url_photo=photo.get("photo").asText();
+        if(photo.get("type").asText().equals("product"))u.getProducts().get(0).setPhoto(url_photo);
+        if(photo.get("type").asText().equals("perso"))u.setPhoto(url_photo);
         dao.save(u);
         return u;
     }
@@ -186,7 +221,6 @@ public class Rest {
     }
 
 
-
     @ApiMethod(name = "askforappointment", httpMethod = ApiMethod.HttpMethod.GET, path = "askforappointment")
     public HashMap<String, String> askforappointment(@Named("email") String email, @Named("durationInMin") Integer duration,@Named("dt") Long dt, @Nullable @Named("motif") String motif) {
 
@@ -210,7 +244,7 @@ public class Rest {
         return rc;
     }
 
-     @ApiMethod(name = "cancelappointments", httpMethod = ApiMethod.HttpMethod.GET, path = "cancelappointments")
+    @ApiMethod(name = "cancelappointments", httpMethod = ApiMethod.HttpMethod.GET, path = "cancelappointments")
     public List<Appointment> cancelappointments(@Named("email") String email,@Named("appointment") String id) {
         Appointment a = dao.getAppointment(id);
         if(a!=null)
@@ -280,8 +314,6 @@ public class Rest {
     public HashMap<String, String> raz() {
         dao.raz();
 
-        car c=new car("Renault Fuego","https://rzpict1.blob.core.windows.net/images/360/autoscout24.fr/RZCATSFRBC44A5EEECF2/RENAULT-FUEGO-0.jpg");
-
 //        Gift g1=new Gift(
 //                "50% sur vos nouveaux pneux",
 //                "Rendez-vous directement dans le magasin, sans prendre rendez-vous avec votre véhicule",
@@ -316,23 +348,7 @@ public class Rest {
 //        g4.setCrmID(SuiteCRM.executeCRM(g4.toCampaign(), RequestType.Create));
 
 
-        Gift g1=new Gift(
-                "Un dessert offert",
-                "Commander le directement",
-                "",
-                "https://media.cdnws.com/_i/60780/172/3964/73/tiramisu.jpeg",
-                0.1,0.0);
-
-        Gift g2=new Gift(
-                "Un américano maison offert",
-                "Commander le directement",
-                "",
-                "https://static.cuisineaz.com/680x357/i139165-americano.jpeg"
-                ,0.2,0d);
-
-
-        dao.save(g1);
-        dao.save(g2);
+        dao.addGifts(Tools.loadDataFile("promotions").get("gifts"));
 
         return Tools.returnAPI(200,"Database erased",null);
     }

@@ -1,0 +1,14 @@
+{
+  "comment":"Ce fichier décrit les services tiers d'authentification utilisé par l'application",
+  "services":[
+  {
+    "name":"linkedin",
+    "token":"linkedin",
+    "appid":"86jsc7wyces0n0","secretid":"FQTQPxOHDxKftdCh",
+    "scope":"r_liteprofile,r_emailaddress",
+    "endpoint":"https://api.linkedin.com/v2",
+    "authpoint":"https://www.linkedin.com/oauth/v2/authorization"
+  }
+  ]
+
+}

@@ -1,0 +1,42 @@
+{
+  "gifts":[
+    {
+      "title":"Un dessert offert",
+      "onclick":{
+        "message":"Commander le directement"
+      },
+      "photo":"https://media.cdnws.com/_i/60780/172/3964/73/tiramisu.jpeg",
+      "duration":1,
+      "cost":15
+    },
+    {
+      "title":"Un américano maison offert",
+      "onclick":{
+        "message":"Commander le directement"
+      },
+      "photo":"https://static.cuisineaz.com/680x357/i139165-americano.jpeg",
+      "duration":1,
+      "cost":20
+    },
+    {
+      "title":"Un soin au spa",
+      "onclick":{
+        "message":"Prendre rendez-vous",
+        "action":"goto:meeting"
+      },
+      "photo":"https://cdn.pixabay.com/photo/2015/09/11/23/27/women-936549_960_720.jpg",
+      "duration":1,
+      "cost":200
+    },
+    {
+      "title":"Une visite de l'ile",
+      "onclick":{
+        "message":"S'inscrire à la réception",
+        "action":"goto:meeting"
+      },
+      "photo":"https://cdn.pixabay.com/photo/2017/12/04/14/37/zakynthos-2997092_960_720.jpg",
+      "duration":1,
+      "cost":200
+    }
+  ]
+}

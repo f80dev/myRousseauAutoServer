@@ -44,6 +44,15 @@
         <url-pattern>/api/oauth2callback/*</url-pattern>
     </servlet-mapping>
 
+  <servlet>
+        <servlet-name>export</servlet-name>
+        <servlet-class>server.export</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>export</servlet-name>
+        <url-pattern>/api/export/*</url-pattern>
+    </servlet-mapping>
+
 
     <filter>
         <filter-name>ObjectifyFilter</filter-name>
@@ -56,11 +65,11 @@
 
     <!-- Default page to serve -->
     <welcome-file-list>
-        <welcome-file>index.html</welcome-file>
+        <welcome-file>./applis/index.html</welcome-file>
     </welcome-file-list>
 
     <error-page>
         <error-code>404</error-code>
-        <location>/404.html</location>
+        <location>/applis/404.html</location>
     </error-page>
 </web-app>

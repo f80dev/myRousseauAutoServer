@@ -278,7 +278,8 @@ public class Tools {
 
     public static JsonNode loadDataFile(String name){
         try {
-            String s=rest(Tools.getDomain()+"/assets/"+name+".json");
+            if(!name.endsWith(".json"))name=name+".json";
+            String s=rest(Tools.getDomain()+"/assets/"+name);
             return toJSON(s);
         } catch (RestAPIException e) {
             e.printStackTrace();

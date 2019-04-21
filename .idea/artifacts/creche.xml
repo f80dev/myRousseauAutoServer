@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="myRAS">
-    <output-path>$PROJECT_DIR$/out/artifacts/myRAS</output-path>
+  <artifact type="exploded-war" name="creche">
+    <output-path>$PROJECT_DIR$/out/artifacts/creche</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -10,9 +10,8 @@
           <element id="library" level="project" name="com.googlecode.objectify:objectify:5.1.22" />
           <element id="library" level="project" name="com.google.apis:google-api-services-people:v1-rev20190304-1.28.0" />
           <element id="library" level="project" name="com.google.appengine:appengine-api-1.0-sdk:Release" />
-          <element id="library" level="project" name="javax.servlet:servlet-api:2.5" />
-          <element id="library" level="project" name="com.google.endpoints:endpoints-framework:Release" />
           <element id="library" level="project" name="sugaronrest-1.0.0" />
+          <element id="library" level="project" name="com.google.endpoints:endpoints-framework:Release" />
           <element id="library" level="project" name="com.restfb:restfb:2.18.1" />
           <element id="library" level="project" name="com.googlecode.objectify:objectify:6.0.3" />
         </element>
