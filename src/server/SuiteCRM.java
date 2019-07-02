@@ -77,16 +77,20 @@ public class SuiteCRM extends CRM {
 
     public static void raz() {
         List<Campaigns> l_camp=readCRM("Campaigns",100, Arrays.asList(NameOf.Campaigns.Id),RequestType.BulkRead);
-        for(Campaigns c:l_camp)deleteCRM("Campaigns",c.getId());
+        if(l_camp!=null)
+            for(Campaigns c:l_camp)deleteCRM("Campaigns",c.getId());
 
         List<Contacts> lc=readCRM("Contacts",100, Arrays.asList(NameOf.Contacts.Id),RequestType.BulkRead);
-        for(Contacts c:lc)deleteCRM("Contacts",c.getId());
+        if(lc!=null)
+            for(Contacts c:lc)deleteCRM("Contacts",c.getId());
 
         List<Leads> ll=readCRM("Leads",100, Arrays.asList(NameOf.Leads.Id),RequestType.BulkRead);
-        for(Leads c:ll)deleteCRM("Leads",c.getId());
+        if(ll!=null)
+            for(Leads c:ll)deleteCRM("Leads",c.getId());
 
         List<Prospects> lp=readCRM("Prospects",100, Arrays.asList(NameOf.Prospects.Id),RequestType.BulkRead);
-        for(Prospects c:lp)deleteCRM("Prospects",c.getId());
+        if(lp!=null)
+            for(Prospects c:lp)deleteCRM("Prospects",c.getId());
     }
 
     public static JsonNode read(String modulePere, String moduleFils, List<String> fieldsPere, List<String> fieldsFils){

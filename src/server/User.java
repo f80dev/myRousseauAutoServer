@@ -44,8 +44,6 @@ public class User {
     @Index
     String crm_contactsID="";
 
-    private Long dtStartWork=0L; //Utilisé pour créer des work a la volé
-
     private List<Long> connexions = new ArrayList<>();
     String lang = "";
     String lastname = "";
@@ -56,13 +54,15 @@ public class User {
     Long dtLastNotif=100000000000L;
 
     Integer pts = 100;
+    //String password = ""+System.currentTimeMillis() % 9999;
     String password = "1234";
     String photo = "./assets/img/avatar.jpg";
+
     public Map<String, token> accessTokens = new HashMap<>();
 
     HashMap<String, Long> gifts = new HashMap<>(); //Liste des cadeaux attribués
 
-    List<Product> products = new ArrayList<>();
+    List<String> products = new ArrayList<>();
 
     List<String> messagesReaded = new ArrayList<>();
 
@@ -129,15 +129,6 @@ public class User {
         return dtLastNotif;
     }
 
-    public Long getDtStartWork() {
-        return dtStartWork;
-    }
-
-    public void setDtStartWork(Long dtStartWork) {
-        this.dtStartWork = dtStartWork;
-    }
-
-
     public List<String> getMessagesReaded() {
         return messagesReaded;
     }
@@ -201,13 +192,13 @@ public class User {
 //            this.cars.remove(this.cars.get(index));
 //    }
 
-    public void setproducts(List<Product> products) {
+    public void setproducts(List<String> products) {
         this.products = products;
     }
 
     public void addproduct(Product c) {
         if (c.isValid())
-            this.products.add(c);
+            this.products.add(c.id);
     }
 
     public void delproduct(Integer index) {
@@ -390,7 +381,7 @@ public class User {
     
 
     public Boolean updateCRM() {
-       return SuiteCRM.updateCRM(this);
+        return SuiteCRM.updateCRM(this);
     }
 
     public Contacts toContact(){
@@ -403,17 +394,17 @@ public class User {
     }
 
 
-    public List<Product> getProducts() {
+    public List<String> getProducts() {
         return products;
     }
 
-    public void setProducts(List<Product> products) {
+    public void setProducts(List<String> products) {
         this.products = products;
     }
 
     @OnSave
     void onSave(){
-        this.updateCRM();
+        //this.updateCRM();
     }
 
     public boolean alreadyView(String messageId) {

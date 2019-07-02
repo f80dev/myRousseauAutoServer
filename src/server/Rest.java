@@ -1,19 +1,10 @@
 package server;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.api.server.spi.config.*;
-import com.googlecode.objectify.ObjectifyService;
-import com.sugaronrest.NameOf;
-import com.sugaronrest.RequestType;
 import com.sugaronrest.modules.*;
 
 import javax.servlet.ServletContext;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -57,7 +48,6 @@ public class Rest {
     @ApiMethod(name = "updateuser", httpMethod = ApiMethod.HttpMethod.POST, path = "updateuser")
     public User updateuser(@Named("email") String email,JsonNode jn) {
         User u=dao.get(email);
-        if(jn.has("dtStartWork"))u.setDtStartWork(jn.get("dtStartWork").asLong());
         if(jn.has("firstname"))u.setFirstname(jn.get("firstname").asText());
         if(jn.has("photo"))u.setPhoto(jn.get("photo").asText());
         dao.save(u);
@@ -66,23 +56,19 @@ public class Rest {
 
 
 
-    @ApiMethod(name = "adduser", httpMethod = ApiMethod.HttpMethod.GET, path = "adduser")
-    public User adduser(@Named("email") String email,
-                        @Named("lastname") String lastname,
-                        @Named("firstname") String firstname,
-                        @Nullable @Named("dtlastnotif") Long dtLastNotif,
-                        @Nullable @Named("modele") String modele) {
+    @ApiMethod(name = "adduser", httpMethod = ApiMethod.HttpMethod.POST, path = "adduser")
+    public User adduser(@Named("dtLastNotif") Long dtLastNotif,JsonNode jn) {
         //String password=""+new Random().ints(1000,9999);
         String password="1234";
-        User u=dao.get(email);
+        User u=dao.get(jn.get("email").asText());
         if(u!=null){
-            u.setFirstname(firstname);
-            u.setLastname(lastname);
+            u.setFirstname(jn.get("firstname").asText());
+            u.setLastname(jn.get("lastname").asText());
             u.setDtLastNotif(dtLastNotif);
         } else {
-            u=new User(email,password,firstname,lastname);
+            u=new User(jn.get("email").asText(),password,jn.get("firstname").asText(),jn.get("lastname").asText());
             u.sendPassword();
-            SuiteCRM.createFromUser(u,Prospects.class);
+            //SuiteCRM.createFromUser(u,Prospects.class);
         }
 
 //        if(modele!=null && modele.length()>0){
@@ -90,7 +76,7 @@ public class Rest {
 //            u.addCar(c);
 //        }
 
-        dao.save(u);
+        dao.save(u).now();
         return u;
     }
 
@@ -111,8 +97,11 @@ public class Rest {
 
     //http://localhost:8080/_ah/api/rousseau/v1/test
     @ApiMethod(name = "getproducts", httpMethod = ApiMethod.HttpMethod.GET, path = "getproducts")
-    public HashMap<String,JsonNode> getproducts() {
-        return dao.getProducts();
+    public List<Product> getproducts(@Nullable @Named("email") String email,@Nullable @Named("id") String id) {
+        if(id!=null && id.length()>0)
+            return Arrays.asList(dao.getProduct(id));
+        else
+            return dao.getProducts(email);
     }
 
     //http://localhost:8080/_ah/api/rousseau/v1/test
@@ -131,7 +120,16 @@ public class Rest {
 
     @ApiMethod(name = "addwork", httpMethod = ApiMethod.HttpMethod.POST, path = "addwork")
     public void addwork(Work w) {
+        Product p=dao.getProduct(w.getProduct_id());
+        p.setDtStartWork(0L);
+        dao.save(p);
         dao.save(w);
+    }
+
+    @ApiMethod(name = "delwork", httpMethod = ApiMethod.HttpMethod.GET, path = "delwork")
+    public void delwork(@Named("work_id") String workid) {
+        Work w=dao.getWork(workid);
+        dao.delete(w);
     }
 
     //http://localhost:8080/_ah/api/rousseau/v1/test
@@ -164,20 +162,27 @@ public class Rest {
 
 
     @ApiMethod(name = "addproduct", httpMethod = ApiMethod.HttpMethod.POST, path = "addproduct")
-    public User addproduct(@Named("email") String email, Product p) {
+    public User addproduct(@Named("email") String email, Enfant p) {
         User u=dao.get(email);
         if(u!=null){
             u.addproduct(p);
+            dao.save(p);
             dao.save(u);
         }
         return u;
     }
 
+    @ApiMethod(name = "startwork", httpMethod = ApiMethod.HttpMethod.GET, path = "startwork")
+    public void startWork(@Named("product_id") String id,@Nullable @Named("dtStart") Long dtStart) {
+        Product p=dao.getProduct(id);
+        p.setDtStartWork(dtStart);
+        dao.save(p);
+    }
 
     @ApiMethod(name = "getservices", httpMethod = ApiMethod.HttpMethod.GET, path = "getservices")
     public JsonNode getservices(@Named("Product") String id) {
-        HashMap<String, JsonNode> products = dao.getProducts();
-        return products.get(id).get("services");
+        HashMap<String, JsonNode> product = dao.getProductsWithService();
+        return product.get(id).get("services");
     }
 
 
@@ -193,10 +198,21 @@ public class Rest {
     public User sendphoto(@Named("email") String email, JsonNode photo) {
         User u=dao.get(email);
         String url_photo=photo.get("photo").asText();
-        if(photo.get("type").asText().equals("product"))u.getProducts().get(0).setPhoto(url_photo);
+        Product p = dao.getProduct(u.getProducts().get(0));
+
+        if(photo.get("type").asText().equals("product")){
+            p.setPhoto(url_photo);
+            dao.save(p);
+        }
         if(photo.get("type").asText().equals("perso"))u.setPhoto(url_photo);
         dao.save(u);
         return u;
+    }
+
+
+    @ApiMethod(name = "getresp", httpMethod = ApiMethod.HttpMethod.GET, path = "getresp")
+    public List<User> getresp(@Named("product_id") String product_id) {
+        return dao.getUsersOfProduct(product_id);
     }
 
 
@@ -262,7 +278,7 @@ public class Rest {
                 if(u.checkPassword(password)){
                     u.addConnexion();
                     dao.save(u);
-                    return dao.get(email);
+                    return u;
                 }
                 else
                     return null;
@@ -348,6 +364,7 @@ public class Rest {
 //        g4.setCrmID(SuiteCRM.executeCRM(g4.toCampaign(), RequestType.Create));
 
 
+        dao.loadProducts();
         dao.addGifts(Tools.loadDataFile("promotions").get("gifts"));
 
         return Tools.returnAPI(200,"Database erased",null);

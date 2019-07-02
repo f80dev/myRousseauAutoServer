@@ -1,4 +1,8 @@
 {
   "catalogue":"modeles.json",
-  "services":"prestations.json"
+  "services":"prestations.json",
+  "products":{
+    "localisation":"server",
+    "name":"products.json"
+  }
 }

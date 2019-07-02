@@ -1,17 +1,65 @@
 {
-  "default_photo":"/assets/img/avatar_baby.png",
+  "default_photo":"./assets/img/avatar_baby.png",
   "products": [
     {
-      "label": "James"
+      "label": "James",
+      "forfait":8
     },
     {
-      "label": "Lou"
+      "label": "Lou",
+      "forfait":10
     },
     {
-      "label": "Esmee"
+      "label": "Esmee",
+      "forfait":9
     },
     {
-      "label": "Sabin"
+      "label": "Sabin",
+      "forfait":9
+    },
+    {
+      "label": "Jules",
+      "forfait":10
+    },
+    {
+      "label": "Roxanne",
+      "forfait":9
+    },
+    {
+      "label": "Aiko",
+      "forfait":9
+    },
+    {
+      "label": "Mina",
+      "forfait":9
+    },
+    {
+      "label": "Ava",
+      "forfait":9
+    },
+    {
+      "label": "Clément",
+      "forfait":9
+    },
+    {
+      "label": "Félix",
+      "forfait":9
+    },
+    {
+      "label": "Léopaul",
+      "forfait":9
+    },
+    {
+      "label": "Louis",
+      "forfait":9
+    },
+    {
+      "label": "Louise",
+      "forfait":9
+    },
+    {
+      "label": "Lucie",
+      "forfait":9
     }
   ]
 }

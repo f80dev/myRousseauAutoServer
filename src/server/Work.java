@@ -5,6 +5,11 @@ import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.OnSave;
 
+/**
+ * Cette classe désigne un temps d'usage des produits
+ *
+ */
+
 @Entity
 public class Work implements Comparable<Work> {
 

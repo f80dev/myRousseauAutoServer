@@ -1,12 +1,7 @@
 package server;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyFactory;
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.cmd.Query;
+import com.googlecode.objectify.*;
 import com.sugaronrest.NameOf;
 import com.sugaronrest.RequestType;
 import com.sugaronrest.modules.Campaigns;
@@ -35,6 +30,8 @@ public class DAO {
     static {
         factory().register(User.class);
         factory().register(Gift.class);
+        factory().register(Product.class);
+        factory().register(Enfant.class);
         factory().register(Message.class);
         factory().register(Work.class);
         factory().register(Appointment.class);
@@ -46,9 +43,11 @@ public class DAO {
         ofy().delete().keys(ofy().load().type(User.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Message.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Work.class).keys().list()).now();
+        ofy().delete().keys(ofy().load().type(Product.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Gift.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Appointment.class).keys().list()).now();
         SuiteCRM.raz();
+        dao.loadEnfants();
     }
 
 
@@ -67,8 +66,8 @@ public class DAO {
         return ofy().load().type(User.class).id(user).now();
     }
 
-    public void save(User u) {
-        ofy().save().entity(u);
+    public Result<Key<User>> save(User u) {
+        return ofy().save().entity(u);
     }
 
     public void save(Appointment a) {
@@ -135,42 +134,73 @@ public class DAO {
         ofy().delete().entity(a).now();
     }
 
-    public HashMap<String, JsonNode> getProducts() {
+    public void loadProducts(){
+        JsonNode nodes = Tools.loadDataFile("products");
+        for(JsonNode product:nodes.get("products")){
+            Product p=new Product(product);
+            p.setPhoto(nodes.get("default_photo").asText());
+            dao.save(p);
+        }
+    }
+
+    public void loadEnfants(){
+        JsonNode nodes = Tools.loadDataFile("products");
+        for(JsonNode product:nodes.get("products")){
+            Product p=new Enfant(product);
+            p.setPhoto(nodes.get("default_photo").asText());
+            dao.save(p);
+        }
+    }
+
+    public HashMap<String, JsonNode> getProductsWithService() {
         HashMap<String,JsonNode> products=new HashMap<>();
         HashMap<String,JsonNode> services=new HashMap<>();
-        JsonNode nodes = Tools.loadDataFile("products");
-        int k=0;
-        for(JsonNode product:nodes.get("products")){
-            List<JsonNode> l_services=new ArrayList<>();
-            if(product.has("services")){
-                for(JsonNode serv:product.get("services")){
-                    String id=serv.get("id").asText();
-                    if(services.containsKey(id)){
-                        JsonNode _new = services.get(id);
-                        Iterator<String> iter = serv.fieldNames();
-                        while(iter.hasNext()){
-                            String fieldname=iter.next();
-                            ((ObjectNode)_new).put(fieldname,serv.get(fieldname).asText());
-                        }
-                        serv=_new;
-                    } else
-                        services.put(id,serv);
 
-                    l_services.add(serv);
-                }
-            }
-            ((ObjectNode) product).put("services",new ObjectMapper().valueToTree(l_services));
-            String id=""+(k++);
-            if(product.has("id"))id=product.get("id").asText();
-            ((ObjectNode) product).put("id",id);
-            if(!product.has("photo")){
-                String addr=nodes.get("default_photo").asText();
-                if(!addr.startsWith("http"))addr=Tools.getDomain()+addr;
-                ((ObjectNode) product).put("photo",addr);
-            }
-            products.put(id,product);
+        //TODO: ici on peut paramètre la localisation de la table de référence des produits
+        JsonNode nodes = Tools.loadDataFile("products");
+
+        int k=0;
+//        for(JsonNode product:dao.getProducts()){
+//            List<JsonNode> l_services=new ArrayList<>();
+//            if(product.has("services")){
+//                for(JsonNode serv:product.get("services")){
+//                    String id=serv.get("id").asText();
+//                    if(services.containsKey(id)){
+//                        JsonNode _new = services.get(id);
+//                        Iterator<String> iter = serv.fieldNames();
+//                        while(iter.hasNext()){
+//                            String fieldname=iter.next();
+//                            ((ObjectNode)_new).put(fieldname,serv.get(fieldname).asText());
+//                        }
+//                        serv=_new;
+//                    } else
+//                        services.put(id,serv);
+//
+//                    l_services.add(serv);
+//                }
+//            }
+//            ((ObjectNode) product).put("services",new ObjectMapper().valueToTree(l_services));
+//            String id=""+(k++);
+//            if(product.has("id"))id=product.get("id").asText();
+//            ((ObjectNode) product).put("id",id);
+//            if(!product.has("photo")){
+//                String addr=nodes.get("default_photo").asText();
+//                if(!addr.startsWith("http"))addr=Tools.getDomain()+addr;
+//                ((ObjectNode) product).put("photo",addr);
+//            }
+//            products.put(id,product);
+//        }
+        return null;
+    }
+
+    public List<Product> getProducts(String email) {
+        if(email==null)
+            return ofy().load().type(Product.class).list();
+        else {
+            User u=get(email);
+            Collection<Product> rc = ofy().load().type(Product.class).ids(u.getProducts()).values();
+            return new ArrayList<>(rc);
         }
-        return products;
     }
 
     public void addGifts(JsonNode jsonNode) {
@@ -194,7 +224,7 @@ public class DAO {
     }
 
     public void save(Work w) {
-        ofy().save().entity(w);
+        ofy().save().entity(w).now();
     }
 
     public List<Work> getWorks(String productid) {
@@ -209,10 +239,34 @@ public class DAO {
         for(Work w:dao.getWorks(null))
             csv+=w.toCSV("product_")+"\n";
 
-        HashMap<String, JsonNode> products = this.getProducts();
-        for(String k:products.keySet())
-            csv=csv.replaceAll("product_"+k,products.get(k).get("label").asText());
+        for(Product p:dao.getProducts(null))
+            csv=csv.replaceAll("product_"+p.id,p.getLabel());
 
         return csv;
+    }
+
+    public void delete(Work w) {
+        ofy().delete().entity(w).now();
+    }
+
+    public Work getWork(String workid) {
+        return ofy().load().type(Work.class).id(workid).now();
+    }
+
+    public void save(Product p) {
+        ofy().save().entity(p);
+    }
+
+    public Product getProduct(String id) {
+        return ofy().load().type(Product.class).id(id).now();
+    }
+
+    public List<User> getUsersOfProduct(String product_id) {
+        List<User> rc=new ArrayList<>();
+        if(product_id.length()==0)return rc;
+        for(User u:ofy().load().type(User.class).list()){
+            if(u.getProducts().contains(product_id))rc.add(u);
+        }
+        return rc;
     }
 }
