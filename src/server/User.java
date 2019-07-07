@@ -39,7 +39,7 @@ public class User {
     String email = "";
 
     @Index
-    String id = null;
+    String id = "user"+System.currentTimeMillis();
 
     @Index
     String crm_contactsID="";
@@ -54,8 +54,8 @@ public class User {
     Long dtLastNotif=100000000000L;
 
     Integer pts = 100;
-    //String password = ""+System.currentTimeMillis() % 9999;
-    String password = "1234";
+    String password = ""+System.currentTimeMillis() % 9999;
+    //String password = "1234";
     String photo = "./assets/img/avatar.jpg";
 
     public Map<String, token> accessTokens = new HashMap<>();
@@ -228,9 +228,10 @@ public class User {
 
     public void sendPassword() {
         List<String> params = Arrays.asList(
+                "logo="+DAO.server_settings.get("logo").asText(),
                 "code=" + this.getPassword(),
                 "firstname=" + this.getFirstname(),
-                "titre=Rousseau Automobile",
+                "titre="+DAO.server_settings.get("appli_name").asText(),
                 "url_to_connect=" + Tools.getDomainAppli() + "/login?email=" + this.getEmail() + "&password=" + this.getPassword());
 
         Tools.sendMail(this.getEmail(), "Votre code est le " + this.getPassword(), ADMIN_EMAIL, "code", params);
@@ -317,7 +318,8 @@ public class User {
 
         GoogleCredential credential = new GoogleCredential.Builder().setTransport(httpTransport).setJsonFactory(jsonFactory).build().setAccessToken(this.accessTokens.get("contact").getToken());
 
-        PeopleService rc = new PeopleService.Builder(httpTransport, jsonFactory, credential).setApplicationName("rousseauAuto").build();
+        PeopleService rc = new PeopleService.Builder(httpTransport, jsonFactory, credential)
+                .setApplicationName(DAO.server_settings.get("authent").get("shortname").asText()).build();
         return rc;
     }
 
@@ -417,4 +419,15 @@ public class User {
         this.messagesReaded.add(messageId);
         return true;
     }
+
+    public Reference createRef(String category,String title,String url,String address){
+        Reference r=new Reference();
+        r.setOwner(this.getId());
+        r.setText(title);
+        r.setTags(category);
+        r.setAddress(address);
+        r.setUrl(url);
+        return r;
+    }
+
 }

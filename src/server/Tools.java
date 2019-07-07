@@ -192,6 +192,7 @@ public class Tools {
             msg.setSubject(subject);
             msg.setContent(body,"text/html; charset=utf-8");
             Transport.send(msg);
+            log.info("Mail envoyé à dest="+dest+" subject="+subject);
             return true;
         } catch (AddressException e) {
             e.printStackTrace();
@@ -242,7 +243,9 @@ public class Tools {
     }
 
     public static  String getDomainAppli() {
-        return Tools.getDomain();
+        String rc = Tools.getDomain() + "/applis";
+        if(rc.indexOf("localhost")>-1)return "http://localhost:4200";
+        return rc;
     }
 
     public static HashMap<String, String> returnAPI(Integer errorCode) {

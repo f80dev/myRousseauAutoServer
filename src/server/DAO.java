@@ -13,8 +13,9 @@ public class DAO {
     private static DAO dao = null;
     private static final Logger log = Logger.getLogger(DAO.class.getName());
 
-    public static Objectify ofy() {
+    public static JsonNode server_settings;
 
+    public static Objectify ofy() {
         return ObjectifyService.ofy();
     }
 
@@ -32,10 +33,16 @@ public class DAO {
         factory().register(Gift.class);
         factory().register(Product.class);
         factory().register(Enfant.class);
+        factory().register(Reference.class);
         factory().register(Message.class);
         factory().register(Work.class);
         factory().register(Appointment.class);
-        SuiteCRM.init(User.CRM_USER,User.CRM_PASSWORD);
+        //SuiteCRM.init(User.CRM_USER,User.CRM_PASSWORD);
+        try {
+            server_settings=Tools.toJSON(Tools.rest(Tools.getDomainAppli()+"/assets/config.json"));
+        } catch (RestAPIException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -43,14 +50,17 @@ public class DAO {
         ofy().delete().keys(ofy().load().type(User.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Message.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Work.class).keys().list()).now();
+        ofy().delete().keys(ofy().load().type(Reference.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Product.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Gift.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Appointment.class).keys().list()).now();
-        SuiteCRM.raz();
+        //SuiteCRM.raz();
         dao.loadEnfants();
     }
 
-
+    public Result<Key<Reference>> save(Reference r) {
+        return ofy().save().entity(r);
+    }
 
 
     public static synchronized DAO getInstance() {
@@ -144,12 +154,18 @@ public class DAO {
     }
 
     public void loadEnfants(){
+        log.info("Chargement des enfants");
         JsonNode nodes = Tools.loadDataFile("products");
-        for(JsonNode product:nodes.get("products")){
-            Product p=new Enfant(product);
-            p.setPhoto(nodes.get("default_photo").asText());
-            dao.save(p);
-        }
+        if(nodes!=null){
+            for(JsonNode product:nodes.get("products")){
+                Product p=new Enfant(product);
+                p.setPhoto(nodes.get("default_photo").asText());
+                dao.save(p);
+            }
+        } else
+            log.severe("Le fichier des produits ne semble pas disponibles");
+
+
     }
 
     public HashMap<String, JsonNode> getProductsWithService() {
@@ -193,8 +209,13 @@ public class DAO {
         return null;
     }
 
+    /**
+     *
+     * @param email
+     * @return la liste de tous les produits si l'email est vide
+     */
     public List<Product> getProducts(String email) {
-        if(email==null)
+        if(email==null || email.length()==0)
             return ofy().load().type(Product.class).list();
         else {
             User u=get(email);
@@ -268,5 +289,19 @@ public class DAO {
             if(u.getProducts().contains(product_id))rc.add(u);
         }
         return rc;
+    }
+
+    public List<Reference> getReferences(String category) {
+        List<Reference> items = ofy().load().type(Reference.class).list();
+
+        List<Reference> rc=new ArrayList<>();
+        for(Reference it:items)
+            if(category==null || category.indexOf(it.getTags())>-1)
+                rc.add(it);
+        return rc;
+    }
+
+    public Reference getReference(String refid) {
+        return ofy().load().type(Reference.class).id(refid).now();
     }
 }

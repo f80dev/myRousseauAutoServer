@@ -210,6 +210,40 @@ public class Rest {
     }
 
 
+    @ApiMethod(name = "addreference", httpMethod = ApiMethod.HttpMethod.POST, path = "addreference")
+    public Reference addreference(@Named("user") String user_id,JsonNode jn) {
+        User u=dao.get(user_id);
+        Reference r=u.createRef(
+                jn.get("category").asText(),
+                jn.get("title").asText(),
+                jn.get("url").asText(),
+                jn.get("address").asText()
+        );
+        dao.save(r);
+        return(r);
+    }
+
+    @ApiMethod(name = "getreferences", httpMethod = ApiMethod.HttpMethod.GET, path = "getreferences")
+    public List<Reference> getreferences(@Nullable @Named("category") String category) {
+        return dao.getReferences(category);
+    }
+
+    @ApiMethod(name = "addvote", httpMethod = ApiMethod.HttpMethod.GET, path = "addvote")
+    public Reference addvote(@Named("user") String user_id,@Named("refid") String refid,@Named("note") Integer note) {
+        User u=dao.get(user_id);
+        if(u!=null){
+            Reference r=dao.getReference(refid);
+            if(note>0)
+                r.getLikes().add(u.getId());
+            else
+                r.getDislikes().add(u.getId());
+            dao.save(r);
+            return r;
+        }
+        return null;
+    }
+
+
     @ApiMethod(name = "getresp", httpMethod = ApiMethod.HttpMethod.GET, path = "getresp")
     public List<User> getresp(@Named("product_id") String product_id) {
         return dao.getUsersOfProduct(product_id);

@@ -45,7 +45,7 @@ public class OAuth2Callback extends HttpServlet {
 
                 if(dao.get(u.getEmail())==null){
                     u.sendPassword();
-                    SuiteCRM.createFromUser(u, Prospects.class);
+                    //SuiteCRM.createFromUser(u, Prospects.class);
                     dao.save(u);
                 } else {
                     u=dao.get(u.getEmail());
