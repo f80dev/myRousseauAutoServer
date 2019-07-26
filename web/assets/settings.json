@@ -4,5 +4,8 @@
   "products":{
     "localisation":"server",
     "name":"products.json"
+  },
+  "items":{
+    "file":"items.json"
   }
 }

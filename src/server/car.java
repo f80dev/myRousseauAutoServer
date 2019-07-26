@@ -35,6 +35,10 @@ public class car extends Product {
             }
     }
 
+    public void initItems(String modelesFile) {
+
+    }
+
     public void initPhoto(String modelesFile) {
         for(JsonNode marque:Tools.loadDataFile(modelesFile))
             for(JsonNode modele:marque.get("modeles"))
@@ -42,8 +46,6 @@ public class car extends Product {
                     this.photo=modele.get("photo").asText();
                     return;
                 }
-
-
     }
 
 

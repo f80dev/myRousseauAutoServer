@@ -18,6 +18,7 @@ public class Reference implements Serializable  {
     String url="";
     String text="";
     String address="";
+    String comment="";
     String tags=""; //Peut être : boutique,livre,
     String owner=""; //reference à l'autheur
 
@@ -89,5 +90,21 @@ public class Reference implements Serializable  {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Long getDtCreate() {
+        return dtCreate;
+    }
+
+    public void setDtCreate(Long dtCreate) {
+        this.dtCreate = dtCreate;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

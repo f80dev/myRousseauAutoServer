@@ -6,6 +6,8 @@ import com.sugaronrest.NameOf;
 import com.sugaronrest.RequestType;
 import com.sugaronrest.modules.Campaigns;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -31,6 +33,8 @@ public class DAO {
     static {
         factory().register(User.class);
         factory().register(Gift.class);
+        factory().register(Menu.class);
+        factory().register(Item.class);
         factory().register(Product.class);
         factory().register(Enfant.class);
         factory().register(Reference.class);
@@ -38,19 +42,34 @@ public class DAO {
         factory().register(Work.class);
         factory().register(Appointment.class);
         //SuiteCRM.init(User.CRM_USER,User.CRM_PASSWORD);
+
         try {
             server_settings=Tools.toJSON(Tools.rest(Tools.getDomainAppli()+"/assets/config.json"));
         } catch (RestAPIException e) {
             e.printStackTrace();
         }
+
+
+    }
+
+    public static void initItems(JsonNode jns) {
+        for(JsonNode it:jns){
+            save(new Item(it));
+        }
+    }
+
+    public static void save(Item item) {
+        ofy().save().entity(item);
     }
 
 
     public void raz(){
         ofy().delete().keys(ofy().load().type(User.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Message.class).keys().list()).now();
+        ofy().delete().keys(ofy().load().type(Item.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Work.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Reference.class).keys().list()).now();
+        ofy().delete().keys(ofy().load().type(Menu.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Product.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Gift.class).keys().list()).now();
         ofy().delete().keys(ofy().load().type(Appointment.class).keys().list()).now();
@@ -296,12 +315,91 @@ public class DAO {
 
         List<Reference> rc=new ArrayList<>();
         for(Reference it:items)
-            if(category==null || category.indexOf(it.getTags())>-1)
+            if(category==null || category.length()==0 || it.getTags().indexOf(category)>-1)
                 rc.add(it);
         return rc;
     }
 
     public Reference getReference(String refid) {
         return ofy().load().type(Reference.class).id(refid).now();
+    }
+
+    public List<Item> getItems(String category) {
+        List<Item> rc=new ArrayList<>();
+        for(Item it:ofy().load().type(Item.class).list())
+            if(category==null || category.length()==0 || it.getTags().indexOf(category)>-1)
+                rc.add(it);
+        return rc;
+    }
+
+    public Menu findMenu(Long dtStart) {
+        return ofy().load().type(Menu.class).filter("dtStart =",dtStart).first().now();
+    }
+
+    public Result<Key<Menu>> save(Menu m) {
+        return ofy().save().entity(m);
+    }
+
+    public List<Menu> getMenusAfter(Long dtStart) {
+        return ofy().load().type(Menu.class).filter("dtStart >",dtStart).order("dtStart").list();
+    }
+
+    public Long getNextDateForMenu(Long dtStart) {
+        if(dtStart==null)dtStart=System.currentTimeMillis();
+        List<Menu> l_m = ofy().load().type(Menu.class).order("dtStart").list();
+        for(Menu m:l_m){
+            if(m.getItems().size()<2 && m.dtStart>System.currentTimeMillis()){
+                if(isOpen(m.dtStart))
+                    return m.dtStart;
+            }
+        }
+
+        Date _now=new Date(System.currentTimeMillis());
+        if(_now.getHours()>12)_now=new Date(System.currentTimeMillis()+24*3600*1000);
+
+        Long start=_now.getTime();
+        if(l_m.size()>0){
+            start=l_m.get(l_m.size()-1).dtStart+24*3600*1000;
+        }
+
+        return nextOpen(start);
+    }
+
+    public void deleteMenu(String idmenu) {
+        ofy().delete().type(Menu.class).id(idmenu).now();
+    }
+
+    public static Boolean isOpen(Long dt){
+        Date _dt=new Date();
+        _dt.setTime(dt);
+        if(_dt.getDay()==0 || _dt.getDay()==6)return false;
+
+        for(JsonNode jn:server_settings.get("creche").get("dayoff")){
+            String dt1=jn.asText().split(":")[0];
+            String dt2=null;
+            if(jn.asText().indexOf(":")>-1)dt2=jn.asText().split(":")[1];
+            try {
+                Date _dt1 = new SimpleDateFormat().parse(dt1+" "+server_settings.get("creche").get("open").asText());
+                Date _dt2=null;
+                if(dt2==null)
+                    _dt2=new SimpleDateFormat().parse(dt1+" "+server_settings.get("creche").get("close").asText());
+                else
+                    _dt2=new SimpleDateFormat().parse(dt2+" "+server_settings.get("creche").get("close").asText());
+
+                if(dt>_dt1.getTime() && dt<_dt2.getTime())return false;
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        return true;
+    }
+
+    public Long nextOpen(Long dt){
+        while(!isOpen(dt))
+            dt=dt+24*3600*1000;
+        return dt;
     }
 }

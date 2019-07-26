@@ -430,4 +430,9 @@ public class User {
         return r;
     }
 
+    public Item createItem(JsonNode jn) {
+        Item rc = new Item(jn);
+        rc.setFrom(this.email);
+        return rc;
+    }
 }

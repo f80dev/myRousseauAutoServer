@@ -2,7 +2,6 @@ package server;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.api.server.spi.config.*;
-import com.sugaronrest.modules.*;
 
 import javax.servlet.ServletContext;
 import java.util.*;
@@ -223,10 +222,58 @@ public class Rest {
         return(r);
     }
 
+    @ApiMethod(name = "additem", httpMethod = ApiMethod.HttpMethod.POST, path = "additem")
+    public Item additem(@Named("user") String user_id,JsonNode jn) {
+        User u=dao.get(user_id);
+        Item r=u.createItem(jn);
+        dao.save(r);
+        return(r);
+    }
+
     @ApiMethod(name = "getreferences", httpMethod = ApiMethod.HttpMethod.GET, path = "getreferences")
     public List<Reference> getreferences(@Nullable @Named("category") String category) {
         return dao.getReferences(category);
     }
+
+    @ApiMethod(name = "getitems", httpMethod = ApiMethod.HttpMethod.GET, path = "getitems")
+    public List<Item> getitems(@Nullable @Named("category") String category) {
+        return dao.getItems(category);
+    }
+
+    @ApiMethod(name = "getmenus", httpMethod = ApiMethod.HttpMethod.GET, path = "getmenus")
+    public List<Menu> getmenus(@Named("dtStart") Long dtStart) {
+        List<Menu> rc = dao.getMenusAfter(dtStart);
+        return rc;
+    }
+
+    @ApiMethod(name = "deletemenu", httpMethod = ApiMethod.HttpMethod.GET, path = "deletemenu")
+    public void deletemenu(@Named("idmenu") String idmenu) {
+        dao.deleteMenu(idmenu);
+    }
+
+    @ApiMethod(name = "addtomenu", httpMethod = ApiMethod.HttpMethod.POST, path = "addtomenu")
+    public HashMap<String, String> addtomenu(@Named("dtStart") Long dtStart, @Named("user") String user_id, Item it) {
+        Menu m=dao.findMenu(dtStart);
+        if(m==null)m=new Menu(dtStart,dao.get(user_id));
+        if(m.getItems().size()>1)return Tools.returnAPI(500,"Message dejà complet","");
+
+        m.add(it);
+        dao.save(m).now();
+        HashMap<String, String> rc = Tools.returnAPI(200);
+        if(m.items.size()>1)dtStart=dao.getNextDateForMenu(dtStart);
+        rc.put("nextDate", String.valueOf(dtStart));
+        return rc;
+    }
+
+
+    @ApiMethod(name = "nextmenudate", httpMethod = ApiMethod.HttpMethod.GET, path = "nextmenudate")
+    public HashMap<String, String> nextmenudate(@Nullable @Named("dtStart") Long dtStart) {
+        HashMap<String, String> rc = Tools.returnAPI(200);
+        if(dtStart==null)dtStart=System.currentTimeMillis();
+        rc.put("nextDate", String.valueOf(dao.getNextDateForMenu(dtStart)));
+        return rc;
+    }
+
 
     @ApiMethod(name = "addvote", httpMethod = ApiMethod.HttpMethod.GET, path = "addvote")
     public Reference addvote(@Named("user") String user_id,@Named("refid") String refid,@Named("note") Integer note) {
@@ -247,6 +294,14 @@ public class Rest {
     @ApiMethod(name = "getresp", httpMethod = ApiMethod.HttpMethod.GET, path = "getresp")
     public List<User> getresp(@Named("product_id") String product_id) {
         return dao.getUsersOfProduct(product_id);
+    }
+
+    @ApiMethod(name = "isopen", httpMethod = ApiMethod.HttpMethod.GET, path = "isopen")
+    public HashMap<String, String> isopen(@Named("dt") Long dt) {
+        if(DAO.isOpen(dt))
+            return Tools.returnAPI(200,"open","");
+        else
+            return Tools.returnAPI(201,"close","");
     }
 
 
@@ -274,9 +329,8 @@ public class Rest {
     @ApiMethod(name = "askforappointment", httpMethod = ApiMethod.HttpMethod.GET, path = "askforappointment")
     public HashMap<String, String> askforappointment(@Named("email") String email, @Named("durationInMin") Integer duration,@Named("dt") Long dt, @Nullable @Named("motif") String motif) {
 
-        User u=dao.get(email);
-        if(SuiteCRM.createFromUser(u,Leads.class))
-            dao.save(u);
+        //User u=dao.get(email);
+        //if(SuiteCRM.createFromUser(u,Leads.class))dao.save(u);
 
         Appointment a = new Appointment();
         a.setDtStart(dt);
@@ -398,12 +452,18 @@ public class Rest {
 //        g4.setCrmID(SuiteCRM.executeCRM(g4.toCampaign(), RequestType.Create));
 
 
-        dao.loadProducts();
-        dao.addGifts(Tools.loadDataFile("promotions").get("gifts"));
 
+        init();
         return Tools.returnAPI(200,"Database erased",null);
     }
 
 
+    @ApiMethod(name = "init", httpMethod = ApiMethod.HttpMethod.GET, path = "init")
+    public HashMap<String, String> init() {
+        dao.loadProducts();
+        dao.addGifts(Tools.loadDataFile("promotions").get("gifts"));
+        dao.initItems(dao.server_settings.get("item").get("items"));
+        return Tools.returnAPI(200,"Database loaded",null);
+    }
 
 }

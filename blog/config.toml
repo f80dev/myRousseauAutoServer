@@ -1,0 +1,12 @@
+baseURL = "https://creche.appspot.com/blog/"
+languageCode = "fr-fr"
+title = "Le blog de maRE"
+theme = "hamburg"
+relativeURLs = true
+publishDir= "../web/blog"
+uglyurls = true
+
+[sitemap]
+    changefreq="weekly"
+    filename="sitemap.xml"
+    priority=0.5

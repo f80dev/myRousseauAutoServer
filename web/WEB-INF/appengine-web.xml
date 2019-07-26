@@ -4,12 +4,16 @@
   <runtime>java8</runtime>
 
   <static-files>
-    <include path="/applis/**.htlm" ></include>
-    <include path="/applis/**.js" ></include>
+    <include path="/applis/**.htlm" expiration="1d"></include>
+    <include path="/applis/**.js" expiration="1d"></include>
     <include path="/applis/**.css" ></include>
     <include path="/applis/**.jpeg" ></include>
     <include path="/applis/**.png" ></include>
+    <include path="/blog/**.html" ></include>
+    <include path="/blog/**.jpg" ></include>
   </static-files>
+
+
 
   <system-properties>
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
