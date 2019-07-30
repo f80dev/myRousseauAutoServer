@@ -18,6 +18,8 @@ public class Reference implements Serializable  {
     String url="";
     String text="";
     String address="";
+    Double lat=0.0;
+    Double lng=0.0;
     String comment="";
     String tags=""; //Peut être : boutique,livre,
     String owner=""; //reference à l'autheur
@@ -106,5 +108,26 @@ public class Reference implements Serializable  {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
+    public Double getLng() {
+        return lng;
+    }
+
+    public void setLng(Double lng) {
+        this.lng = lng;
+    }
+
+    public void setPosition(double lat, double lng) {
+        this.setLat(lat);
+        this.setLng(lng);
     }
 }

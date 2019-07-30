@@ -7,8 +7,8 @@ import javax.servlet.ServletContext;
 import java.util.*;
 import java.util.logging.Logger;
 
-import static server.User.ADMIN_EMAIL;
-import static server.User.TITLE_APPLI;
+import static server.DAO.server_settings;
+
 
 
 //@Api(   name = "rousseau",
@@ -216,10 +216,24 @@ public class Rest {
                 jn.get("category").asText(),
                 jn.get("title").asText(),
                 jn.get("url").asText(),
-                jn.get("address").asText()
+                jn.get("address").asText(),
+                jn.get("comment").asText()
         );
+        r.setPosition(jn.get("lat").asDouble(),jn.get("lng").asDouble());
         dao.save(r);
         return(r);
+    }
+
+    @ApiMethod(name = "delreference", httpMethod = ApiMethod.HttpMethod.GET, path = "delreference")
+    public void delreference(@Named("user") String user_id,@Named("refid") String refid) {
+        Reference r=dao.getReference(refid);
+        dao.delete(r);
+    }
+
+    @ApiMethod(name = "deleteitem", httpMethod = ApiMethod.HttpMethod.GET, path = "deleteitem")
+    public void deleteitem(@Named("item_id") String item_id) {
+        Item it=dao.getItem(item_id);
+        dao.delete(it);
     }
 
     @ApiMethod(name = "additem", httpMethod = ApiMethod.HttpMethod.POST, path = "additem")
@@ -241,8 +255,8 @@ public class Rest {
     }
 
     @ApiMethod(name = "getmenus", httpMethod = ApiMethod.HttpMethod.GET, path = "getmenus")
-    public List<Menu> getmenus(@Named("dtStart") Long dtStart) {
-        List<Menu> rc = dao.getMenusAfter(dtStart);
+    public List<Menu> getmenus(@Named("dtStart") Long dtStart,@Nullable @Named("filter") String filter) {
+        List<Menu> rc = dao.getMenusAfter(dtStart,filter);
         return rc;
     }
 
@@ -312,14 +326,14 @@ public class Rest {
         if(t!=null)return Tools.returnAPI(500,"Destinataire dejà enregistré",null);
         List<String> params = new ArrayList<>(Arrays.asList(
                 "url_to_subscribe="+Tools.getDomainAppli()+"/login?email="+dest,
-                "titre="+User.TITLE_APPLI,
+                "titre="+server_settings.get("appli_name").asText(),
                 "origin.firstname="+u.getFirstname()));
         if(firstname!=null)params.add("firstname="+firstname);
 
         u.addPoints(10);
         dao.save(u);
 
-        if(Tools.sendMail(dest,"Invitation de "+u.getFirstname()+" a rejoindre "+TITLE_APPLI,ADMIN_EMAIL,"invite",params))
+        if(Tools.sendMail(dest,"Invitation de "+u.getFirstname()+" a rejoindre "+server_settings.get("appli_name").asText(),server_settings.get("admin").get("email").asText(),"invite",params))
             return Tools.returnAPI(200,"Mail envoyé",null);
         else
             return Tools.returnAPI(500);
@@ -462,7 +476,7 @@ public class Rest {
     public HashMap<String, String> init() {
         dao.loadProducts();
         dao.addGifts(Tools.loadDataFile("promotions").get("gifts"));
-        dao.initItems(dao.server_settings.get("item").get("items"));
+        dao.initItems(server_settings.get("item").get("items"));
         return Tools.returnAPI(200,"Database loaded",null);
     }
 

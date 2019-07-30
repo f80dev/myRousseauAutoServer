@@ -420,10 +420,11 @@ public class User {
         return true;
     }
 
-    public Reference createRef(String category,String title,String url,String address){
+    public Reference createRef(String category,String title,String url,String address,String comment){
         Reference r=new Reference();
         r.setOwner(this.getId());
         r.setText(title);
+        r.setComment(comment);
         r.setTags(category);
         r.setAddress(address);
         r.setUrl(url);

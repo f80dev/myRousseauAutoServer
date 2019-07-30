@@ -26,6 +26,11 @@ public class Item {
         if(jn.has("from"))this.setFrom(jn.get("from").asText());
         if(jn.has("recette"))this.setRecette(jn.get("recette").asText());
         if(jn.has("tags"))this.setTags(jn.get("tags").asText());
+        if(jn.has("category")){
+            for(JsonNode cat:jn.get("category")){
+                this.setTags(this.getTags()+","+cat.asText());
+            }
+        }
     }
 
 

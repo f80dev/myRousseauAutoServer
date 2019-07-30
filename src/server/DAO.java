@@ -159,7 +159,7 @@ public class DAO {
         return ofy().load().type(Appointment.class).id(id).now();
     }
 
-    public void delete(Appointment a) {
+    public void delete(Item a) {
         ofy().delete().entity(a).now();
     }
 
@@ -340,8 +340,14 @@ public class DAO {
         return ofy().save().entity(m);
     }
 
-    public List<Menu> getMenusAfter(Long dtStart) {
-        return ofy().load().type(Menu.class).filter("dtStart >",dtStart).order("dtStart").list();
+    public List<Menu> getMenusAfter(Long dtStart,String filter) {
+        List<Menu> rc=new ArrayList<>();
+        for(Menu m:ofy().load().type(Menu.class).filter("dtStart >",dtStart).order("dtStart").list()){
+            if(filter==null || m.getPreparateur().getId().equals(filter))
+                rc.add(m);
+        }
+        return rc;
+
     }
 
     public Long getNextDateForMenu(Long dtStart) {
@@ -401,5 +407,17 @@ public class DAO {
         while(!isOpen(dt))
             dt=dt+24*3600*1000;
         return dt;
+    }
+
+    public void delete(Reference r) {
+        ofy().delete().entity(r);
+    }
+
+    public Item getItem(String item_id) {
+        return ofy().load().type(Item.class).id(item_id).now();
+    }
+
+    public void delete(Appointment a) {
+        ofy().delete().entity(a);
     }
 }
