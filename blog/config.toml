@@ -1,10 +1,14 @@
-baseURL = "https://creche.appspot.com/blog/"
+baseURL = "https://f80dev.github.io/blogs-creches-republique_enfant/"
 languageCode = "fr-fr"
 title = "Le blog de maRE"
 theme = "hamburg"
-relativeURLs = true
-publishDir= "../web/blog"
-uglyurls = true
+uglyURLs = true
+canonifyURLs = true
+defaultContentLanguage = "fr"
+NewContentEditor = "mate"
+
+[permalinks]
+  posts = "/:year/:month/:title/"
 
 [sitemap]
     changefreq="weekly"
