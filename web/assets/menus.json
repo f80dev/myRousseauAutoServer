@@ -1,0 +1,179 @@
+﻿{
+"items":[
+{
+"titre":"Chili con carne / riz basmati",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,,"
+},
+{
+"titre":"Papillotte Saumon / Haricots verts",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,,"
+},
+{
+"titre":"Risotto tomate cerise & farce",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,viande,"
+},
+{
+"titre":"Tarte épinards / truite & purée carotte, pdt et patate douce",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,,"
+},
+{
+"titre":"Riz carottes/poivrons/tomates/oignons & œuf",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,œuf,légumes,"
+},
+{
+"titre":"Gratin de courgettes & pommes de terre",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,,"
+},
+{
+"titre":"Boulgour / boulettes de viande & aubergines / tomates",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Petit salé aux lentilles / saucissse de Morteau",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Cabillaud sauce tomate & riz au thym",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Tajine de veau carotte orange semoule",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Pates, sauce tomate olive & capres",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Poulet basquaise et son riz de camargue",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Boulettes de viande, petit pois & riz parfumé",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"cake jambon / carottes / courgettes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Filet de poulet / coquillettes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Cassolette de cabillaud aux légumes et boulgour",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Ratatouille & omelettes aux pommes de terre",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Hachis parmentier & légumes (carottes, tomates, pomme de terre, brocolis)",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,,,"
+},
+{
+"titre":"Soupe de lentilles corail",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,,,"
+},
+{
+"titre":"concombre / tomates cerises",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,,,"
+},
+{
+"titre":"Crevettes pamplemousse",
+"description":"Morceau de crevette avec morceaux de pamplemousse",
+"commentaire":"",
+"recette":"https://www.marmiton.org/recettes/recette_salade-crevettes-et-pamplemousse_15454.aspx",
+"categorie":"Entrée",
+"tags":"Entrée,agrumes,poisson,"
+},
+{
+"titre":"Brandade de morue",
+"description":"Petite purée de pomme terre",
+"commentaire":"",
+"recette":"https://www.marmiton.org/recettes/recette_brandade-de-morue_12736.aspx",
+"categorie":"Plat",
+"tags":"Plat,poisson,féculent,"
+}]
+,"tags":"Plat,viande,poisson,légumes,œuf,Entrée,agrumes,féculent"}
