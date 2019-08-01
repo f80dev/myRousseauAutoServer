@@ -1,0 +1,139 @@
+{
+  "configVersion": 1,
+  "index": "/applis/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/applis/favicon.ico",
+        "/applis/main.2ac6ceda64418749d63d.js",
+        "/applis/polyfills.5b5c514d83a60ce973bc.js",
+        "/applis/privacy.html",
+        "/applis/runtime.26209474bfa8dc87a77c.js",
+        "/applis/styles.e46754f42c43bf909b84.css",
+        "/applis/termofuse.html"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/applis/assets/config.json",
+        "/applis/assets/config_hotel.json",
+        "/applis/assets/html/books.html",
+        "/applis/assets/icons/icon - Copy.png",
+        "/applis/assets/icons/icon-128x128.png",
+        "/applis/assets/icons/icon-144x144.png",
+        "/applis/assets/icons/icon-152x152.png",
+        "/applis/assets/icons/icon-192x192.png",
+        "/applis/assets/icons/icon-384x384.png",
+        "/applis/assets/icons/icon-512x512.png",
+        "/applis/assets/icons/icon-72x72.png",
+        "/applis/assets/icons/icon-96x96.png",
+        "/applis/assets/icons/icon.png",
+        "/applis/assets/img/avatar.jpg",
+        "/applis/assets/img/avatar.png",
+        "/applis/assets/img/avatar_baby.png",
+        "/applis/assets/img/banniere_lotus.gif",
+        "/applis/assets/img/bell-icon.png",
+        "/applis/assets/img/ferrari.jpg",
+        "/applis/assets/img/logo-carre.jpg",
+        "/applis/assets/img/logo-carre.png",
+        "/applis/assets/img/logo-rousseau.jpg",
+        "/applis/assets/img/logo-rousseau.png",
+        "/applis/assets/img/logo-rousseau2.png",
+        "/applis/assets/img/logo_creche.png",
+        "/applis/assets/img/logo_selfapp.png",
+        "/applis/assets/img/premiersecours.jpg",
+        "/applis/assets/img/qrcode_shorter.png",
+        "/applis/assets/img/splash_creche.jpg",
+        "/applis/assets/img/splash_hotel.jpg",
+        "/applis/assets/img/splash_screen.webp",
+        "/applis/assets/img/tips.png",
+        "/applis/assets/img/wait.gif",
+        "/applis/assets/menus.json",
+        "/applis/assets/menus.xlsm"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api",
+      "patterns": [
+        "\\/api",
+        "\\/_ah"
+      ],
+      "strategy": "freshness",
+      "maxSize": 0,
+      "maxAge": 0,
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/applis/assets/config.json": "af8fea40a20159bb0c9e6de757e25390f3c4cd78",
+    "/applis/assets/config_hotel.json": "e1b88e209f10c9454ff9cc77039d6182a073b3e1",
+    "/applis/assets/html/books.html": "afdea479123a838f332edd88c2d3b0531db62f8f",
+    "/applis/assets/icons/icon - Copy.png": "334676648de940298d6d2be403b681d014604c2c",
+    "/applis/assets/icons/icon-128x128.png": "20a40a5aed2d90eaaaab2aa6883d41e6631e60cb",
+    "/applis/assets/icons/icon-144x144.png": "b955c010efb59b90cfb460c10b98a85608ba4220",
+    "/applis/assets/icons/icon-152x152.png": "ac6f6cfdd9c7df08deef5f92431bc53015b17107",
+    "/applis/assets/icons/icon-192x192.png": "35a8483a77f253c8e77206210483bb7ae42a4356",
+    "/applis/assets/icons/icon-384x384.png": "1a81935af5057c6448a7573959223568e2bd05cf",
+    "/applis/assets/icons/icon-512x512.png": "88dbb7b155678707cc86ae9f2dce197147478c0a",
+    "/applis/assets/icons/icon-72x72.png": "778a5e05f8ef2572ab3095a3c456d9086b45b1e8",
+    "/applis/assets/icons/icon-96x96.png": "6284d5be58348ba02e456b33b30d5955daa3599d",
+    "/applis/assets/icons/icon.png": "945861360daaf9b617fe83627553cc07b7ba97a2",
+    "/applis/assets/img/avatar.jpg": "9a5121f4693324f58650435101760eb29cd556c8",
+    "/applis/assets/img/avatar.png": "cfe9feca91db20b4608a2926b4581c556239b830",
+    "/applis/assets/img/avatar_baby.png": "d0d77017b651b168793ffd7321fa8bb9248b6cc3",
+    "/applis/assets/img/banniere_lotus.gif": "b0e6942bbff354fd2e2a547388fed7121329550d",
+    "/applis/assets/img/bell-icon.png": "56f1ad9acb1383f78a268d606657dc5407cbce59",
+    "/applis/assets/img/ferrari.jpg": "be8d088d9ed6e891d7de21c83d9cf8e6f9f52b7c",
+    "/applis/assets/img/logo-carre.jpg": "a4fa7781891ab5adf6f3c4daa47c3a22cd4daf16",
+    "/applis/assets/img/logo-carre.png": "8535c91170da784e0079876e4ce6dcfe0ec7adf8",
+    "/applis/assets/img/logo-rousseau.jpg": "daba3a4337dbc7044bf4f949db84bbcb017cf9b2",
+    "/applis/assets/img/logo-rousseau.png": "eea6e34b5bd9f6d279930f92829a9f14c19397bc",
+    "/applis/assets/img/logo-rousseau2.png": "eea6e34b5bd9f6d279930f92829a9f14c19397bc",
+    "/applis/assets/img/logo_creche.png": "68a7570cdd73ab6e95716fb7942afbe93ec5338f",
+    "/applis/assets/img/logo_selfapp.png": "b975dae853e3ca99ce9179194565b08ac500b3e0",
+    "/applis/assets/img/premiersecours.jpg": "f339e1b45f5eb85c0235cfabe18a165479137075",
+    "/applis/assets/img/qrcode_shorter.png": "cd9e761360811d93cd827c45bb92a5840028eb61",
+    "/applis/assets/img/splash_creche.jpg": "be3541291a0976e756429c2f95652b05d6ae89f8",
+    "/applis/assets/img/splash_hotel.jpg": "4add7a544f6f73d2bb0755c31c0138e9a298e63a",
+    "/applis/assets/img/splash_screen.webp": "ddb802d7917228dbe66593dbac2176ac9fa80081",
+    "/applis/assets/img/tips.png": "f7b9e7372227902dd4cc5e68d5a2239cb1c4ad18",
+    "/applis/assets/img/wait.gif": "8631a7917c369b330020c52aa463452ce9426dbd",
+    "/applis/assets/menus.json": "5fc4b191f6c46658fcbdef29fd798f6b636571c9",
+    "/applis/assets/menus.xlsm": "d41d80bb743839eff94403d3b8ece0f86676bb2a",
+    "/applis/favicon.ico": "8535c91170da784e0079876e4ce6dcfe0ec7adf8",
+    "/applis/main.2ac6ceda64418749d63d.js": "0b242b3a5e9a1a79d56b5d84ca684c00fa326291",
+    "/applis/polyfills.5b5c514d83a60ce973bc.js": "4f7d0f63b906aa376eb9c7bc6f0abfae545593a0",
+    "/applis/privacy.html": "973a92e7a6070c5bbdaf954961b8065316f6631b",
+    "/applis/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "/applis/styles.e46754f42c43bf909b84.css": "d4959dd0ecf2d46427ba831d793a6855702a6e9c",
+    "/applis/termofuse.html": "13beeaead279629039e0c54ce192672c5fd7912a"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}

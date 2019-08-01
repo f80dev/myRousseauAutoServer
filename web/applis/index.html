@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+  <meta charset="utf-8">
+  <title>My Rousseau Automobile</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145017593-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-145017593-1');
+  </script>
+
+
+  <base href="/applis/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href=" favicon.ico">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#1976d2">
+<link rel="stylesheet" href="styles.e46754f42c43bf909b84.css"></head>
+<body>
+
+<style>
+  .cover-img {
+    height:100vmax;
+    width:100vmax;
+    object-fit: cover;
+    object-position: center;
+  }
+</style>
+
+
+  <app-root>
+
+    <div style="width: 100%;height:100%;">
+      <img
+           src=""
+           class=""
+           id="page">
+
+      <img style="position: absolute;left:20px;top:20px;width: 40px;height: 40px;"
+           src="./assets/img/wait.gif">
+
+      <div id="name_appli"
+           style="font-family: Arial, Helvetica, serif;
+                   font-size:6vw;color:white;font-weight:lighter;
+                   position: absolute;left:0px;top:25%;width: 100%;text-align: center;">
+      </div>
+
+    </div>
+
+
+    <!--<br><br><br><br><br><br>-->
+    <!--<div style="width: 100%;text-align: center;">-->
+      <!--<br><br>-->
+      <!--Votre espace client-->
+      <!--<br>-->
+      <!--<img src="./assets/img/splash_screen.jpg" style="width: 80%;max-width: 400px;";>-->
+      <!--<br><br><br><br>-->
+      <!--Chargement ...-->
+    <!--</div>-->
+  </app-root>
+
+
+<script>
+  fetch("./assets/config.json").then(function(response) {return response.json();})
+    .then(function(config) {
+      if(document.getElementById("page")!=null){
+        document.getElementById("page").onload=function(){
+          if(document.getElementById("page")!=null)
+            document.getElementById("page").classList.toggle("cover-img");
+        };
+        document.getElementById("page").src=config.splash.screen;
+      }
+      if(document.getElementById("name_appli")!=null)
+        document.getElementById("name_appli").innerHTML=config.splash.title;
+      document.title=config.appli_name;
+
+      (function () {
+        // Retrieve the URL the user was trying to access when receiving the 404.
+        var redirect = sessionStorage.redirect;
+        // Remove the URL from sessionStorage.
+        delete sessionStorage.redirect;
+        // Check if we actually need to redirect.
+        if (redirect && redirect != location.href) {
+          // We need to redirect to the URL the user was trying to access.
+          history.replaceState(null, null, redirect);
+        }
+      })();
+    });
+</script>
+
+  <noscript>Veuillez activer JavaScript pour faire fonctionner MyRousseauAutomobile</noscript>
+
+<script type="text/javascript" src="runtime.26209474bfa8dc87a77c.js"></script><script type="text/javascript" src="polyfills.5b5c514d83a60ce973bc.js"></script><script type="text/javascript" src="main.2ac6ceda64418749d63d.js"></script></body>
+</html>

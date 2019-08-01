@@ -1,0 +1,113 @@
+{
+  "configVersion": 1,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/favicon.ico",
+        "/main.18a7cb4a1eba81fba4ec.js",
+        "/polyfills.898576310992865ac2b8.js",
+        "/privacy.html",
+        "/runtime.06daa30a2963fa413676.js",
+        "/styles.2759878602ad5c0e362c.css",
+        "/termofuse.html"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/config.json",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/img/avatar.jpg",
+        "/assets/img/banniere_lotus.gif",
+        "/assets/img/bell-icon.png",
+        "/assets/img/ferrari.jpg",
+        "/assets/img/logo-carre.jpg",
+        "/assets/img/logo-carre.png",
+        "/assets/img/logo-rousseau.jpg",
+        "/assets/img/logo-rousseau.png",
+        "/assets/img/logo-rousseau2.png",
+        "/assets/img/logo_selfapp.png",
+        "/assets/img/splash_hotel.jpg",
+        "/assets/img/splash_screen.webp",
+        "/assets/img/wait.gif"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "api",
+      "patterns": [
+        "\\/api",
+        "\\/_ah"
+      ],
+      "strategy": "freshness",
+      "maxSize": 0,
+      "maxAge": 0,
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/assets/config.json": "e1b88e209f10c9454ff9cc77039d6182a073b3e1",
+    "/assets/icons/icon-128x128.png": "8535c91170da784e0079876e4ce6dcfe0ec7adf8",
+    "/assets/icons/icon-144x144.png": "ab11a67d07d3a8e720ae080c6b18b1599588d5ad",
+    "/assets/icons/icon-152x152.png": "bd7ed9f36a7599306a0ceff30666dc35fa249fce",
+    "/assets/icons/icon-192x192.png": "b2fbdeefc8a2205dac17ef9c0d8fb8f4488895cb",
+    "/assets/icons/icon-384x384.png": "d903148c537c9e97b3112b1dab3d5c97e26a63de",
+    "/assets/icons/icon-512x512.png": "334676648de940298d6d2be403b681d014604c2c",
+    "/assets/icons/icon-72x72.png": "07605b060b67b0fce36f2d85adc96cb85913b626",
+    "/assets/icons/icon-96x96.png": "58adcb52820a3d00728d8eb90c6b98c3adb4a587",
+    "/assets/img/avatar.jpg": "9a5121f4693324f58650435101760eb29cd556c8",
+    "/assets/img/banniere_lotus.gif": "b0e6942bbff354fd2e2a547388fed7121329550d",
+    "/assets/img/bell-icon.png": "56f1ad9acb1383f78a268d606657dc5407cbce59",
+    "/assets/img/ferrari.jpg": "be8d088d9ed6e891d7de21c83d9cf8e6f9f52b7c",
+    "/assets/img/logo-carre.jpg": "a4fa7781891ab5adf6f3c4daa47c3a22cd4daf16",
+    "/assets/img/logo-carre.png": "8535c91170da784e0079876e4ce6dcfe0ec7adf8",
+    "/assets/img/logo-rousseau.jpg": "daba3a4337dbc7044bf4f949db84bbcb017cf9b2",
+    "/assets/img/logo-rousseau.png": "eea6e34b5bd9f6d279930f92829a9f14c19397bc",
+    "/assets/img/logo-rousseau2.png": "eea6e34b5bd9f6d279930f92829a9f14c19397bc",
+    "/assets/img/logo_selfapp.png": "b975dae853e3ca99ce9179194565b08ac500b3e0",
+    "/assets/img/splash_hotel.jpg": "4add7a544f6f73d2bb0755c31c0138e9a298e63a",
+    "/assets/img/splash_screen.webp": "ddb802d7917228dbe66593dbac2176ac9fa80081",
+    "/assets/img/wait.gif": "8631a7917c369b330020c52aa463452ce9426dbd",
+    "/favicon.ico": "8535c91170da784e0079876e4ce6dcfe0ec7adf8",
+    "/main.18a7cb4a1eba81fba4ec.js": "b14723388fea4e588fde1b003a9fdaee9c8cf01b",
+    "/polyfills.898576310992865ac2b8.js": "4c850befca5b780eb941f5897e76e8654e7c962d",
+    "/privacy.html": "a52c952a7c135fedf53b3809189a16996a4c0033",
+    "/runtime.06daa30a2963fa413676.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "/styles.2759878602ad5c0e362c.css": "68eee015073abe54d6f8b740a1ec532437d862de",
+    "/termofuse.html": "13beeaead279629039e0c54ce192672c5fd7912a"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}

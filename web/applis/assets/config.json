@@ -1,0 +1,261 @@
+{
+  "appli_name":"My République Enfants",
+  "version":"0.18.beta",
+
+  "owner":{
+    "licence":"ouverte",
+    "company":"F80",
+    "logo":"https://f80.fr/img/logoF80.png",
+    "website":"http://f80.fr",
+    "author":"Herve HOAREAU",
+    "contact":"dev@f80.fr",
+    "about":"République Enfants est une application développée par F80 pour le compte de la crêche du même nom"
+  },
+
+
+  "url_invite":"https://creche.appspot.com/appli/index.html",
+  "logo":"./assets/icons/icon-384x384.png",
+  "splash":{
+    "title":"République Enfants",
+    "screen":"./assets/img/splash_creche.jpg"
+  },
+  "background_color":"orange",
+
+  "authent":{
+    "shortname":"f80",
+    "google":true,
+    "linkedin":false,
+    "facebook":true,
+    "email":true
+  },
+
+  "user_profil":{
+    "firstname":true,
+    "lastname":false,
+    "phone":false,
+    "photo":false,
+    "address":false,
+    "share":false,
+    "notif":false,
+    "default_photo":"./assets/img/avatar.png",
+    "take_picture":false
+  },
+
+  "references":{
+    "#":"Fenêtre utilisée pour stocker des adresses par catégorie",
+    "title":"Nos meilleurs adresses",
+    "categories":["magasins","alimentation","jouets","lieux","loisir"]
+  },
+
+  "header":{
+    "logo":true,
+    "color":"primary"
+  },
+
+  "work":{
+    "title":"Présences",
+    "label_end":"Départ",
+    "label_start":"Arrivée",
+    "label_newwork":"%product_name%",
+    "long_url":"https://creche.appspot.com/applis/works/mark",
+    "short_url":"http://bit.ly/2xlJW2G"
+  },
+
+  "compose_menu":{
+    "title":"Menu"
+  },
+
+  "product_picker":{
+    "mode":"select",
+    "title":"vous avez la responsabilité de ?",
+    "title_color":"black",
+    "font_size":"5vmin",
+    "label_button":"Sélectionner",
+    "max_product":1
+  },
+
+  "schedule":{
+    "title":"Horaire manuel",
+    "durations":[
+      {
+        "durationInMinute":480,
+        "label":"8h"
+      },
+      {
+        "durationInMinute":540,
+        "label":"9h"
+      },
+      {
+        "durationInMinute":600,
+        "label":"10h"
+      }
+    ],
+    "min_time":"08:30",
+    "max_time":"18:30"
+  },
+
+  "light_profil":{
+    "height_preview":"200px"
+  },
+
+  "menu":{
+    "compose_menu":{
+      "visible":true
+    },
+
+    "showmenu":{
+      "visible":true
+    },
+
+    "next_appointment":{
+      "visible":false
+    },
+    "dashboard":{
+      "visible":true
+    },
+    "gifts":{
+      "visible":false
+    },
+    "addmessage":{
+      "visible":true
+    },
+    "car_picker":{
+      "visible":false
+    },
+    "schedule":{
+      "visible":false
+    },
+    "references":{
+      "visible":true
+    },
+    "list_messages":{
+      "visible":true
+    },
+    "list_works":{
+      "visible":true
+    },
+    "services":{
+      "visible":false
+    },
+    "profil":{
+      "visible":true
+    },
+    "contact":{
+      "visible":false
+    },
+    "share":{
+      "visible":true
+    },
+    "about":{
+      "visible":true
+    }
+  },
+
+  "menus":[
+    {
+      "title":"Premiers secours",
+      "description":"Les premiers secours",
+      "icon":"add_circle_outline",
+      "href":"https://creche.appspot.com/applis/assets/img/premiersecours.jpg",
+      "color":"red"
+    },
+    {
+      "online":false,
+      "title":"Menus",
+      "description":"Menus de la semaine",
+      "icon":"list",
+      "href":"https://p7.storage.canalblog.com/71/88/1401137/115633696.jpg"
+    },
+    {
+      "online":false,
+      "title":"Bibliographie",
+      "description":"Liste d'ouvrage sur la petite enfance",
+      "icon":"library_books",
+      "href":"./assets/html/books.html",
+      "color":"red"
+    },
+    {
+      "title":"Comptines",
+      "description":"Liste de contines",
+      "icon":"library_music",
+      "href":"https://comptines.tv/"
+    },
+    {
+      "title":"Le site web",
+      "description":"Le site web de la creche",
+      "icon":"web",
+      "href":"http://crecherepu.strikingly.com/",
+      "target":"blank"
+    },
+    {
+      "title":"PMI",
+      "description":"Liste des PMIs",
+      "icon":"account_balance",
+      "href":"https://www.mairie10.paris.fr/mes-demarches/07-enfance-et-affaires-scolaires/3-demarches-liees-a-la-petite-enfance/4-informations-accompagnement-activites-pour-aprents-et-enfants-du-10e-570"
+    },
+    {
+      "online":false,
+      "title":"Chaussettes",
+      "description":"Prendre une photo de son enfant avant de l'emmener",
+      "icon":"palette",
+      "href":"https://assets.bombas.com/image/fetch/f_auto,q_auto/https://cdn.shopify.com/s/files/1/1119/5850/products/pink-purple-teal-yellow-layflat-product_8eb190d3-1692-4209-ad4d-f5c230d8bfa9_1000x1000.jpg%3Fv%3D1545237583"
+    },
+    {
+      "online":true,
+      "title":"Le blog",
+      "description":"Conseils aux parents",
+      "icon":"account_circle",
+      "href":"https://f80dev.github.io/blogs-creches-republique_enfant/"
+    },
+    {
+      "online":false,
+      "title":"Les commissions",
+      "description":"Le travail des commissions",
+      "icon":"message",
+      "href":"https://republiqueenfants.slack.com/messages/CHQ50RD6H/",
+      "target":"blank"
+    },
+    {
+      "title":"Cafés",
+      "description":"Les cafés avec espace pour les enfants",
+      "icon":"insert_emoticon",
+      "href":"https://www.elle.fr/Loisirs/Sorties/Dossiers/cafe-pour-enfants-cafe-poussette",
+      "target":"blank"
+    },
+    {
+      "title":"Agenda",
+      "description":"Sortir a Paris avec des petits",
+      "icon":"videogame_asset",
+      "href":"https://www.familinparis.fr/paris-pour-les-petits/#actualite"
+    },
+    {
+      "title":"Vacances",
+      "description":"Vacances scolaires",
+      "icon":"chrome_reader_mode",
+      "href":"https://f2.quomodo.com/C7275825/uploads/4944/190708_155739.jpg"
+    }
+  ],
+
+  "loyalty":{
+    "enabled":false,
+    "start":100,
+    "invite":10
+  },
+
+
+  "admin":{
+    "visible":false,
+    "email":"hhoareau@gmail.com",
+    "href":""
+  },
+
+  "creche":{
+    "dayoff":[
+      "02/08/2019:02/09/2019","02/08/2020:02/09/2020","01/01/2020","25/12/2019"
+    ],
+    "open":"08:30",
+    "close":"18:30"
+  }
+
+
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Le blog de my République Enfant</title>
+    <link>https://f80dev.github.io/blogs-creches-republique_enfant/posts.html</link>
+    <description>Recent content in Posts on Le blog de my République Enfant</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>fr-fr</language>
+    <lastBuildDate>Sat, 20 Jul 2019 16:13:23 +0100</lastBuildDate>
+    
+	<atom:link href="https://f80dev.github.io/blogs-creches-republique_enfant/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>L&#39;appli République Enfant est disponible</title>
+      <link>https://f80dev.github.io/blogs-creches-republique_enfant/2019/07/lappli-r%C3%A9publique-enfant-est-disponible.html</link>
+      <pubDate>Sat, 20 Jul 2019 16:13:23 +0100</pubDate>
+      
+      <guid>https://f80dev.github.io/blogs-creches-republique_enfant/2019/07/lappli-r%C3%A9publique-enfant-est-disponible.html</guid>
+      <description>L&amp;rsquo;application &amp;ldquo;Ma république enfant&amp;rdquo; est aujourd&amp;rsquo;hui disponible dans une première version, dites béta.
+On peut donc s&amp;rsquo;attendre à des dysfonctionnements que je vous invite à me remonter
+simplement par mail à support@f80.fr
+Cette application est réservée aux parents de la crèche et aux personnes en charge des enfants
+(babysitter, grand-parents &amp;hellip; etc &amp;hellip;).
+Je vous laisse découvrir les fonctionnalités mais en quelques mots on peut :
+- décompter le temps de présence des enfants (c&amp;rsquo;est même son objet principal),</description>
+    </item>
+    
+    <item>
+      <title>Bienvenue dans le blog</title>
+      <link>https://f80dev.github.io/blogs-creches-republique_enfant/2019/07/bienvenue-dans-le-blog.html</link>
+      <pubDate>Fri, 19 Jul 2019 16:13:23 +0100</pubDate>
+      
+      <guid>https://f80dev.github.io/blogs-creches-republique_enfant/2019/07/bienvenue-dans-le-blog.html</guid>
+      <description>Ce blog est ouvert à tous les parents de la crêche. L&amp;rsquo;idée est d&amp;rsquo;y publier des articles
+ou des références d&amp;rsquo;articles qui vous sembleraient pertinant pour les autres familles.
+Les articles doivent être écrit au format Markdown, par exemple via l&amp;rsquo;éditeur en ligne StackEdit
+Pour les publier il suffit de me les envoyer.
+Je me chargerais de les publier rapidement.</description>
+    </item>
+    
+  </channel>
+</rss>

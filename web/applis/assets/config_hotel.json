@@ -1,0 +1,197 @@
+{
+  "appli_name":"Blue Cycladic Resort",
+  "owner":{
+    "licence":"propriétaire",
+    "company":"F80",
+    "website":"http://f80.fr",
+    "author":"Herve HOAREAU",
+    "contact":"dev@f80.fr"
+  },
+
+  "admin":{
+    "email":"paul.dudule@gmail.com"
+  },
+
+  "_logo":"./assets/img/logo-rousseau.png",
+  "logo":"https://cdn.webhotelier.net/photos/h=180:v=3/templates/2693/logo.png",
+  "splash":{
+    "title":"Blue Cycladic Resort",
+    "screen":"./assets/img/splash_hotel.jpg"
+  },
+  "background_color":"black",
+
+  "authent":{
+    "google":false,
+    "linkedin":true,
+    "facebook":false,
+    "email":true
+  },
+
+  "user_profil":{
+    "firstname":true,
+    "lastname":true,
+    "phone":false,
+    "photo":true,
+    "address":false,
+    "share":true,
+    "notif":true
+  },
+
+  "header":{
+    "logo":true,
+    "color":"primaey"
+  },
+
+  "product_picker":{
+    "title":"Quelle chambre avez vous ?",
+    "title_color":"white",
+    "font_size":"3vmin",
+    "label_button":"Celle-ci !"
+  },
+
+  "menu":{
+    "dashboard":{
+      "visible":true
+    },
+    "car_picker":{
+      "visible":false
+    },
+    "schedule":{
+      "visible":true
+    },
+    "gift":{
+      "visible":true
+    },
+    "services":{
+      "visible":false
+    },
+    "profil":{
+      "visible":true
+    },
+    "contact":{
+      "visible":false
+    },
+    "share":{
+      "visible":true
+    },
+    "about":{
+      "visible":true
+    },
+    "admin":{
+      "visible":true
+    }
+  },
+  
+  "_menus":[
+    {
+      "title":"Location",
+      "icon":"collections",
+      "href":"https://www.salvaloc.fr/"
+    },
+    {
+      "title":"Catalogue",
+      "icon":"collections",
+      "href":"https://www.salvaloc.fr/"
+    }
+  ],
+
+  "resto_menus":[
+    {
+      "title":"Menus",
+      "description":"Menus et cartes",
+      "icon":"chrome_reader_mode",
+      "href":"https://www.zazza.paris/menus-carte/#"
+    },
+    {
+      "title":"Privatiser",
+      "icon":"face",
+      "href":"https://reservations.zenchef.com/privatisation.php?rid=348829&lang=fr&1001"
+    },
+    {
+      "title":"Réserver",
+      "icon":"alarm",
+      "href":""
+    },
+    {
+      "title":"Contacter",
+      "icon":"phone",
+      "href":"https://www.zazza.paris/informations-contact/"
+    }
+  ],
+
+  "loyalty":{
+    "invite":10
+  },
+
+  "menus":[
+    {
+      "id":"cmdMenus",
+      "title":"Menus",
+      "description":"Menus et cartes",
+      "icon":"chrome_reader_mode",
+      "href":"https://www.aegeablue.gr/gastronomy/"
+    },
+    {
+      "id":"cmdTourisme",
+      "title":"Tourisme",
+      "icon":"face",
+      "href":"https://www.tripadvisor.fr/Attractions-g580193-Activities-Andros_Cyclades_South_Aegean.html#ATTRACTION_SORT_WRAPPER"
+    },
+    {
+      "id":"cmdReserver",
+      "title":"Réserver",
+      "icon":"alarm",
+      "href":"https://www.tripadvisor.fr/Hotel_Review-g580193-d4324772-Reviews-Aegea_Blue_Cycladic_Resort-Andros_Cyclades_South_Aegean.html"
+    },
+    {
+      "id":"cmdForum",
+      "title":"Forum",
+      "icon":"forum",
+      "href":"https://www.tapatalk.com/groups/hotelaegan"
+    },
+    {
+      "title":"Contacter",
+      "icon":"phone",
+      "href":"https://www.aegeablue.gr/contact/"
+    }
+  ],
+
+  "rousseau_menus":[
+    {
+      "id":"faq",
+      "title":"Vos questions",
+      "description":"Questions les plus fréquentes",
+      "icon":"help",
+      "href":"/faq.html"
+    },
+    {
+      "id":"forum",
+      "title":"Forum",
+      "description":"La communauté des clients",
+      "icon":"forum",
+      "href":"https://forum.quechoisir.org/reparation-voiture-f41.html"
+    },
+    {
+      "id":"location",
+      "title":"Location",
+      "description":"Louer un véhicule",
+      "icon":"collections",
+      "href":"https://www.salvaloc.fr/"
+    },
+    {
+      "id":"blog",
+      "title":"Le blog",
+      "description":"Toute l'actualité de votre concessionnaire",
+      "icon":"camera_roll",
+      "href":"https://blog.atome.auto/category/auto/belles-voitures/voiture-de-collection/"
+    }
+
+  ],
+
+  "admin":{
+    "visible":true,
+    "href":""
+  },
+
+  "avatar":"./assets/img/avatar.jpg"
+}

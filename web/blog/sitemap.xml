@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://f80dev.github.io/blogs-creches-republique_enfant/2019/07/lappli-r%C3%A9publique-enfant-est-disponible.html</loc>
+    <lastmod>2019-07-20T16:13:23+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://f80dev.github.io/blogs-creches-republique_enfant/2019/07/bienvenue-dans-le-blog.html</loc>
+    <lastmod>2019-07-19T16:13:23+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://f80dev.github.io/blogs-creches-republique_enfant/categories.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://f80dev.github.io/blogs-creches-republique_enfant/</loc>
+    <lastmod>2019-07-20T16:13:23+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://f80dev.github.io/blogs-creches-republique_enfant/posts.html</loc>
+    <lastmod>2019-07-20T16:13:23+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://f80dev.github.io/blogs-creches-republique_enfant/tags.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
