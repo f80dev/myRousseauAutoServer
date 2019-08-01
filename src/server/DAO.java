@@ -341,9 +341,17 @@ public class DAO {
 
     public List<Item> getItems(String category) {
         List<Item> rc=new ArrayList<>();
-        for(Item it:ofy().load().type(Item.class).list())
-            if(category==null || category.length()==0 || it.getTags().indexOf(category)>-1)
+        for(Item it:ofy().load().type(Item.class).list()){
+            if(category==null || category.length()==0)
                 rc.add(it);
+            else {
+                Boolean b=true;
+                for(String cat:category.split(",")){
+                    if(it.getTags().indexOf(cat)==-1)b=false;
+                }
+                if(b)rc.add(it);
+            }
+        }
         return rc;
     }
 
@@ -355,11 +363,14 @@ public class DAO {
         return ofy().save().entity(m);
     }
 
-    public List<Menu> getMenusAfter(Long dtStart,String filter) {
+    public List<Menu> getMenusAfter(Long dtStart,String filter,Long limit) {
         List<Menu> rc=new ArrayList<>();
-        for(Menu m:ofy().load().type(Menu.class).filter("dtStart >",dtStart).order("dtStart").list()){
-            if(filter==null || m.getPreparateur().getId().equals(filter))
+        for(Menu m:ofy().load().type(Menu.class).filter("dtStart >=",dtStart).order("dtStart").list()){
+            if(filter==null || filter.equals("null") || m.getPreparateur().getId().equals(filter)){
                 rc.add(m);
+                if(limit!=null && rc.size()>=limit)return rc;
+            }
+
         }
         return rc;
 
@@ -434,5 +445,9 @@ public class DAO {
 
     public void delete(Appointment a) {
         ofy().delete().entity(a);
+    }
+
+    public Result<Void> delete(Menu m) {
+        return ofy().delete().entity(m);
     }
 }

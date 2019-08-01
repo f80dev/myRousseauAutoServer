@@ -255,8 +255,8 @@ public class Rest {
     }
 
     @ApiMethod(name = "getmenus", httpMethod = ApiMethod.HttpMethod.GET, path = "getmenus")
-    public List<Menu> getmenus(@Named("dtStart") Long dtStart,@Nullable @Named("filter") String filter) {
-        List<Menu> rc = dao.getMenusAfter(dtStart,filter);
+    public List<Menu> getmenus(@Named("dtStart") Long dtStart,@Nullable @Named("filter") String filter,@Nullable @Named("limit") Long limit) {
+        List<Menu> rc = dao.getMenusAfter(dtStart,filter,limit);
         return rc;
     }
 
@@ -266,13 +266,17 @@ public class Rest {
     }
 
     @ApiMethod(name = "addtomenu", httpMethod = ApiMethod.HttpMethod.POST, path = "addtomenu")
-    public HashMap<String, String> addtomenu(@Named("dtStart") Long dtStart, @Named("user") String user_id, Item it) {
+    public HashMap<String, String> addtomenu(@Named("dtStart") Long dtStart, @Named("user") String user_id, JsonNode menu) {
         Menu m=dao.findMenu(dtStart);
-        if(m==null)m=new Menu(dtStart,dao.get(user_id));
-        if(m.getItems().size()>1)return Tools.returnAPI(500,"Message dejà complet","");
+        if(m!=null){
+            dao.delete(m).now();
+        }
 
-        m.add(it);
+        m=new Menu(dtStart,dao.get(user_id));
+        if(menu.has("entree") && menu.get("entree").get("title")!=null && menu.get("entree").get("title").asText().length()>0)m.add(new Item(menu.get("entree")));
+        if(menu.has("plat") && menu.get("plat").get("title")!=null && menu.get("plat").get("title").asText().length()>0)m.add(new Item(menu.get("plat")));
         dao.save(m).now();
+
         HashMap<String, String> rc = Tools.returnAPI(200);
         if(m.items.size()>1)dtStart=dao.getNextDateForMenu(dtStart);
         rc.put("nextDate", String.valueOf(dtStart));

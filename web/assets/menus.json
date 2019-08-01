@@ -1,68 +1,76 @@
 ﻿{
 "items":[
 {
-"titre":"Chili con carne / riz basmati",
+"titre":"Asperges vertes à la vinaigrette",
 "description":"",
 "commentaire":"",
 "recette":"",
-"categorie":"Plat",
-"tags":"Plat,viande,,"
+"categorie":"Entrée",
+"tags":"Entrée,légumes,,,,"
 },
 {
-"titre":"Papillotte Saumon / Haricots verts",
+"titre":"Batônnets de carottes au cumin",
 "description":"",
 "commentaire":"",
 "recette":"",
-"categorie":"Plat",
-"tags":"Plat,poisson,,"
+"categorie":"Entrée",
+"tags":"Entrée,légumes,,,,"
 },
 {
-"titre":"Risotto tomate cerise & farce",
+"titre":"Boulettes de cabillaud, petits-pois et carottes",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,légumes,viande,"
+"tags":"Plat,poisson,légumes,légumineuse,,"
 },
 {
-"titre":"Tarte épinards / truite & purée carotte, pdt et patate douce",
+"titre":"Boulettes de viande (kefta), boulgour, petits-pois, carottes, oignons et tomates",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,poisson,,"
+"tags":"Plat,viande,céréales,légumes,légumineuse,"
 },
 {
-"titre":"Riz carottes/poivrons/tomates/oignons & œuf",
+"titre":"Boulettes de viande, boulgour, aubergines et tomates",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,œuf,légumes,"
+"tags":"Plat,viande,céréales,légumes,,"
 },
 {
-"titre":"Gratin de courgettes & pommes de terre",
+"titre":"Boulettes de viande, petit-pois & riz parfumé",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,viande,,"
+"tags":"Plat,viande,céréales,légumineuse,,"
 },
 {
-"titre":"Boulgour / boulettes de viande & aubergines / tomates",
+"titre":"Boulgour / quinoa / ratatouille",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,céréales,légumes,,,"
 },
 {
-"titre":"Petit salé aux lentilles / saucissse de Morteau",
+"titre":"Brandade de morue",
+"description":"Petite purée de pommes de terre",
+"commentaire":"",
+"recette":"https://www.marmiton.org/recettes/recette_brandade-de-morue_12736.aspx",
+"categorie":"Plat",
+"tags":"Plat,poisson,féculent,,,"
+},
+{
+"titre":"Brochettes de poulet au pesto et nouilles japonaise au sarrasin",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,viande,céréales,féculent,,"
 },
 {
 "titre":"Cabillaud sauce tomate & riz au thym",
@@ -70,55 +78,63 @@
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,poisson,céréales,légumes,,"
 },
 {
-"titre":"Tajine de veau carotte orange semoule",
+"titre":"Cabillaud, purée de pdt et potimarron",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,poisson,féculent,,,"
 },
 {
-"titre":"Pates, sauce tomate olive & capres",
+"titre":"Cake au jambon, olives et cheddar",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,viande,légumes,calcium,,"
+},
+{
+"titre":"Cake aux courgettes et saumon",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,poisson,légumes,,,"
 },
 {
-"titre":"Poulet basquaise et son riz de camargue",
+"titre":"Cake courgettes-chèvre et tomates cerises",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,légumes,calcium,,,"
+},
+{
+"titre":"Cake jambon / carottes / courgettes",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,viande,légumes,,,"
 },
 {
-"titre":"Boulettes de viande, petit pois & riz parfumé",
+"titre":"Cannelloni ricotta-épinards",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,féculent,légumes,calcium,,"
 },
 {
-"titre":"cake jambon / carottes / courgettes",
+"titre":"Carottes à la crème et au cumin",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
-},
-{
-"titre":"Filet de poulet / coquillettes",
-"description":"",
-"commentaire":"",
-"recette":"",
-"categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,légumes,calcium,,,"
 },
 {
 "titre":"Cassolette de cabillaud aux légumes et boulgour",
@@ -126,15 +142,247 @@
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,poisson,céréales,légumes,,"
 },
 {
-"titre":"Ratatouille & omelettes aux pommes de terre",
+"titre":"Chili con carne / riz basmati",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,viande,céréales,légumineuse,,"
+},
+{
+"titre":"Chou-fleur rôti et pdt vapeur",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,féculent,légumes,,,"
+},
+{
+"titre":"Colin aux épices (persil, laurier, thym) et sa compotée de fenouil",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,légumes,,,"
+},
+{
+"titre":"Concombre / tomates cerises",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,légumes,,,,"
+},
+{
+"titre":"Coquillettes jambon-petits pois",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,,,"
+},
+{
+"titre":"Courge butternut cuite vapeur au thym",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,,,,"
+},
+{
+"titre":"Courgettes farcies au bouglour, tomates, poivrons et champignons",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,céréales,légumes,,"
+},
+{
+"titre":"Courgettes farcies et riz",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,viande,légumes,,"
+},
+{
+"titre":"Creuzets (croziflette) à la courge butternut",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,légumes,calcium,,"
+},
+{
+"titre":"Creuzets d'épautre à la carbonara et champignons",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,viande,légumes,,"
+},
+{
+"titre":"Crevettes marinées (citron-ciboulette)",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,poisson,,,,"
+},
+{
+"titre":"Crevettes pamplemousse",
+"description":"Morceaux de crevette avec morceaux de pamplemousse",
+"commentaire":"",
+"recette":"https://www.marmiton.org/recettes/recette_salade-crevettes-et-pamplemousse_15454.aspx",
+"categorie":"Entrée",
+"tags":"Entrée,agrumes,poisson,,,"
+},
+{
+"titre":"Croque-monsieur et petits-pois / carottes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumineuse,légumes,féculent,viande,"
+},
+{
+"titre":"Crumble courgettes-cabillaud",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,légumes,féculent,,"
+},
+{
+"titre":"Curry de légumes de saison et son riz",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,légumes,calcium,,"
+},
+{
+"titre":"Curry de pois-chiches et chou-fleur, riz",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumineuse,céréales,légumes,calcium,"
+},
+{
+"titre":"Dahl d'épinards et pdt",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,féculent,légumes,,,"
+},
+{
+"titre":"Dos de lieu noir au citron et à l'huile d'olive, chou-fleur rôti et riz thaï",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,céréales,légumes,,"
+},
+{
+"titre":"Duo de poissons, quinoa, sauche aux champignons",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,céréales,calcium,,"
+},
+{
+"titre":"Filet de poulet / coquillettes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,,,"
+},
+{
+"titre":"Filets de flétan au four et sa salade de pdt-cornichons",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,féculent,,,"
+},
+{
+"titre":"Gazpacho",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,légumes,,,,"
+},
+{
+"titre":"Gratin d'aubergines, tomates, parmesan et polenta",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,céréales,calcium,,"
+},
+{
+"titre":"Gratin de chou-fleur, pdt et lardons",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumes,,"
+},
+{
+"titre":"Gratin de courgettes et pommes de terre",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,féculent,,"
+},
+{
+"titre":"Gratin de crêpes aux épinards",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,féculent,,,"
+},
+{
+"titre":"Gratin de pdt / jambon / fromage / dès de betterave",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,calcium,légumes,"
+},
+{
+"titre":"Gratin de raviolis de bœuf et petits pois",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,œuf,féculent,,"
+},
+{
+"titre":"Gratin de raviolis de volaille et de chou-fleur",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumes,,"
+},
+{
+"titre":"Hâchis de courge butternut et pdt",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,féculent,légumes,,,"
 },
 {
 "titre":"Hachis parmentier & légumes (carottes, tomates, pomme de terre, brocolis)",
@@ -142,7 +390,559 @@
 "commentaire":"",
 "recette":"",
 "categorie":"Plat",
-"tags":"Plat,,,"
+"tags":"Plat,viande,légumes,féculent,,"
+},
+{
+"titre":"Hamburger et frites de pdt et courgettes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumes,,"
+},
+{
+"titre":"Haricots plats grillés et brocolis vapeur",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,,,,"
+},
+{
+"titre":"Jambon et sa purée de chou-fleur, brocolis et semoule",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,légumes,féculent,"
+},
+{
+"titre":"Korma de légumes et riz",
+"description":"Patates douces, brocolis, chou-fleur, épinards",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,féculent,,,"
+},
+{
+"titre":"Lasagnes",
+"description":"Carottes, céléri, courgettes, aubergines, tomates",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,viande,,,"
+},
+{
+"titre":"Lentilles au curry, carottes et riz",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumineuse,céréales,légumes,calcium,"
+},
+{
+"titre":"Macaroni à la bolognaise végétarienne",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,féculent,légumes,,,"
+},
+{
+"titre":"Maïs en épis à croquer, grillé au beurre",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,légumes,,,,"
+},
+{
+"titre":"Maquereaux en filet",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,poisson,,,,"
+},
+{
+"titre":"Navarin d'agneau et sa semoule",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,,,"
+},
+{
+"titre":"Nuggets de poulet, ratatouille et riz",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,légumes,,"
+},
+{
+"titre":"Œufs durs",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,œuf,,,,"
+},
+{
+"titre":"Papillotte de saumon / Haricots verts / Semoule",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,céréales,légumes,,"
+},
+{
+"titre":"Parmentier de boudin noir aux 2 pommes",
+"description":"Pdt, pommes",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumes,,"
+},
+{
+"titre":"Pâtes à la bolognaise",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumes,,"
+},
+{
+"titre":"Pâtes à la crème, courgettes, oignon et crevettes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,féculent,légumes,calcium,"
+},
+{
+"titre":"Pâtes à l'avocat et aux amandes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,féculent,,,"
+},
+{
+"titre":"Pâtes au jambon et haricots verts",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumes,,"
+},
+{
+"titre":"Pâtes au jambon, brocolis et crème",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumes,calcium,"
+},
+{
+"titre":"Pâtes aux asperges blanches et leur sauce hollandaise",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,féculent,légumes,calcium,,"
+},
+{
+"titre":"Pâtes aux courgettes et champignons, sauce tomate",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,féculent,,,"
+},
+{
+"titre":"Pâtes aux crevettes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,féculent,,,"
+},
+{
+"titre":"Pates, sauce tomate olive & capres",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,féculent,,,"
+},
+{
+"titre":"Petit salé aux lentilles / Saucisse de Morteau",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumineuse,,,"
+},
+{
+"titre":"Pizza à l'épautre, tomates cerises, maïs nain, emmental, olives noires et lardons",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,calcium,,"
+},
+{
+"titre":"Poisson, semoule et pdt au romarin",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,céréales,féculent,,"
+},
+{
+"titre":"Poulet au curry et riz",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,,,"
+},
+{
+"titre":"Poulet au paprika et son écrasée de patates douces et céleri rave",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumes,,"
+},
+{
+"titre":"Poulet basquaise et son riz de camargue",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,légumes,,"
+},
+{
+"titre":"Poulet crème coriandre, courgettes, mélange quinoa/boulgour",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,légumes,calcium,"
+},
+{
+"titre":"Poulet et couscous de légumes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,,,"
+},
+{
+"titre":"Poulet, fonds d'artichauts, petits-pois et riz",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,légumineuse,légumes,"
+},
+{
+"titre":"Poulet, quinoa et haricots verts",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,légumes,,"
+},
+{
+"titre":"Purée de brocolis-citron-laurier et quinoa",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,féculent,céréales,,"
+},
+{
+"titre":"Purée de butternut et panais",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,féculent,,,"
+},
+{
+"titre":"Purée de carottes à la crème et au curry",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,féculent,calcium,,"
+},
+{
+"titre":"Purée de chou-fleur et pdt avec lardons",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumes,,"
+},
+{
+"titre":"Purée de pdt assaisonnées à la noix de muscade",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,féculent,,,,"
+},
+{
+"titre":"Quenelles de brochet à la sauce tomate et brocolis",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,légumes,,,"
+},
+{
+"titre":"Quiche au jambon et fromage râpé",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,calcium,,,"
+},
+{
+"titre":"Quiche au saumon et chou-fleur au curry",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,légumes,,,"
+},
+{
+"titre":"Quiche aux épinards et à la mozzarella",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,légumes,calcium,,"
+},
+{
+"titre":"Quiche aux lardons et aux épinards",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,,,"
+},
+{
+"titre":"Quiche aux poireaux et au thon",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,légumes,,,"
+},
+{
+"titre":"Quiche aux poireaux et curry",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,,,,"
+},
+{
+"titre":"Quiche lardons-gruyère",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,calcium,,,"
+},
+{
+"titre":"Quiche lorraine, salade de blé, carottes, petits-pois et comté",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,légumineuse,légumes,calcium,"
+},
+{
+"titre":"Ratatouille & omelette aux pommes de terre",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumes,œuf,féculent,,"
+},
+{
+"titre":"Risotto aux carottes, chou-fleur et jambon",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,céréales,,"
+},
+{
+"titre":"Risotto aux tomates cerises & farce",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,céréales,,"
+},
+{
+"titre":"Riz cantonnais",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,légumes,légumineuse,œuf,"
+},
+{
+"titre":"Riz carottes/poivrons/tomates/oignons & œuf",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,œuf,légumes,céréales,,"
+},
+{
+"titre":"Riz sauté aux asperges",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,légumes,,,"
+},
+{
+"titre":"Rôti de veau au lard et semoule-brocolis-poëlée de shitaké",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,légumes,,"
+},
+{
+"titre":"Salade betterave-avocat",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,féculent,légumes,,,"
+},
+{
+"titre":"Salade betterave-concombre",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,féculent,crudités,légumes,,"
+},
+{
+"titre":"Salade de concombre à l'aneth et yaourt",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,féculent,crudités,calcium,,"
+},
+{
+"titre":"Salade de maïs, champignons et vinaigre balsamique",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,féculent,légumes,,,"
+},
+{
+"titre":"Salade de pâtes et mélange légumes-crudités-thon",
+"description":"Tomates, concombres, échalotes, poivrons, thon",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,féculent,légumes,poisson,,"
+},
+{
+"titre":"Salade de potimarron, feta, oignon et miel",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,féculent,calcium,,,"
+},
+{
+"titre":"Salade d'endives, citron, huile d'olive",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,agrumes,crudités,,,"
+},
+{
+"titre":"Salade grecque et toast de rillettes de sardines au citron",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,crudités,calcium,,"
+},
+{
+"titre":"Saucisse de francfort, lentilles vertes, carottes et pdt",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumineuse,légumes,féculent,"
+},
+{
+"titre":"Saucisse, lentilles et riz",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumineuse,céréales,,"
+},
+{
+"titre":"Saucisses, ratatouille et riz",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,céréales,légumes,,"
+},
+{
+"titre":"Saumon et salade de penne froides",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,féculent,,,"
+},
+{
+"titre":"Semoule, carottes, pois-chiche, oignon et cumin",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,légumineuse,légumes,féculent,céréales,"
+},
+{
+"titre":"Soupe de carottes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,légumes,,,,"
+},
+{
+"titre":"Soupe de légumes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Entrée",
+"tags":"Entrée,légumes,,,,"
 },
 {
 "titre":"Soupe de lentilles corail",
@@ -150,30 +950,126 @@
 "commentaire":"",
 "recette":"",
 "categorie":"Entrée",
-"tags":"Entrée,,,"
+"tags":"Entrée,légumineuse,,,,"
 },
 {
-"titre":"concombre / tomates cerises",
+"titre":"Soupe de riz, carottes et poulet",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,céréales,,"
+},
+{
+"titre":"Spaghetti, petits-pois et champignons",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,féculent,légumes,légumineuse,,"
+},
+{
+"titre":"Taboulé",
+"description":"Semoule, tomates, concombres, échalotes, citron, poivron",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,crudités,légumes,,"
+},
+{
+"titre":"Tajine de poulet, pois-chiche",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,féculent,légumineuse,,"
+},
+{
+"titre":"Tajine de veau, carottes oranges et semoule",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,céréales,,"
+},
+{
+"titre":"Tarte aux courgettes, au thon et au Kiri",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,légumes,,,"
+},
+{
+"titre":"Tarte aux tomates et au thon",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,légumes,,,"
+},
+{
+"titre":"Tarte épinards & truite et purée carotte, pdt et patate douce",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,poisson,légumes,féculent,,"
+},
+{
+"titre":"Tartiflette",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,calcium,,,"
+},
+{
+"titre":"Tendron de veau aux carottes et miel, pâtes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,féculent,,"
+},
+{
+"titre":"Tian de légumes et semoule",
+"description":"Courgettes, aubergines, tomates et oignon",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,céréales,légumes,,,"
+},
+{
+"titre":"Tomates au four confites et quinoa aux carottes",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,féculent,légumes,,,"
+},
+{
+"titre":"Tomates cerises / Concombre",
 "description":"",
 "commentaire":"",
 "recette":"",
 "categorie":"Entrée",
-"tags":"Entrée,,,"
+"tags":"Entrée,crudités,légumes,,,"
 },
 {
-"titre":"Crevettes pamplemousse",
-"description":"Morceau de crevette avec morceaux de pamplemousse",
+"titre":"Viande hâchée, épinards au cumin et riz",
+"description":"",
 "commentaire":"",
-"recette":"https://www.marmiton.org/recettes/recette_salade-crevettes-et-pamplemousse_15454.aspx",
-"categorie":"Entrée",
-"tags":"Entrée,agrumes,poisson,"
-},
-{
-"titre":"Brandade de morue",
-"description":"Petite purée de pomme terre",
-"commentaire":"",
-"recette":"https://www.marmiton.org/recettes/recette_brandade-de-morue_12736.aspx",
+"recette":"",
 "categorie":"Plat",
-"tags":"Plat,poisson,féculent,"
+"tags":"Plat,viande,légumes,céréales,,"
+},
+{
+"titre":"Viande hâchée, poivrons et polenta",
+"description":"",
+"commentaire":"",
+"recette":"",
+"categorie":"Plat",
+"tags":"Plat,viande,légumes,céréales,,"
 }]
-,"tags":"Plat,viande,poisson,légumes,œuf,Entrée,agrumes,féculent"}
+,"tags":"Entrée,légumes,Plat,poisson,légumineuse,viande,céréales,féculent,calcium,agrumes,œuf,crudités"}

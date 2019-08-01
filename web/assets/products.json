@@ -3,63 +3,78 @@
   "products": [
     {
       "label": "James",
-      "forfait":8
+      "forfait":8,
+      "promo":2
     },
     {
       "label": "Lou",
-      "forfait":10
+      "forfait":10,
+      "promo":2
     },
     {
       "label": "Esmee",
-      "forfait":9
+      "forfait":9,
+      "promo":2
     },
     {
       "label": "Sabin",
-      "forfait":9
+      "forfait":9,
+      "promo":3
     },
     {
       "label": "Jules",
-      "forfait":10
+      "forfait":10,
+      "promo":2
     },
     {
       "label": "Roxanne",
-      "forfait":9
+      "forfait":9,
+      "promo":2
     },
     {
       "label": "Aiko",
-      "forfait":9
+      "forfait":9,
+      "promo":2
     },
     {
       "label": "Mina",
-      "forfait":9
+      "forfait":9,
+      "promo":2
     },
     {
       "label": "Ava",
-      "forfait":9
+      "forfait":9,
+      "promo":3
     },
     {
       "label": "Clément",
-      "forfait":9
+      "forfait":9,
+      "promo":3
     },
     {
       "label": "Félix",
-      "forfait":9
+      "forfait":9,
+      "promo":3
     },
     {
       "label": "Léopaul",
-      "forfait":9
+      "forfait":9,
+      "promo":3
     },
     {
       "label": "Louis",
-      "forfait":9
+      "forfait":9,
+      "promo":3
     },
     {
       "label": "Louise",
-      "forfait":9
+      "forfait":9,
+      "promo":3
     },
     {
       "label": "Lucie",
-      "forfait":9
+      "forfait":9,
+      "promo":3
     }
   ]
 }

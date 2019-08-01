@@ -7,6 +7,7 @@ draft: false
 
 L'application "Ma république enfant" est aujourd'hui disponible dans une première version, dites [béta](https://creche.appspot.com).   
 
+##Version béta
 On peut donc s'attendre à des dysfonctionnements que je vous invite à me remonter  
 simplement par mail à [support@f80.fr](mailto:support@f80.fr)  
   
@@ -14,7 +15,7 @@ simplement par mail à [support@f80.fr](mailto:support@f80.fr)
 Cette application est réservée aux parents de la crèche et aux personnes en charge des enfants  
 (babysitter, grand-parents ... etc ...).  
   
-  
+##Fonctionnalités principales
 Je vous laisse découvrir les fonctionnalités mais en quelques mots on peut :  
  - décompter le temps de présence des enfants (c'est même son objet principal),  
  - afficher un message à tous les utilisateurs pendant un certains temps  
