@@ -476,7 +476,7 @@ public class Rest {
     public HashMap<String, String> init() {
         dao.loadProducts();
         dao.addGifts(Tools.loadDataFile("promotions").get("gifts"));
-        dao.initItems(server_settings.get("item").get("items"));
+        dao.initItems(Tools.getDomain()+"/assets/menus.json");
         return Tools.returnAPI(200,"Database loaded",null);
     }
 

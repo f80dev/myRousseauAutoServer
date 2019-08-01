@@ -6,6 +6,8 @@ import com.sugaronrest.NameOf;
 import com.sugaronrest.RequestType;
 import com.sugaronrest.modules.Campaigns;
 
+import java.io.ByteArrayInputStream;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -52,10 +54,21 @@ public class DAO {
 
     }
 
-    public static void initItems(JsonNode jns) {
-        for(JsonNode it:jns){
-            save(new Item(it));
+    public static void initItems(String filename) {
+        String s= null;
+        try {
+            s = Tools.rest(filename);
+            JsonNode jns=Tools.toJSON(new ByteArrayInputStream(s.getBytes("UTF-8")));
+            for(JsonNode it:jns.get("items")){
+                if(it!=null)
+                    save(new Item(it));
+            }
+        } catch (RestAPIException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
+
     }
 
     public static void save(Item item) {
@@ -163,13 +176,15 @@ public class DAO {
         ofy().delete().entity(a).now();
     }
 
-    public void loadProducts(){
+    public Boolean loadProducts(){
         JsonNode nodes = Tools.loadDataFile("products");
+        if(nodes==null)return false;
         for(JsonNode product:nodes.get("products")){
             Product p=new Product(product);
             p.setPhoto(nodes.get("default_photo").asText());
             dao.save(p);
         }
+        return true;
     }
 
     public void loadEnfants(){

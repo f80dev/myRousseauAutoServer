@@ -22,6 +22,7 @@ public class Item {
 
     public Item(JsonNode jn) {
         if(jn.has("title"))this.setTitle(jn.get("title").asText());
+        if(jn.has("titre"))this.setTitle(jn.get("titre").asText());
         if(jn.has("description"))this.setDescription(jn.get("description").asText());
         if(jn.has("from"))this.setFrom(jn.get("from").asText());
         if(jn.has("recette"))this.setRecette(jn.get("recette").asText());
@@ -63,6 +64,8 @@ public class Item {
     }
 
     public void setTags(String tags) {
+        while(tags.endsWith(","))
+            tags=tags.substring(0,tags.length()-1);
         this.tags = tags;
     }
 

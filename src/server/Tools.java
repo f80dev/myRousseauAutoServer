@@ -138,6 +138,16 @@ public class Tools {
         return null;
     }
 
+    public static JsonNode toJSON(InputStream is){
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            return objectMapper.readTree(is);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static JsonNode toJSON(String s){
         if(s==null){
             return null;
