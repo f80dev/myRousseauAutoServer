@@ -1,6 +1,6 @@
 baseURL = "https://f80dev.github.io/blogs-creches-republique_enfant/"
 languageCode = "fr-fr"
-title = "Le blog de My République Enfant"
+title = "Le blog"
 theme = "hamburg"
 uglyURLs = true
 canonifyURLs = true
@@ -14,3 +14,4 @@ NewContentEditor = "mate"
     changefreq="weekly"
     filename="sitemap.xml"
     priority=0.5
+

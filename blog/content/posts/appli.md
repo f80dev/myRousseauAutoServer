@@ -1,8 +1,9 @@
 
 ---  
-title: "L'appli République Enfant est disponible"  
+title: "L'appli 'My République Enfants', enfin disponible !"  
 date: 2019-07-20T16:13:23+01:00  
 draft: false  
+summary: "Avec un peu de retard, elle arrive cet été. L'appli 'my république enfants' n'attend que vos tests !"
 --- 
 
 L'application "Ma république enfant" est aujourd'hui disponible dans une première version, dites [béta](https://creche.appspot.com).   

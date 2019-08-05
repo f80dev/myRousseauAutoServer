@@ -13,6 +13,7 @@ import java.util.HashMap;
 public class Product {
     protected String photo="";
     protected String label="";
+    protected String groupe="";
 
     @Id
     protected String id="product"+System.currentTimeMillis();
@@ -28,6 +29,7 @@ public class Product {
         if(product.has("photo"))this.photo=product.get("photo").asText();
         if(product.has("label"))this.label=product.get("label").asText();
         if(product.has("id"))this.id=product.get("id").asText();
+        if(product.has("groupe"))this.groupe=product.get("groupe").asText();
     }
 
     public String getPhoto() {
@@ -56,6 +58,14 @@ public class Product {
 
     public Long getDtStartWork() {
         return dtStartWork;
+    }
+
+    public String getGroupe() {
+        return groupe;
+    }
+
+    public void setGroupe(String groupe) {
+        this.groupe = groupe;
     }
 
     public void setDtStartWork(Long dtStartWork) {

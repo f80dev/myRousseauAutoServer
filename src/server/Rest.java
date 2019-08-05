@@ -255,8 +255,11 @@ public class Rest {
     }
 
     @ApiMethod(name = "getmenus", httpMethod = ApiMethod.HttpMethod.GET, path = "getmenus")
-    public List<Menu> getmenus(@Named("dtStart") Long dtStart,@Nullable @Named("filter") String filter,@Nullable @Named("limit") Long limit) {
-        List<Menu> rc = dao.getMenusAfter(dtStart,filter,limit);
+    public List<Menu> getmenus(@Named("dtStart") Long dtStart,@Nullable @Named("groupe") String groupe,@Nullable @Named("filter") String filter,@Nullable @Named("limit") Long limit) {
+        List<Menu> rc = new ArrayList<>();
+        for(Menu m:dao.getMenusAfter(dtStart,filter,limit))
+            if(m.isGroupe(groupe))rc.add(m);
+
         return rc;
     }
 
@@ -266,29 +269,29 @@ public class Rest {
     }
 
     @ApiMethod(name = "addtomenu", httpMethod = ApiMethod.HttpMethod.POST, path = "addtomenu")
-    public HashMap<String, String> addtomenu(@Named("dtStart") Long dtStart, @Named("user") String user_id, JsonNode menu) {
-        Menu m=dao.findMenu(dtStart);
+    public HashMap<String, String> addtomenu(@Named("dtStart") Long dtStart,@Named("groupe") String groupe, @Named("user") String user_id, JsonNode menu) {
+        Menu m=dao.findMenu(dtStart,groupe);
         if(m!=null){
             dao.delete(m).now();
         }
 
-        m=new Menu(dtStart,dao.get(user_id));
+        m=new Menu(dtStart,dao.get(user_id),groupe);
         if(menu.has("entree") && menu.get("entree").get("title")!=null && menu.get("entree").get("title").asText().length()>0)m.add(new Item(menu.get("entree")));
         if(menu.has("plat") && menu.get("plat").get("title")!=null && menu.get("plat").get("title").asText().length()>0)m.add(new Item(menu.get("plat")));
         dao.save(m).now();
 
         HashMap<String, String> rc = Tools.returnAPI(200);
-        if(m.items.size()>1)dtStart=dao.getNextDateForMenu(dtStart);
+        if(m.items.size()>1)dtStart=dao.getNextDateForMenu(dtStart,groupe);
         rc.put("nextDate", String.valueOf(dtStart));
         return rc;
     }
 
 
     @ApiMethod(name = "nextmenudate", httpMethod = ApiMethod.HttpMethod.GET, path = "nextmenudate")
-    public HashMap<String, String> nextmenudate(@Nullable @Named("dtStart") Long dtStart) {
+    public HashMap<String, String> nextmenudate(@Nullable @Named("dtStart") Long dtStart,@Named("groupe") String groupe) {
         HashMap<String, String> rc = Tools.returnAPI(200);
         if(dtStart==null)dtStart=System.currentTimeMillis();
-        rc.put("nextDate", String.valueOf(dao.getNextDateForMenu(dtStart)));
+        rc.put("nextDate", String.valueOf(dao.getNextDateForMenu(dtStart,groupe)));
         return rc;
     }
 

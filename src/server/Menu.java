@@ -18,16 +18,25 @@ public class Menu {
 
     User preparateur=null;
     List<Item> items=new ArrayList<>();
+    String groupe="";
 
     public Menu() {
     }
 
-    public Menu(Long dtStart,User preparateur) {
+    public Menu(Long dtStart,User preparateur,String groupe) {
         this.preparateur=preparateur;
+        this.groupe=groupe;
         this.dtStart=dtStart;
     }
 
 
+    public String getGroupe() {
+        return groupe;
+    }
+
+    public void setGroupe(String groupe) {
+        this.groupe = groupe;
+    }
 
     public Long getDtStart() {
         return dtStart;
@@ -63,5 +72,10 @@ public class Menu {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public boolean isGroupe(String groupe) {
+        if(groupe==null || this.groupe==null || this.groupe.equals(groupe))return true;
+        return false;
     }
 }

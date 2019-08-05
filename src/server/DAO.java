@@ -352,8 +352,11 @@ public class DAO {
         return rc;
     }
 
-    public Menu findMenu(Long dtStart) {
-        return ofy().load().type(Menu.class).filter("dtStart =",dtStart).first().now();
+    public Menu findMenu(Long dtStart,String groupe) {
+        for(Menu m:ofy().load().type(Menu.class).filter("dtStart =",dtStart).list()){
+            if(m.isGroupe(groupe))return m;
+        }
+        return null;
     }
 
     public Result<Key<Menu>> save(Menu m) {
@@ -373,11 +376,11 @@ public class DAO {
 
     }
 
-    public Long getNextDateForMenu(Long dtStart) {
+    public Long getNextDateForMenu(Long dtStart,String groupe) {
         if(dtStart==null)dtStart=System.currentTimeMillis();
         List<Menu> l_m = ofy().load().type(Menu.class).order("dtStart").list();
         for(Menu m:l_m){
-            if(m.getItems().size()<2 && m.dtStart>System.currentTimeMillis()){
+            if(m.isGroupe(groupe) && m.getItems().size()<2 && m.dtStart>dtStart){
                 if(isOpen(m.dtStart))
                     return m.dtStart;
             }
