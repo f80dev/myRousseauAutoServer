@@ -1,6 +1,5 @@
 package server;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.sugaronrest.modules.Prospects;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

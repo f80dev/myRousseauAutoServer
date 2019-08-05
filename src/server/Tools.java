@@ -5,18 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.appengine.api.utils.SystemProperty;
 import com.google.apphosting.api.ApiProxy;
 import com.google.common.io.CharStreams;
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
-import com.mashape.unirest.request.body.MultipartBody;
-import com.sugaronrest.*;
-import com.sugaronrest.modules.*;
+
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
-import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.ssl.TrustStrategy;
 
@@ -305,25 +295,25 @@ public class Tools {
         return rc;
     }
 
-    private static CloseableHttpAsyncClient createSSLClient() {
-        TrustStrategy acceptingTrustStrategy = new TrustStrategy() {
-            @Override
-            public boolean isTrusted(java.security.cert.X509Certificate[] x509Certificates, String s) throws java.security.cert.CertificateException {
-                return true;
-            }
-        };
-
-        SSLContext sslContext = null;
-        try {
-            sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
-        } catch (Exception e) {
-
-        }
-
-        return HttpAsyncClients.custom()
-                .setHostnameVerifier(SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
-                .setSSLContext(sslContext).build();
-    }
+//    private static CloseableHttpAsyncClient createSSLClient() {
+//        TrustStrategy acceptingTrustStrategy = new TrustStrategy() {
+//            @Override
+//            public boolean isTrusted(java.security.cert.X509Certificate[] x509Certificates, String s) throws java.security.cert.CertificateException {
+//                return true;
+//            }
+//        };
+//
+//        SSLContext sslContext = null;
+//        try {
+//            sslContext = SSLContexts.custom().loadTrustMaterial(null, acceptingTrustStrategy).build();
+//        } catch (Exception e) {
+//
+//        }
+//
+//        return HttpAsyncClients.custom()
+//                .setHostnameVerifier(SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
+//                .setSSLContext(sslContext).build();
+//    }
 
     //A tester : https://172.17.242.201/suitecrm/service/v4_1/rest.php
 
@@ -331,23 +321,23 @@ public class Tools {
     //User.CRM_USER,User.CRM_PASSWORD
 
 
-    public static void getAccessToken(){
-        try {
-            HttpResponse<String> s = Unirest.post(getCRMServer() + "/api/oauth/access_token")
-                    .header("Content-type", "application/vnd.api+json")
-                    .header("Accept:", "application/vnd.api+json")
-                    .field("client_id", "selfapp")
-                    .field("client_secret", "hh4271")
-                    .field("username", "hhoareau")
-                    .field("password", "hh4271")
-                    .field("grant_type", "password")
-                    .field("scope", "")
-                    .asString();
-            log.info(s.getBody());
-        } catch (UnirestException e) {
-            e.printStackTrace();
-        }
-    }
+//    public static void getAccessToken(){
+//        try {
+//            HttpResponse<String> s = Unirest.post(getCRMServer() + "/api/oauth/access_token")
+//                    .header("Content-type", "application/vnd.api+json")
+//                    .header("Accept:", "application/vnd.api+json")
+//                    .field("client_id", "selfapp")
+//                    .field("client_secret", "hh4271")
+//                    .field("username", "hhoareau")
+//                    .field("password", "hh4271")
+//                    .field("grant_type", "password")
+//                    .field("scope", "")
+//                    .asString();
+//            log.info(s.getBody());
+//        } catch (UnirestException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     public static void readRelation_old(String moduleName,Class c,String id) {

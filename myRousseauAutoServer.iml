@@ -28,7 +28,6 @@
     <orderEntry type="library" name="com.google.appengine:appengine-api-1.0-sdk:Release" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" name="com.google.endpoints:endpoints-framework:Release" level="project" />
-    <orderEntry type="library" name="sugaronrest-1.0.0" level="project" />
     <orderEntry type="library" name="com.restfb:restfb:2.18.1" level="project" />
     <orderEntry type="library" name="com.googlecode.objectify:objectify:5.1.22" level="project" />
     <orderEntry type="library" name="com.googlecode.objectify:objectify:5.1.22" level="project" />

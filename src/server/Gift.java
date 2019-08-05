@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
-import com.sugaronrest.modules.Campaigns;
 
 import java.util.Date;
 import java.util.Random;
@@ -57,25 +56,25 @@ public class Gift {
         this.manual=manual;
     }
 
-    public Gift(Campaigns c) {
-        this.message=c.getName();
-        if(c.getStartDate()!=null)
-            this.dtStart=c.getStartDate().getTime();
-        else
-            this.dtStart=System.currentTimeMillis();
-
-        if(c.getEndDate()!=null)
-            this.dtEnd=c.getEndDate().getTime();
-        else
-            this.dtEnd=this.dtStart+10000000;
-
-        String[] contents = c.getContent().split(",");
-
-        this.picture=contents[0].split("=")[1];
-        this.manual=contents[1].split("=")[1];
-        this.crmID=c.getId();
-        this.setId(c.getId());
-    }
+//    public Gift(Campaigns c) {
+//        this.message=c.getName();
+//        if(c.getStartDate()!=null)
+//            this.dtStart=c.getStartDate().getTime();
+//        else
+//            this.dtStart=System.currentTimeMillis();
+//
+//        if(c.getEndDate()!=null)
+//            this.dtEnd=c.getEndDate().getTime();
+//        else
+//            this.dtEnd=this.dtStart+10000000;
+//
+//        String[] contents = c.getContent().split(",");
+//
+//        this.picture=contents[0].split("=")[1];
+//        this.manual=contents[1].split("=")[1];
+//        this.crmID=c.getId();
+//        this.setId(c.getId());
+//    }
 
     public Gift(JsonNode jn) {
         this.picture=jn.get("photo").asText();
@@ -173,12 +172,12 @@ public class Gift {
         this.picture = picture;
     }
 
-    public Campaigns toCampaign() {
-        Campaigns c=new Campaigns();
-        c.setContent("image="+this.picture+",description="+this.manual);
-        c.setStartDate(new Date(this.getDtStart()));
-        c.setEndDate(new Date(this.getDtEnd()));
-        c.setName(this.message);
-        return c;
-    }
+//    public Campaigns toCampaign() {
+//        Campaigns c=new Campaigns();
+//        c.setContent("image="+this.picture+",description="+this.manual);
+//        c.setStartDate(new Date(this.getDtStart()));
+//        c.setEndDate(new Date(this.getDtEnd()));
+//        c.setName(this.message);
+//        return c;
+//    }
 }

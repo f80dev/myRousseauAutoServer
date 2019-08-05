@@ -13,7 +13,6 @@ import com.google.api.services.people.v1.model.Person;
 import com.google.common.hash.Hashing;
 import com.googlecode.objectify.annotation.*;
 import com.restfb.*;
-import com.sugaronrest.modules.Contacts;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -382,18 +381,18 @@ public class User {
     }
     
 
-    public Boolean updateCRM() {
-        return SuiteCRM.updateCRM(this);
-    }
+//    public Boolean updateCRM() {
+//        return SuiteCRM.updateCRM(this);
+//    }
 
-    public Contacts toContact(){
-        Contacts c=new Contacts();
-        c.setLastName(this.getLastname());
-        c.setId(this.getCrm_contactsID());
-        c.setDateModified(new Date());
-        c.setFirstName(this.getFirstname());
-        return c;
-    }
+//    public Contacts toContact(){
+//        Contacts c=new Contacts();
+//        c.setLastName(this.getLastname());
+//        c.setId(this.getCrm_contactsID());
+//        c.setDateModified(new Date());
+//        c.setFirstName(this.getFirstname());
+//        return c;
+//    }
 
 
     public List<String> getProducts() {

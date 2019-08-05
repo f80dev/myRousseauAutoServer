@@ -4,8 +4,7 @@ import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
 import com.googlecode.objectify.annotation.Index;
 import com.googlecode.objectify.annotation.OnSave;
-import com.sugaronrest.RequestType;
-import com.sugaronrest.modules.Meetings;
+
 
 import java.util.Date;
 
@@ -87,21 +86,21 @@ public class Appointment {
         this.confirm = confirm;
     }
 
-    public Meetings toMeetings(){
-        Meetings m=new Meetings();
-        m.setDateStart(new Date(this.getDtStart()));
-        m.setDateEntered(new Date(this.getDtStart()));
-        m.setDurationHours(Math.toIntExact(this.getDuration() / (3600 * 1000)));
-        m.setDurationMinutes(Math.toIntExact(this.getDuration() / (60 * 1000)) % 60);
-        m.setName(this.getMotif());
-        m.setDateEnd(new Date(this.getDtStart()+this.getDuration()));
-        return m;
-    }
+//    public Meetings toMeetings(){
+//        Meetings m=new Meetings();
+//        m.setDateStart(new Date(this.getDtStart()));
+//        m.setDateEntered(new Date(this.getDtStart()));
+//        m.setDurationHours(Math.toIntExact(this.getDuration() / (3600 * 1000)));
+//        m.setDurationMinutes(Math.toIntExact(this.getDuration() / (60 * 1000)) % 60);
+//        m.setName(this.getMotif());
+//        m.setDateEnd(new Date(this.getDtStart()+this.getDuration()));
+//        return m;
+//    }
 
-    @OnSave
-    void onSave(){
-        this.setCrmID(SuiteCRM.executeCRM(this.toMeetings(), RequestType.Create));
-    }
+//    @OnSave
+//    void onSave(){
+//        this.setCrmID(SuiteCRM.executeCRM(this.toMeetings(), RequestType.Create));
+//    }
 
 }
 

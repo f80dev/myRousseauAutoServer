@@ -2,9 +2,6 @@ package server;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.googlecode.objectify.*;
-import com.sugaronrest.NameOf;
-import com.sugaronrest.RequestType;
-import com.sugaronrest.modules.Campaigns;
 
 import java.io.ByteArrayInputStream;
 import java.io.UnsupportedEncodingException;
@@ -148,25 +145,25 @@ public class DAO {
         return ofy().load().type(Gift.class).limit(limit).list();
     }
 
-    public List<Gift> getGifsFromCRM(Integer limit) {
-        if(limit==null)limit=1000;
-        List<Campaigns> result=SuiteCRM.readCRM("Campaigns",
-                limit,
-                Arrays.asList(
-                        NameOf.Campaigns.Id,
-                        NameOf.Campaigns.Name,
-                        NameOf.Campaigns.Content,
-                        NameOf.Campaigns.TrackerKey,
-                        NameOf.Campaigns.StartDate,
-                        NameOf.Campaigns.EndDate),
-                RequestType.BulkRead);
-
-        List<Gift> rc=new ArrayList<>();
-        for(Campaigns c:result)
-            rc.add(new Gift(c));
-
-        return rc;
-    }
+//    public List<Gift> getGifsFromCRM(Integer limit) {
+//        if(limit==null)limit=1000;
+//        List<Campaigns> result=SuiteCRM.readCRM("Campaigns",
+//                limit,
+//                Arrays.asList(
+//                        NameOf.Campaigns.Id,
+//                        NameOf.Campaigns.Name,
+//                        NameOf.Campaigns.Content,
+//                        NameOf.Campaigns.TrackerKey,
+//                        NameOf.Campaigns.StartDate,
+//                        NameOf.Campaigns.EndDate),
+//                RequestType.BulkRead);
+//
+//        List<Gift> rc=new ArrayList<>();
+//        for(Campaigns c:result)
+//            rc.add(new Gift(c));
+//
+//        return rc;
+//    }
 
     public Appointment getAppointment(String id) {
         return ofy().load().type(Appointment.class).id(id).now();
