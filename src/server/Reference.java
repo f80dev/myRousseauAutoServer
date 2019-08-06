@@ -1,5 +1,6 @@
 package server;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.googlecode.objectify.annotation.Cache;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
@@ -28,6 +29,14 @@ public class Reference implements Serializable  {
     List<String> dislikes=new ArrayList<>();
 
     public Reference() {
+    }
+
+    public Reference(JsonNode jn) {
+        if(jn.has("address"))this.setAddress(jn.get("address").asText());
+        if(jn.has("comment"))this.setComment(jn.get("comment").asText());
+        if(jn.has("description"))this.setText(jn.get("description").asText());
+        if(jn.has("title"))this.setText(jn.get("title").asText());
+        if(jn.has("tags"))this.setTags(jn.get("tags").asText());
     }
 
     public String getID() {

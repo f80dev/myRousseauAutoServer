@@ -65,7 +65,22 @@ public class DAO {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
+    }
 
+    public static void initReferences(String filename) {
+        String s= null;
+        try {
+            s = Tools.rest(filename);
+            JsonNode jns=Tools.toJSON(new ByteArrayInputStream(s.getBytes("UTF-8")));
+            for(JsonNode it:jns.get("items")){
+                if(it!=null)
+                    save(new Reference(it));
+            }
+        } catch (RestAPIException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void save(Item item) {
@@ -87,7 +102,7 @@ public class DAO {
         dao.loadEnfants();
     }
 
-    public Result<Key<Reference>> save(Reference r) {
+    public static Result<Key<Reference>> save(Reference r) {
         return ofy().save().entity(r);
     }
 
@@ -411,20 +426,19 @@ public class DAO {
             String dt2=null;
             if(jn.asText().indexOf(":")>-1)dt2=jn.asText().split(":")[1];
             try {
-                Date _dt1 = new SimpleDateFormat().parse(dt1+" "+server_settings.get("creche").get("open").asText());
+                Date _dt1 = new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(dt1+" "+server_settings.get("creche").get("open").asText());
                 Date _dt2=null;
                 if(dt2==null)
-                    _dt2=new SimpleDateFormat().parse(dt1+" "+server_settings.get("creche").get("close").asText());
+                    _dt2=new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(dt1+" "+server_settings.get("creche").get("close").asText());
                 else
-                    _dt2=new SimpleDateFormat().parse(dt2+" "+server_settings.get("creche").get("close").asText());
+                    _dt2=new SimpleDateFormat("dd/MM/yyyy HH:mm").parse(dt2+" "+server_settings.get("creche").get("close").asText());
 
                 if(dt>_dt1.getTime() && dt<_dt2.getTime())return false;
 
             } catch (ParseException e) {
+                log.severe("Erreur de parsing des date dans isOpen");
                 e.printStackTrace();
             }
-
-
         }
         return true;
     }

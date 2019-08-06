@@ -231,7 +231,7 @@ public class User {
                 "code=" + this.getPassword(),
                 "firstname=" + this.getFirstname(),
                 "titre="+DAO.server_settings.get("appli_name").asText(),
-                "url_to_connect=" + Tools.getDomainAppli() + "/login?email=" + this.getEmail() + "&password=" + this.getPassword());
+                "url_to_connect=" + Tools.getDomainAppli() + "/login?email=" + this.getEmail());
 
         Tools.sendMail(this.getEmail(), "Votre code est le " + this.getPassword(), ADMIN_EMAIL, "code", params);
     }

@@ -484,6 +484,7 @@ public class Rest {
         dao.loadProducts();
         dao.addGifts(Tools.loadDataFile("promotions").get("gifts"));
         dao.initItems(Tools.getDomain()+"/assets/menus.json");
+        dao.initReferences(Tools.getDomain()+"/assets/references.json");
         return Tools.returnAPI(200,"Database loaded",null);
     }
 
