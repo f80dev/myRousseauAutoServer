@@ -8,7 +8,7 @@ summary: "Avec un peu de retard, elle arrive cet été. L'appli 'my république 
 
 L'application "Ma république enfant" est aujourd'hui disponible dans une première version, dites [béta](https://creche.appspot.com).   
 
-<h1>Version béta</h1>
+## Version béta
 On peut donc s'attendre à des dysfonctionnements que je vous invite à me remonter  
 simplement par mail à [support@f80.fr](mailto:support@f80.fr)  
   
