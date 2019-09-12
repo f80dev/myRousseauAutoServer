@@ -225,6 +225,9 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 
+ngx-clipboard
+MIT
+
 ngx-device-detector
 MIT
 
@@ -254,6 +257,9 @@ SOFTWARE.
 
 
 ngx-webcam
+MIT
+
+ngx-window-token
 MIT
 
 qrcodejs2

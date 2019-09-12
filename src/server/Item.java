@@ -32,6 +32,7 @@ public class Item {
                 this.setTags(this.getTags()+","+cat.asText());
             }
         }
+        if(jn.has("type_plat"))this.setTags(this.getTags()+","+jn.get("type_plat").asText());
     }
 
 

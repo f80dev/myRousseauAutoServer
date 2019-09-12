@@ -8,7 +8,7 @@
       "updateMode": "prefetch",
       "urls": [
         "/applis/favicon.ico",
-        "/applis/main.7fdfa4872b73019d7816.js",
+        "/applis/main.6acbbd2beab299bcbcf2.js",
         "/applis/polyfills.5b5c514d83a60ce973bc.js",
         "/applis/privacy.html",
         "/applis/runtime.26209474bfa8dc87a77c.js",
@@ -76,7 +76,7 @@
     }
   ],
   "hashTable": {
-    "/applis/assets/config.json": "3b8a3825e621d78b98d38f39abf19b90a00fd85d",
+    "/applis/assets/config.json": "e96442737c8821d37891646ac60ec92ca5192e6b",
     "/applis/assets/config_hotel.json": "e1b88e209f10c9454ff9cc77039d6182a073b3e1",
     "/applis/assets/html/books.html": "afdea479123a838f332edd88c2d3b0531db62f8f",
     "/applis/assets/icons/icon - Copy.png": "334676648de940298d6d2be403b681d014604c2c",
@@ -113,7 +113,7 @@
     "/applis/assets/menus.json": "5fc4b191f6c46658fcbdef29fd798f6b636571c9",
     "/applis/assets/menus.xlsm": "d41d80bb743839eff94403d3b8ece0f86676bb2a",
     "/applis/favicon.ico": "8535c91170da784e0079876e4ce6dcfe0ec7adf8",
-    "/applis/main.7fdfa4872b73019d7816.js": "09a012458b848430f6ede33b039adb815c95cf03",
+    "/applis/main.6acbbd2beab299bcbcf2.js": "0a0bf1db317ba4bc8f7cb77ffb2e66488c3bdaae",
     "/applis/polyfills.5b5c514d83a60ce973bc.js": "4f7d0f63b906aa376eb9c7bc6f0abfae545593a0",
     "/applis/privacy.html": "973a92e7a6070c5bbdaf954961b8065316f6631b",
     "/applis/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",

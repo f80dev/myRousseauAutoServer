@@ -205,8 +205,6 @@ public class User {
             this.products.remove(this.products.get(index));
     }
 
-    
-
     public void addGift(String gift) {
         this.gifts.put(gift, System.currentTimeMillis());
     }

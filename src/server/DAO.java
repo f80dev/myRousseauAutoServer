@@ -464,4 +464,14 @@ public class DAO {
     public Result<Void> delete(Menu m) {
         return ofy().delete().entity(m);
     }
+
+    public Menu getMenu(Long dtStart) {
+        List<Menu> lm = this.getMenusAfter(dtStart, null, 1L);
+        if(lm.size()==0)return null;
+        if(new SimpleDateFormat("dd/mm/yyyy").format(new Date(dtStart)).equals(new SimpleDateFormat("dd/mm/yyyy").format(new Date(lm.get(0).getDtStart()))))
+            return lm.get(0);
+
+        return null;
+    }
 }
+

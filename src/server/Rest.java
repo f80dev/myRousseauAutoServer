@@ -203,7 +203,10 @@ public class Rest {
             p.setPhoto(url_photo);
             dao.save(p);
         }
-        if(photo.get("type").asText().equals("perso"))u.setPhoto(url_photo);
+
+        if(photo.get("type").asText().equals("perso") || photo.get("type").asText().equals("user"))
+            u.setPhoto(url_photo);
+
         dao.save(u);
         return u;
     }
@@ -261,6 +264,11 @@ public class Rest {
             if(m.isGroupe(groupe))rc.add(m);
 
         return rc;
+    }
+
+    @ApiMethod(name = "getmenu", httpMethod = ApiMethod.HttpMethod.GET, path = "menu")
+    public Menu getmenu(@Named("dtStart") Long dtStart) {
+        return dao.getMenu(dtStart);
     }
 
     @ApiMethod(name = "deletemenu", httpMethod = ApiMethod.HttpMethod.GET, path = "deletemenu")
